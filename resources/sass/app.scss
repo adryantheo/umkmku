@@ -1,8 +1,19 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//fonts
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons");
 
-// Variables
-@import 'variables';
+//vuetify
+@import '~vuetify/dist/vuetify.min.css';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+.rounded {
+    border-radius: 10px !important;
+}
+
+.menu-card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+.menu-card .menu-img {
+    border-radius: 10px 10px 0 0 !important;
+}

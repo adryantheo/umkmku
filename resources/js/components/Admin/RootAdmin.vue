@@ -1,87 +1,39 @@
 <template>
- <v-navigation-drawer
-      stateless
-      value="true"
-    >
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Home</v-list-tile-title>
-        </v-list-tile>
-  
-        <v-list-group
-          prepend-icon="account_circle"
-          value="true"
-        >
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-title>Users</v-list-tile-title>
-            </v-list-tile>
-          </template>
-          <v-list-group
-            no-action
-            sub-group
-            value="true"
-          >
-            <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-title>Admin</v-list-tile-title>
-              </v-list-tile>
-            </template>
-  
-            <v-list-tile
-              v-for="(admin, i) in admins"
-              :key="i"
-              
-            >
-              <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="admin[1]"></v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list-group>
-  
-          <v-list-group
-            sub-group
-            no-action
-          >
-            <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-title>Actions</v-list-tile-title>
-              </v-list-tile>
-            </template>
-            <v-list-tile
-              v-for="(crud, i) in cruds"
-              :key="i"
-              
-            >
-              <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="crud[1]"></v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list-group>
-        </v-list-group>
-      </v-list>
-    </v-navigation-drawer>
-
+  <v-app id="inspire">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm8 md4>
+            <v-card class="elevation-12">
+              <v-toolbar dark color="primary">
+                <v-toolbar-title>Login Admin</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <v-text-field prepend-icon="person" name="login" label="Email" type="text"></v-text-field>
+                  <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
+                </v-form>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary">Login</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-export default {
+  export default {
     data: () => ({
-    admins: [
-      ['Management', 'people_outline'],
-      ['Settings', 'settings']
-    ],
-    cruds: [
-      ['Create', 'add'],
-      ['Read', 'insert_drive_file'],
-      ['Update', 'update'],
-      ['Delete', 'delete']
-    ]
-  })
-}
+      drawer: null
+    }),
+    props: {
+      source: String
+    }
+  }
 </script>

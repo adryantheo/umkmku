@@ -1867,54 +1867,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      admins: [['Management', 'people_outline'], ['Settings', 'settings']],
-      cruds: [['Create', 'add'], ['Read', 'insert_drive_file'], ['Update', 'update'], ['Delete', 'delete']]
+      drawer: null
     };
+  },
+  props: {
+    source: String
   }
 });
 
@@ -2660,138 +2620,89 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-navigation-drawer",
-    { attrs: { stateless: "", value: "true" } },
+    "v-app",
+    { attrs: { id: "inspire" } },
     [
       _c(
-        "v-list",
+        "v-content",
         [
           _c(
-            "v-list-tile",
+            "v-container",
+            { attrs: { fluid: "", "fill-height": "" } },
             [
-              _c("v-list-tile-action", [_c("v-icon", [_vm._v("home")])], 1),
-              _vm._v(" "),
-              _c("v-list-tile-title", [_vm._v("Home")])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-list-group",
-            {
-              attrs: { "prepend-icon": "account_circle", value: "true" },
-              scopedSlots: _vm._u([
-                {
-                  key: "activator",
-                  fn: function() {
-                    return [
+              _c(
+                "v-layout",
+                { attrs: { "align-center": "", "justify-center": "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs12: "", sm8: "", md4: "" } },
+                    [
                       _c(
-                        "v-list-tile",
-                        [_c("v-list-tile-title", [_vm._v("Users")])],
+                        "v-card",
+                        { staticClass: "elevation-12" },
+                        [
+                          _c(
+                            "v-toolbar",
+                            { attrs: { dark: "", color: "primary" } },
+                            [
+                              _c("v-toolbar-title", [_vm._v("Login Admin")]),
+                              _vm._v(" "),
+                              _c("v-spacer")
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-text",
+                            [
+                              _c(
+                                "v-form",
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      "prepend-icon": "person",
+                                      name: "login",
+                                      label: "Email",
+                                      type: "text"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      id: "password",
+                                      "prepend-icon": "lock",
+                                      name: "password",
+                                      label: "Password",
+                                      type: "password"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-actions",
+                            [
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c("v-btn", { attrs: { color: "primary" } }, [
+                                _vm._v("Login")
+                              ])
+                            ],
+                            1
+                          )
+                        ],
                         1
                       )
-                    ]
-                  },
-                  proxy: true
-                }
-              ])
-            },
-            [
-              _vm._v(" "),
-              _c(
-                "v-list-group",
-                {
-                  attrs: { "no-action": "", "sub-group": "", value: "true" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "activator",
-                      fn: function() {
-                        return [
-                          _c(
-                            "v-list-tile",
-                            [_c("v-list-tile-title", [_vm._v("Admin")])],
-                            1
-                          )
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ])
-                },
-                [
-                  _vm._v(" "),
-                  _vm._l(_vm.admins, function(admin, i) {
-                    return _c(
-                      "v-list-tile",
-                      { key: i },
-                      [
-                        _c("v-list-tile-title", {
-                          domProps: { textContent: _vm._s(admin[0]) }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-tile-action",
-                          [
-                            _c("v-icon", {
-                              domProps: { textContent: _vm._s(admin[1]) }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  })
+                    ],
+                    1
+                  )
                 ],
-                2
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-group",
-                {
-                  attrs: { "sub-group": "", "no-action": "" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "activator",
-                      fn: function() {
-                        return [
-                          _c(
-                            "v-list-tile",
-                            [_c("v-list-tile-title", [_vm._v("Actions")])],
-                            1
-                          )
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ])
-                },
-                [
-                  _vm._v(" "),
-                  _vm._l(_vm.cruds, function(crud, i) {
-                    return _c(
-                      "v-list-tile",
-                      { key: i },
-                      [
-                        _c("v-list-tile-title", {
-                          domProps: { textContent: _vm._s(crud[0]) }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "v-list-tile-action",
-                          [
-                            _c("v-icon", {
-                              domProps: { textContent: _vm._s(crud[1]) }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  })
-                ],
-                2
+                1
               )
             ],
             1

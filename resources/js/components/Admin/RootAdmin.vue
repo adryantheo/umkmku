@@ -30,10 +30,21 @@
 <script>
   export default {
     data: () => ({
-      drawer: null
+      drawer: null,
+      email: undefined,
+      password: undefined,
+      user_type: undefined
+      
     }),
     props: {
-      source: String
+      source: String,
+    },
+    
+    methods: {
+      
+      login(){
+      },
+
     }
   }
 </script>

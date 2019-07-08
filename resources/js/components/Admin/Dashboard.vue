@@ -81,7 +81,38 @@ export default {
       ['Read', 'insert_drive_file'],
       ['Update', 'update'],
       ['Delete', 'delete']
-    ]
-  })
+    ],
+
+    isLoggedIn: localStorage.getItem('jwt') != null,
+
+     beforeMount(){
+        this.setComponent(this.$route.params.page)
+        this.user = JSON.parse(localStorage.getItem('user'))
+        axios.defaults.headers.common['Content-Type'] = 'application/json'
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwt')
+       
+        },
+  }),
+
+  methods:{
+
+    setDefaults() {
+                if (this.isLoggedIn) {
+                    let user = JSON.parse(localStorage.getItem('user'))
+                    
+                }
+            },
+            change() {
+                this.isLoggedIn = localStorage.getItem('jwt') != null
+                this.setDefaults()
+            },
+            logout(){
+                localStorage.removeItem('jwt')
+                localStorage.removeItem('user')
+                this.change()
+                this.$router.push('/')
+            },
+
+  }
 }
 </script>

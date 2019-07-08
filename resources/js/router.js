@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import RootCustomer from './components/Customers/RootCustomer'
-import RootAdmin from './components/Admin/RootAdmin'
+import Dashboard from './components/Admin/Dashboard'
 
 Vue.use(VueRouter)
 
@@ -11,7 +11,7 @@ const routes = [
         
     },
     {
-        path: '/admin', component: RootAdmin
+        path: '/admin', component: Dashboard
     }
 ]
 

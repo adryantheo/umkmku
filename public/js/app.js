@@ -1926,29 +1926,137 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      drawer: null,
-      links: [{
-        text: 'Home',
-        route: '/'
-      }, {
-        text: 'Jasa Service',
-        route: 'jasa-service'
-      }, {
-        text: 'Spareparts',
-        route: 'sparepart'
-      }, {
-        text: 'History Transaksi',
-        route: 'history'
-      }, {
-        text: 'Cari Pengunjung',
-        route: 'pengunjungcari'
-      }, {
-        text: 'Contact Us',
-        route: 'contactus'
-      }]
+      title: 'Logo'
     };
   }
 });
@@ -2490,108 +2598,569 @@ var render = function() {
     [
       _c(
         "v-app",
-        { attrs: { id: "inspire" } },
+        { attrs: { light: "" } },
         [
           _c(
-            "v-navigation-drawer",
-            {
-              attrs: { fixed: "", app: "" },
-              model: {
-                value: _vm.drawer,
-                callback: function($$v) {
-                  _vm.drawer = $$v
-                },
-                expression: "drawer"
-              }
-            },
+            "v-toolbar",
+            { staticClass: "white" },
+            [
+              _c("v-toolbar-title", {
+                domProps: { textContent: _vm._s(_vm.title) }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-content",
             [
               _c(
-                "v-list",
-                { attrs: { dense: "" } },
-                _vm._l(_vm.links, function(link) {
-                  return _c(
-                    "v-list-tile",
-                    { key: link.text, attrs: { router: "", to: link.route } },
+                "section",
+                [
+                  _c(
+                    "v-parallax",
+                    {
+                      attrs: {
+                        src:
+                          "https://media.radarbanyumas.co.id/wp-content/uploads/2017/08/Produk-UMKM-Mulai-Hiasi-Swalayan.jpg",
+                        height: "800"
+                      }
+                    },
                     [
-                      _c("v-list-tile-action"),
-                      _vm._v(" "),
                       _c(
-                        "v-list-tile-content",
-                        [_c("v-list-tile-title", [_vm._v(_vm._s(link.text))])],
+                        "v-layout",
+                        {
+                          staticClass: "white--text",
+                          attrs: {
+                            column: "",
+                            "align-center": "",
+                            "justify-center": ""
+                          }
+                        },
+                        [
+                          _c(
+                            "h1",
+                            {
+                              staticClass:
+                                "white--text mb-2 display-1 text-m-center"
+                            },
+                            [_vm._v("UMKMku :)")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "blue lighten-2 mt-5",
+                              attrs: { dark: "", large: "" }
+                            },
+                            [_vm._v("\n              Mulai\n            ")]
+                          )
+                        ],
                         1
                       )
                     ],
                     1
                   )
-                }),
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-toolbar",
-            { attrs: { color: "white", app: "" } },
-            [
-              _c("v-toolbar-side-icon", {
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    _vm.drawer = !_vm.drawer
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("v-toolbar-title", [_vm._v("Atma Auto")]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-layout",
-                {
-                  staticStyle: { "max-width": "250px" },
-                  attrs: { row: "", "align-center": "" }
-                },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      placeholder: "Search",
-                      "single-line": "",
-                      "append-icon": "search",
-                      "append-icon-cb": function() {},
-                      color: "white",
-                      "hide-details": ""
-                    }
-                  })
                 ],
                 1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-content", [_c("v-container", [_c("router-view")], 1)], 1),
-          _vm._v(" "),
-          _c(
-            "v-footer",
-            { attrs: { height: "auto", color: "indigo" } },
-            [
+              ),
+              _vm._v(" "),
               _c(
-                "v-flex",
-                {
-                  attrs: {
-                    indigo: "",
-                    "py-3": "",
-                    "text-xs-center": "",
-                    "white--text": "",
-                    xs12: ""
-                  }
-                },
+                "section",
                 [
-                  _vm._v("\n        ©2019 — "),
-                  _c("strong", [_vm._v("Atma Auto")])
-                ]
+                  _c(
+                    "v-layout",
+                    {
+                      staticClass: "my-5",
+                      attrs: { column: "", wrap: "", "align-center": "" }
+                    },
+                    [
+                      _c(
+                        "v-flex",
+                        { staticClass: "my-3", attrs: { xs12: "", sm4: "" } },
+                        [
+                          _c("div", { staticClass: "text-xs-center" }, [
+                            _c("h2", { staticClass: "headline" }, [
+                              _vm._v("UMKM Itu Mudah")
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "subheading" }, [
+                              _vm._v(
+                                "\n                Saatnya Belajar UMKM \n              "
+                              )
+                            ])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c(
+                            "v-container",
+                            { attrs: { "grid-list-xl": "" } },
+                            [
+                              _c(
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    row: "",
+                                    wrap: "",
+                                    "align-center": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", md4: "" } },
+                                    [
+                                      _c(
+                                        "v-card",
+                                        {
+                                          staticClass: "elevation-0 transparent"
+                                        },
+                                        [
+                                          _c(
+                                            "v-card-text",
+                                            { staticClass: "text-xs-center" },
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  staticClass:
+                                                    "blue--text text--lighten-2",
+                                                  attrs: { "x-large": "" }
+                                                },
+                                                [_vm._v("color_lens")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-card-title",
+                                            {
+                                              staticClass:
+                                                "layout justify-center",
+                                              attrs: { "primary-title": "" }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "headline text-xs-center"
+                                                },
+                                                [_vm._v("Kreatif")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                      Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. \n                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. \n                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. \n                    "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", md4: "" } },
+                                    [
+                                      _c(
+                                        "v-card",
+                                        {
+                                          staticClass: "elevation-0 transparent"
+                                        },
+                                        [
+                                          _c(
+                                            "v-card-text",
+                                            { staticClass: "text-xs-center" },
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  staticClass:
+                                                    "blue--text text--lighten-2",
+                                                  attrs: { "x-large": "" }
+                                                },
+                                                [_vm._v("flash_on")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-card-title",
+                                            {
+                                              staticClass:
+                                                "layout justify-center",
+                                              attrs: { "primary-title": "" }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "headline" },
+                                                [_vm._v("Maksimal Profit")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                      Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. \n                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. \n                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. \n                    "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs12: "", md4: "" } },
+                                    [
+                                      _c(
+                                        "v-card",
+                                        {
+                                          staticClass: "elevation-0 transparent"
+                                        },
+                                        [
+                                          _c(
+                                            "v-card-text",
+                                            { staticClass: "text-xs-center" },
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  staticClass:
+                                                    "blue--text text--lighten-2",
+                                                  attrs: { "x-large": "" }
+                                                },
+                                                [_vm._v("build")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-card-title",
+                                            {
+                                              staticClass:
+                                                "layout justify-center",
+                                              attrs: { "primary-title": "" }
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "headline text-xs-center"
+                                                },
+                                                [_vm._v("UMKM itu Mudah")]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("v-card-text", [
+                                            _vm._v(
+                                              "\n                      Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. \n                      Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. \n                      Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. \n                    "
+                                            )
+                                          ])
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "section",
+                [
+                  _c(
+                    "v-parallax",
+                    {
+                      attrs: {
+                        src:
+                          "http://www.kalimantan-news.com/wp-content/uploads/2018/07/211025_02383408072017_umkm.jpg",
+                        height: "600"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-layout",
+                        {
+                          attrs: {
+                            column: "",
+                            "align-center": "",
+                            "justify-center": ""
+                          }
+                        },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              staticClass: "blue lighten-2 mt-5",
+                              attrs: {
+                                dark: "",
+                                large: "",
+                                href: "/pre-made-themes"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n              Mulai Belajar\n            "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "section",
+                [
+                  _c(
+                    "v-container",
+                    { attrs: { "grid-list-xl": "" } },
+                    [
+                      _c(
+                        "v-layout",
+                        {
+                          staticClass: "my-5",
+                          attrs: { row: "", wrap: "", "justify-center": "" }
+                        },
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm4: "" } },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-0 transparent" },
+                                [
+                                  _c(
+                                    "v-card-title",
+                                    {
+                                      staticClass: "layout justify-center",
+                                      attrs: { "primary-title": "" }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "headline" }, [
+                                        _vm._v("Info Perushaan")
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-card-text", [
+                                    _vm._v(
+                                      "\n                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. \n                  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. \n                  Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. \n                "
+                                    )
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "", sm4: "", "offset-sm1": "" } },
+                            [
+                              _c(
+                                "v-card",
+                                { staticClass: "elevation-0 transparent" },
+                                [
+                                  _c(
+                                    "v-card-title",
+                                    {
+                                      staticClass: "layout justify-center",
+                                      attrs: { "primary-title": "" }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "headline" }, [
+                                        _vm._v("Hubungi Kami")
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-card-text", [
+                                    _vm._v(
+                                      "\n                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.\n                "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-list",
+                                    { staticClass: "transparent" },
+                                    [
+                                      _c(
+                                        "v-list-tile",
+                                        [
+                                          _c(
+                                            "v-list-tile-action",
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  staticClass:
+                                                    "blue--text text--lighten-2"
+                                                },
+                                                [_vm._v("phone")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            [
+                                              _c("v-list-tile-title", [
+                                                _vm._v("0817-7777-7777")
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile",
+                                        [
+                                          _c(
+                                            "v-list-tile-action",
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  staticClass:
+                                                    "blue--text text--lighten-2"
+                                                },
+                                                [_vm._v("place")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            [
+                                              _c("v-list-tile-title", [
+                                                _vm._v("Kulon Progo, DIY")
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile",
+                                        [
+                                          _c(
+                                            "v-list-tile-action",
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  staticClass:
+                                                    "blue--text text--lighten-2"
+                                                },
+                                                [_vm._v("email")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-content",
+                                            [
+                                              _c("v-list-tile-title", [
+                                                _vm._v("Email.com")
+                                              ])
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-footer",
+                { staticClass: "blue darken-2" },
+                [
+                  _c(
+                    "v-layout",
+                    { attrs: { row: "", wrap: "", "align-center": "" } },
+                    [
+                      _c("v-flex", { attrs: { xs12: "" } }, [
+                        _c("div", { staticClass: "white--text ml-3" }, [
+                          _vm._v("\n              Made\n              by "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "white--text",
+                              attrs: { href: "https://github.com/adryantheo" }
+                            },
+                            [_vm._v("Adryan Theo")]
+                          )
+                        ])
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1

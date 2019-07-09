@@ -63,7 +63,7 @@
           </v-list-tile>
         </v-list-group>
       </v-list-group>
-      <v-list-tile>
+      <v-list-tile @click="logout">
         <v-list-tile-action>
           <v-icon>logout</v-icon>
         </v-list-tile-action>

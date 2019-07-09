@@ -4,6 +4,7 @@ import RootCustomer from './components/Customers/RootCustomer'
 import Dashboard from './components/Admin/Dashboard'
 import RootAdmin from './components/Admin/RootAdmin'
 import RegisterAdmin from './components/Admin/AdminRegister'
+import AdminLogout from './components/Admin/AdminLogout'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,9 @@ const routes = [
     },
     {
         path: '/register', component: RegisterAdmin
+    },
+    {
+        path: '/logout', component: AdminLogout
     }
 ]
 

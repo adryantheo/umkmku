@@ -10,20 +10,16 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function login(Request $request)
-    {
-        $credentials = [
-            'email' => $request->get('email'),
-            'password' => $request->get('password'),
-        ];
-        
+    {        
         $status = 401;
         $response = ['error' => 'Unauthorised'];
         
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($request->only(['email','password']))) {
             $status = 200;
             $response = [
-                'token' => Auth::user()->createToken('umkmku')->accessToken,
-                'user' => Auth::user()
+                'user' => Auth::user(),
+                'token' => Auth::user()->createToken('umkmKu')->accessToken,
+                
             ];
         }
         

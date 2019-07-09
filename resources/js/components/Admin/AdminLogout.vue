@@ -4,12 +4,13 @@
 export default {
     data(){
         return{
-            Email:undefined,
-            Password:undefined,
+            email:undefined,
+            password:undefined,
         }
     },
     created(){
         localStorage.removeItem('jwt');
+        this.$router.push(('/'));
     }
 }
 </script>

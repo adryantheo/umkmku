@@ -11,13 +11,13 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field prepend-icon="person" name="login" label="Email" type="text"></v-text-field>
-                  <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password"></v-text-field>
+                  <v-text-field prepend-icon="person" v-model="email" name="login" label="Email" type="text"></v-text-field>
+                  <v-text-field id="password" prepend-icon="lock" v-model="password" name="password" label="Password" type="password"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">Login</v-btn>
+                <v-btn color="primary" @click="login">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -32,8 +32,7 @@
     data: () => ({
       drawer: null,
       email: undefined,
-      password: undefined,
-      user_type: undefined
+      password: undefined
       
     }),
     props: {
@@ -43,6 +42,22 @@
     methods: {
       
       login(){
+        let email = this.email
+        let password = this.password
+
+        axios.post('/api/login', {
+          email,
+          password
+        }).then(response => {
+          let user = response.data.user
+          localStorage.setItem('user', JSON.stringify(user))
+          localStorage.setItem('jwt', response.data.token)
+
+          if(localStorage.getItem('jwt') != null){
+            this.$emit('loggedIn')
+            this.$router.push(('/admin'))
+          }
+        })
       },
 
     }

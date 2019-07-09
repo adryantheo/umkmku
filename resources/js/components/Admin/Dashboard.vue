@@ -73,7 +73,7 @@
   </v-navigation-drawer>
 </div>
 <div style="text-align: center" v-else>
-  <p class="text-xs-center">Belum Login TOD</p>
+  <p class="text-xs-center">Harap Login Terlebih Dahulu</p>
   <a class="align-center" href="./login">Login</a>
 </div>
 </template>

@@ -3245,7 +3245,9 @@ var render = function() {
         1
       )
     : _c("div", { staticStyle: { "text-align": "center" } }, [
-        _c("p", { staticClass: "text-xs-center" }, [_vm._v("Belum Login TOD")]),
+        _c("p", { staticClass: "text-xs-center" }, [
+          _vm._v("Harap Login Terlebih Dahulu")
+        ]),
         _vm._v(" "),
         _c("a", { staticClass: "align-center", attrs: { href: "./login" } }, [
           _vm._v("Login")

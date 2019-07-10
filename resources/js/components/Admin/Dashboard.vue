@@ -20,27 +20,7 @@
             <v-list-tile-title>Users</v-list-tile-title>
           </v-list-tile>
         </template>
-        <v-list-group
-          no-action
-          sub-group
-          value="true"
-        >
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-title>Admin</v-list-tile-title>
-            </v-list-tile>
-          </template>
-          <v-list-tile
-            v-for="(admin, i) in admins"
-            :key="i"
-            
-          >
-            <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon v-text="admin[1]"></v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list-group>
+        
 
         <v-list-group
           sub-group
@@ -81,15 +61,11 @@
 <script>
 export default {
     data: () => ({
-    admins: [
-      ['Management', 'people_outline'],
-      ['Settings', 'settings']
-    ],
+    
     cruds: [
       ['Tambah Artikel', 'add'],
-      ['Read', 'insert_drive_file'],
-      ['Update', 'update'],
-      ['Delete', 'delete']
+      ['Edit Artikel', 'update'],
+      ['Hapus Artikel', 'delete']
     ],
 
     isLoggedIn: localStorage.getItem('jwt') != null,

@@ -1997,31 +1997,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      admins: [['Management', 'people_outline'], ['Settings', 'settings']],
-      cruds: [['Tambah Artikel', 'add'], ['Read', 'insert_drive_file'], ['Update', 'update'], ['Delete', 'delete']],
+      cruds: [['Tambah Artikel', 'add'], ['Edit Artikel', 'update'], ['Hapus Artikel', 'delete']],
       isLoggedIn: localStorage.getItem('jwt') != null,
       beforeMount: function beforeMount() {
         this.setComponent(this.$route.params.page);
@@ -3097,69 +3076,6 @@ var render = function() {
                       )
                     },
                     [
-                      _vm._v(" "),
-                      _c(
-                        "v-list-group",
-                        {
-                          attrs: {
-                            "no-action": "",
-                            "sub-group": "",
-                            value: "true"
-                          },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "activator",
-                                fn: function() {
-                                  return [
-                                    _c(
-                                      "v-list-tile",
-                                      [
-                                        _c("v-list-tile-title", [
-                                          _vm._v("Admin")
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ],
-                            null,
-                            false,
-                            2847658371
-                          )
-                        },
-                        [
-                          _vm._v(" "),
-                          _vm._l(_vm.admins, function(admin, i) {
-                            return _c(
-                              "v-list-tile",
-                              { key: i },
-                              [
-                                _c("v-list-tile-title", {
-                                  domProps: { textContent: _vm._s(admin[0]) }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-tile-action",
-                                  [
-                                    _c("v-icon", {
-                                      domProps: {
-                                        textContent: _vm._s(admin[1])
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          })
-                        ],
-                        2
-                      ),
                       _vm._v(" "),
                       _c(
                         "v-list-group",

@@ -11,8 +11,8 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field prepend-icon="person" v-model="email" name="login" label="Email" type="text"></v-text-field>
-                  <v-text-field id="password" prepend-icon="lock" v-model="password" name="password" label="Password" type="password"></v-text-field>
+                  <v-text-field prepend-icon="person" v-model="email" name="login" label="Email" type="text" :rules="[rules.required, rules.email]"></v-text-field>
+                  <v-text-field id="password" prepend-icon="lock" v-model="password" name="password" label="Password" type="password" :rules="[rules.required, rules.password]"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -32,7 +32,15 @@
     data: () => ({
       drawer: null,
       email: undefined,
-      password: undefined
+      password: undefined,
+
+      rules: {
+        email: v => (v || '').match(/@/) || 'Format Email Salah',
+        length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
+        password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password harus terdiri dari alphabert, angka, huruf kapital, dan karakter spesial',
+        required: v => !!v || 'Tidak Boleh Kosong',
+        
+      },
       
     }),
     props: {

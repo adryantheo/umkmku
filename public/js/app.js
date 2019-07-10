@@ -2074,7 +2074,23 @@ __webpack_require__.r(__webpack_exports__);
     return {
       drawer: null,
       email: undefined,
-      password: undefined
+      password: undefined,
+      rules: {
+        email: function email(v) {
+          return (v || '').match(/@/) || 'Format Email Salah';
+        },
+        length: function length(len) {
+          return function (v) {
+            return (v || '').length >= len || "Invalid character length, required ".concat(len);
+          };
+        },
+        password: function password(v) {
+          return (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password harus terdiri dari alphabert, angka, huruf kapital, dan karakter spesial';
+        },
+        required: function required(v) {
+          return !!v || 'Tidak Boleh Kosong';
+        }
+      }
     };
   },
   props: {
@@ -3237,7 +3253,11 @@ var render = function() {
                                       "prepend-icon": "person",
                                       name: "login",
                                       label: "Email",
-                                      type: "text"
+                                      type: "text",
+                                      rules: [
+                                        _vm.rules.required,
+                                        _vm.rules.email
+                                      ]
                                     },
                                     model: {
                                       value: _vm.email,
@@ -3254,7 +3274,11 @@ var render = function() {
                                       "prepend-icon": "lock",
                                       name: "password",
                                       label: "Password",
-                                      type: "password"
+                                      type: "password",
+                                      rules: [
+                                        _vm.rules.required,
+                                        _vm.rules.password
+                                      ]
                                     },
                                     model: {
                                       value: _vm.password,

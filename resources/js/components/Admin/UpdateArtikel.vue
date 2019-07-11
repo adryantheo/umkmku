@@ -1,5 +1,5 @@
 <template>
-    <div>tambah
+    <div>update
 
         
     </div>

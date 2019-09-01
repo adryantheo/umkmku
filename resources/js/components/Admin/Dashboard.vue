@@ -4,45 +4,45 @@
 
   <v-navigation-drawer fixed v-model="drawer" app >
     <v-list>
+
+       <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>account_circle</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>{Owner}</v-list-tile-title>
+        </v-list-tile>
         <v-list-tile>
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>folder_open</v-icon>
           </v-list-tile-action>
-          <v-list-tile-title>Home</v-list-tile-title>
+          <v-list-tile-title>Jurnal</v-list-tile-title>
         </v-list-tile>
-        <v-list-group
-          prepend-icon="account_circle"
-          value="true"
-        >
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-title>Users</v-list-tile-title>
-            </v-list-tile>
-          </template>
-          
-
-          <v-list-group
-            sub-group
-            no-action
-          >
-            <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-title>Actions</v-list-tile-title>
-              </v-list-tile>
-            </template>
-            <v-list-tile
-              v-for="(crud, i) in cruds"
-              :key="i"
-              @click="select"              
-            >
-              <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="crud[1]"></v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list-group>
-        </v-list-group>
-        <v-list-tile @click="logout">
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>menu_book</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Materi</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>assessment</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Laporan</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>settings_applications</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Pengaturan</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>info</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Tentang</v-list-tile-title>
+        </v-list-tile>
+        
+       <v-list-tile @click="logout">
           <v-list-tile-action>
             <v-icon>logout</v-icon>
           </v-list-tile-action>
@@ -79,14 +79,6 @@ export default {
 
       show: false,
       drawer: null,
-    
-    cruds: [
-      ['Jurnal', 'add'],
-      ['Materi', 'update'],
-      ['Laporan', 'folder_open'],
-      ['Pengaturan', 'update'],
-      ['Tentang', 'info'],
-    ],
 
     isLoggedIn: localStorage.getItem('jwt') != null,
 

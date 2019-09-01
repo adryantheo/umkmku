@@ -13,7 +13,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/', component: Dashboard,
+        path: '/', component: RootAdmin,
         
     },
     {

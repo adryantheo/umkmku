@@ -13,7 +13,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/', component: RootCustomer,
+        path: '/', component: Dashboard,
         
     },
     {

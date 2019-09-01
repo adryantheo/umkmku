@@ -36,6 +36,10 @@ class UserController extends Controller
         ]);
         $user = new User([
             'email' => $request->email,
+            'name'  => $request->name,
+            'company_name'  => $request->company_name,
+            'phone'  => $request->phone,
+            'address'  => $request->address,
             'password' => bcrypt($request->password),             
         ]);
         $user->save();

@@ -52,7 +52,7 @@
   </v-navigation-drawer>
   <v-toolbar  color="white" app >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Admin</v-toolbar-title>
+      <v-toolbar-title>{nama perusahaan}</v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">           
       </v-toolbar-items>
     </v-toolbar>  
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import { mdiClipboardText } from '@mdi/js';
 export default {
     data: () => ({
 
@@ -80,9 +81,11 @@ export default {
       drawer: null,
     
     cruds: [
-      ['Tambah Artikel', 'add'],
-      ['Edit Artikel', 'update'],
-      ['Hapus Artikel', 'delete']
+      ['Jurnal', 'add'],
+      ['Materi', 'update'],
+      ['Laporan', 'folder_open'],
+      ['Pengaturan', 'update'],
+      ['Tentang', 'info'],
     ],
 
     isLoggedIn: localStorage.getItem('jwt') != null,

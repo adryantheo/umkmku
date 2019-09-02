@@ -9,7 +9,7 @@
           <v-list-tile-action>
             <v-icon>account_circle</v-icon>
           </v-list-tile-action>
-          <v-list-tile-title>{Owner}</v-list-tile-title>
+          <v-list-tile-title>{{name}}</v-list-tile-title>
         </v-list-tile>
         <v-list-tile>
           <v-list-tile-action>
@@ -52,7 +52,7 @@
   </v-navigation-drawer>
   <v-toolbar  color="white" app >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>{nama perusahaan}</v-toolbar-title>
+      <v-toolbar-title>{{myCompany}}</v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">           
       </v-toolbar-items>
     </v-toolbar>  
@@ -79,6 +79,9 @@ export default {
 
       show: false,
       drawer: null,
+      myCompany: null,
+      name: null,
+      user_info: [],
 
     isLoggedIn: localStorage.getItem('jwt') != null,
 
@@ -95,20 +98,31 @@ export default {
 
     setDefaults() {
                 if (this.isLoggedIn) {
-                    let user = JSON.parse(localStorage.getItem('user'))
-                    
+                    let user = JSON.parse(localStorage.getItem('user'))                       
                 }
-            },
-            change() {
-                this.isLoggedIn = localStorage.getItem('jwt') != null
-                this.setDefaults()
-            },
-            logout(){
-                localStorage.removeItem('jwt')
-                localStorage.removeItem('user')
-                this.change()
-                this.$router.push('/')
-            },
+    },
+    getInfo(){
+      this.name = localStorage.getItem('username');
+      this.myCompany = localStorage.getItem('company');
+
+    },  
+    change() {
+        this.isLoggedIn = localStorage.getItem('jwt') != null
+        this.setDefaults()
+    },
+    logout(){
+        localStorage.removeItem('jwt')
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        localStorage.removeItem('username')
+        localStorage.removeItem('company')
+        this.change()
+        this.$router.push('/')
+    },
+  },
+  mounted(){
+    this.getInfo();
+  
   }
 }
 </script>

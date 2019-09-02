@@ -60,6 +60,8 @@
         }).then(response => {
           let user = response.data.user
           localStorage.setItem('user', JSON.stringify(user))
+          localStorage.setItem('username', JSON.stringify(user.name))
+          localStorage.setItem('company', JSON.stringify(user.company_name))
           localStorage.setItem('jwt', response.data.token)
 
           if(localStorage.getItem('jwt') != null){

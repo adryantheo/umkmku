@@ -10699,6 +10699,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       show: false,
       drawer: null,
+      myCompany: null,
+      name: null,
+      user_info: [],
       isLoggedIn: localStorage.getItem('jwt') != null,
       beforeMount: function beforeMount() {
         this.setComponent(this.$route.params.page);
@@ -10714,6 +10717,10 @@ __webpack_require__.r(__webpack_exports__);
         var user = JSON.parse(localStorage.getItem('user'));
       }
     },
+    getInfo: function getInfo() {
+      this.name = localStorage.getItem('username');
+      this.myCompany = localStorage.getItem('company');
+    },
     change: function change() {
       this.isLoggedIn = localStorage.getItem('jwt') != null;
       this.setDefaults();
@@ -10721,9 +10728,15 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout() {
       localStorage.removeItem('jwt');
       localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      localStorage.removeItem('company');
       this.change();
       this.$router.push('/');
     }
+  },
+  mounted: function mounted() {
+    this.getInfo();
   }
 });
 
@@ -10807,6 +10820,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         var user = response.data.user;
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('username', JSON.stringify(user.name));
+        localStorage.setItem('company', JSON.stringify(user.company_name));
         localStorage.setItem('jwt', response.data.token);
 
         if (localStorage.getItem('jwt') != null) {
@@ -12610,7 +12625,7 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-list-tile-title", [_vm._v("{Owner}")])
+                      _c("v-list-tile-title", [_vm._v(_vm._s(_vm.name))])
                     ],
                     1
                   ),
@@ -12719,7 +12734,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("v-toolbar-title", [_vm._v("{nama perusahaan}")]),
+              _c("v-toolbar-title", [_vm._v(_vm._s(_vm.myCompany))]),
               _vm._v(" "),
               _c("v-toolbar-items", { staticClass: "hidden-sm-and-down" })
             ],

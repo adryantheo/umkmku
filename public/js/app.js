@@ -10701,7 +10701,6 @@ __webpack_require__.r(__webpack_exports__);
       drawer: null,
       myCompany: null,
       name: null,
-      user_info: [],
       isLoggedIn: localStorage.getItem('jwt') != null,
       beforeMount: function beforeMount() {
         this.setComponent(this.$route.params.page);
@@ -10718,7 +10717,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getInfo: function getInfo() {
-      this.name = localStorage.getItem('username');
+      this.name = localStorage.getItem('name');
       this.myCompany = localStorage.getItem('company');
     },
     change: function change() {
@@ -10729,7 +10728,7 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.removeItem('jwt');
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      localStorage.removeItem('username');
+      localStorage.removeItem('name');
       localStorage.removeItem('company');
       this.change();
       this.$router.push('/');
@@ -10781,10 +10780,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       drawer: null,
+      loading: false,
       email: undefined,
       password: undefined,
       rules: {
@@ -10814,14 +10816,18 @@ __webpack_require__.r(__webpack_exports__);
 
       var email = this.email;
       var password = this.password;
+      this.loading = true;
       axios.post('/api/login', {
         email: email,
         password: password
       }).then(function (response) {
         var user = response.data.user;
+        var Owner = JSON.stringify(user.name);
+        var Company = JSON.stringify(user.company_name); // console.log(JSON.parse(Owner))
+
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('username', JSON.stringify(user.name));
-        localStorage.setItem('company', JSON.stringify(user.company_name));
+        localStorage.setItem('name', JSON.parse(Owner));
+        localStorage.setItem('company', JSON.parse(Company));
         localStorage.setItem('jwt', response.data.token);
 
         if (localStorage.getItem('jwt') != null) {
@@ -12913,7 +12919,11 @@ var render = function() {
                               _c(
                                 "v-btn",
                                 {
-                                  attrs: { color: "primary" },
+                                  attrs: {
+                                    color: "primary",
+                                    loading: _vm.loading,
+                                    type: "submit"
+                                  },
                                   on: { click: _vm.login }
                                 },
                                 [_vm._v("Login")]

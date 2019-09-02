@@ -81,7 +81,6 @@ export default {
       drawer: null,
       myCompany: null,
       name: null,
-      user_info: [],
 
     isLoggedIn: localStorage.getItem('jwt') != null,
 
@@ -102,7 +101,7 @@ export default {
                 }
     },
     getInfo(){
-      this.name = localStorage.getItem('username');
+      this.name = localStorage.getItem('name');
       this.myCompany = localStorage.getItem('company');
 
     },  
@@ -114,7 +113,7 @@ export default {
         localStorage.removeItem('jwt')
         localStorage.removeItem('user')
         localStorage.removeItem('token')
-        localStorage.removeItem('username')
+        localStorage.removeItem('name')
         localStorage.removeItem('company')
         this.change()
         this.$router.push('/')

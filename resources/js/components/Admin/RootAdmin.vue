@@ -18,7 +18,9 @@
               <v-card-actions>
                 <router-link :to="{path: '/register'}">Belum Punya Akun? Daftar Disini</router-link>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="login">Login</v-btn>
+                <v-btn color="primary"
+                :loading="loading"
+                 type="submit" @click="login">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -32,6 +34,7 @@
   export default {
     data: () => ({
       drawer: null,
+      loading: false,
       email: undefined,
       password: undefined,
 
@@ -53,16 +56,21 @@
       login(){
         let email = this.email
         let password = this.password
+        this.loading = true
 
         axios.post('/api/login', {
           email,
           password
         }).then(response => {
           let user = response.data.user
+          let Owner = JSON.stringify(user.name)
+          let Company = JSON.stringify(user.company_name)
+          // console.log(JSON.parse(Owner))
           localStorage.setItem('user', JSON.stringify(user))
-          localStorage.setItem('username', JSON.stringify(user.name))
-          localStorage.setItem('company', JSON.stringify(user.company_name))
+          localStorage.setItem('name', JSON.parse(Owner))
+          localStorage.setItem('company', JSON.parse(Company))
           localStorage.setItem('jwt', response.data.token)
+          
 
           if(localStorage.getItem('jwt') != null){
             this.$emit('loggedIn')

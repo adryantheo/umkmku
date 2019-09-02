@@ -19,7 +19,6 @@ class UserController extends Controller
             $response = [
                 'user' => Auth::user(),
                 'token' => Auth::user()->createToken('umkmKu')->accessToken,
-                
             ];
         }
         

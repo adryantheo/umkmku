@@ -10,7 +10,7 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form ref="login_form">
                   <v-text-field prepend-icon="email" v-model="email" name="login" label="Email" type="text" :rules="[rules.required, rules.email]"></v-text-field>
                   <v-text-field id="password" prepend-icon="lock" v-model="password" name="password" label="Password" type="password" :rules="[rules.required, rules.password]"></v-text-field>
                 </v-form>
@@ -53,30 +53,41 @@
     
     methods: {
       
-      login(){
-        let email = this.email
-        let password = this.password
-        this.loading = true
+     async login(){
+       if(this.$refs.login_form.validate()){
+          let email = this.email;
+          let password = this.password;
+          this.loading = true;
+          try{
+             axios.post('/api/login', {
+              email,
+              password
+            }).then(response => {
+              let user = response.data.user
+              let Owner = JSON.stringify(user.name)
+              let Company = JSON.stringify(user.company_name)
+              // console.log(JSON.parse(Owner))
+              localStorage.setItem('user', JSON.stringify(user))
+              localStorage.setItem('name', JSON.parse(Owner))
+              localStorage.setItem('company', JSON.parse(Company))
+              localStorage.setItem('jwt', response.data.token)
+              
+              if(localStorage.getItem('jwt') != null){
+                this.$emit('loggedIn')
+                alert("Selamat Datang" + " " + localStorage.getItem('name'));
+                this.$router.push(('/admin'))
+              } 
+            })
 
-        axios.post('/api/login', {
-          email,
-          password
-        }).then(response => {
-          let user = response.data.user
-          let Owner = JSON.stringify(user.name)
-          let Company = JSON.stringify(user.company_name)
-          // console.log(JSON.parse(Owner))
-          localStorage.setItem('user', JSON.stringify(user))
-          localStorage.setItem('name', JSON.parse(Owner))
-          localStorage.setItem('company', JSON.parse(Company))
-          localStorage.setItem('jwt', response.data.token)
-          
-
-          if(localStorage.getItem('jwt') != null){
-            this.$emit('loggedIn')
-            this.$router.push(('/admin'))
           }
-        })
+          catch(err){
+            console.log(err);
+            // alert("Alamat Email atau Password Anda Salah!");
+            // this.$router.push(('/'))            
+          }
+
+       }
+
       },
 
     }

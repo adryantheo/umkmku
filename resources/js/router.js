@@ -5,9 +5,11 @@ import Dashboard from './components/Admin/Dashboard'
 import RootAdmin from './components/Admin/RootAdmin'
 import RegisterAdmin from './components/Admin/AdminRegister'
 import AdminLogout from './components/Admin/AdminLogout'
-import TambahArtikel from './components/Admin/CreateArtikel'
-import HapusArtikel from './components/Admin/HapusArtikel'
-import UpdateArtikel from './components/Admin/UpdateArtikel'
+import Jurnal from './components/Admin/Pages/Jurnal'
+import Settings from './components/Admin/Pages/Settings'
+import Laporan from './components/Admin/Pages/Laporan'
+import Materi from './components/Admin/Pages/Materi'
+import AboutUs from './components/Admin/Pages/AboutUs'
 
 Vue.use(VueRouter)
 
@@ -20,17 +22,26 @@ const routes = [
         path: '/admin', component: Dashboard,
         children:[
             {
-                path: 'tambah-artikel',
-                component: TambahArtikel,
+                path: 'jurnal',
+                component: Jurnal,
             },
             {
-                path: 'update-artikel',
-                component: UpdateArtikel,
+                path: 'materi',
+                component: Materi,
             },
             {
-                path: 'hapus-artikel',
-                component: HapusArtikel
+                path: 'laporan',
+                component: Laporan
             },
+            {
+                path: 'pengaturan',
+                component: Settings
+            },
+            {
+                path: 'aboutus',
+                component: AboutUs
+            },
+            
         ]
     },
     {

@@ -4,7 +4,6 @@ import RootCustomer from './components/Customers/RootCustomer'
 import Dashboard from './components/Admin/Dashboard'
 import RootAdmin from './components/Admin/RootAdmin'
 import RegisterAdmin from './components/Admin/AdminRegister'
-import AdminLogout from './components/Admin/AdminLogout'
 import Jurnal from './components/Admin/Pages/Jurnal'
 import Settings from './components/Admin/Pages/Settings'
 import Laporan from './components/Admin/Pages/Laporan'
@@ -21,28 +20,13 @@ const routes = [
     {
         path: '/admin', component: Dashboard,
         children:[
-            {
-                path: 'jurnal',
-                component: Jurnal,
-            },
-            {
-                path: 'materi',
-                component: Materi,
-            },
-            {
-                path: 'laporan',
-                component: Laporan
-            },
-            {
-                path: 'pengaturan',
-                component: Settings
-            },
-            {
-                path: 'aboutus',
-                component: AboutUs
-            },
-            
-        ]
+            { path: 'jurnal', component: Jurnal },
+            { path: 'materi', component: Materi },
+            { path: 'laporan', component: Laporan },
+            { path: 'pengaturan', component: Settings },
+            { path: 'aboutus', component: AboutUs },   
+        ],
+        meta: {requiresAuth: true},
     },
     {
         path: '/login', component: RootAdmin
@@ -50,9 +34,6 @@ const routes = [
     {
         path: '/register', component: RegisterAdmin
     },
-    {
-        path: '/logout', component: AdminLogout
-    }
 ]
 
 const router = new VueRouter({
@@ -61,5 +42,22 @@ const router = new VueRouter({
     mode: 'history',
 })
 
+import User from '../js/components/helpers/User';
+
+router.beforeEach(async (to, from, next) => {
+    if(to.matched.some(route => route.meta.requiresAuth)){
+        if(!User.loggedIn()){
+            next({path: '/login', replace: true})
+            return
+        }
+    }
+    if(to.path === "/login" || to.path === "/register"){
+        if(User.loggedIn()){
+            next({path: '/admin', replace: true})
+            return
+        }
+    }
+    next();
+})
 
 export default router;

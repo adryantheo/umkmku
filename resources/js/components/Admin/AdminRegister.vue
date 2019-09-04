@@ -61,26 +61,43 @@
       async register() {
         if(this.$refs.register_form.validate()){
           this.loading = true;
-          try{
+          // try{
              
-             const res = await axios.post('/api/register/',{
-                email : this.email,
-                address : this.address,
-                name : this.name,
-                company_name : this.company_name,
-                phone : this.phone,
-                password : this.password,
-                c_password : this.c_password,
-              }).then(response => {
-                  alert("Berhasil Membuat Akun")
-                  this.$router.push(('/login'))
-                  console.log('Created Admin');
-              });
+          //    const res = await axios.post('/api/register/',{
+          //       email : this.email,
+          //       address : this.address,
+          //       name : this.name,
+          //       company_name : this.company_name,
+          //       phone : this.phone,
+          //       password : this.password,
+          //       c_password : this.c_password,
+          //     }).then(response => {
+          //         alert("Berhasil Membuat Akun")
+          //         this.$router.push(('/login'))
+          //         console.log('Created Admin');
+          //     });
 
-          }catch(err){
-            console.log(err);
+          // }catch(err){
+          //   console.log(err);
+          // }
+
+          try{
+            const request = {
+            email : this.email,
+            address : this.address,
+            name : this.name,
+            company_name : this.company_name,
+            phone : this.phone,
+            password : this.password,
+            c_password : this.c_password,
+            };
+            const res = await this.$user.signup(request)
+            // await this.$user.storeSession(res.data)
+            this.$router.replace({path: "/login"});
+          }catch(error){
+            alert(error);
           }
-
+          this.loading = false    
         }
           
       },

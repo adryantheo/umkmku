@@ -37,6 +37,8 @@
       loading: false,
       email: undefined,
       password: undefined,
+      Owner: undefined,
+      Company: undefined,
 
       rules: {
         email: v => (v || '').match(/@/) || 'Format Email Salah',
@@ -54,39 +56,22 @@
     methods: {
       
      async login(){
-       if(this.$refs.login_form.validate()){
-          let email = this.email;
-          let password = this.password;
-          this.loading = true;
+        if(this.$refs.login_form.validate()){
+          this.loading = true
           try{
-             axios.post('/api/login', {
-              email,
-              password
-            }).then(response => {
-              let user = response.data.user
-              let Owner = JSON.stringify(user.name)
-              let Company = JSON.stringify(user.company_name)
-              // console.log(JSON.parse(Owner))
-              localStorage.setItem('user', JSON.stringify(user))
-              localStorage.setItem('name', JSON.parse(Owner))
-              localStorage.setItem('company', JSON.parse(Company))
-              localStorage.setItem('jwt', response.data.token)
-              
-              if(localStorage.getItem('jwt') != null){
-                this.$emit('loggedIn')
-                alert("Selamat Datang" + " " + localStorage.getItem('name'));
-                this.$router.push(('/admin'))
-              } 
-            })
-
+            const request = {
+              email: this.email,
+              password: this.password
+            }
+            const res = await this.$user.login(request);
+            await this.$user.storeSession(res.data);
+            this.$router.replace({path: "/admin"});
+          }catch(error){
+            alert("Alamat Email Atau Password Anda Salah!");
           }
-          catch(err){
-            console.log(err);
-            // alert("Alamat Email atau Password Anda Salah!");
-            // this.$router.push(('/'))            
-          }
-
-       }
+          this.loading = false
+          
+        }
 
       },
 

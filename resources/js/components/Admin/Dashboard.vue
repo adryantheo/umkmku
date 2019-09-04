@@ -1,5 +1,5 @@
 <template>
-<div v-if="isLoggedIn">
+<div>
 <!-- dashboard -->
 
   <v-navigation-drawer fixed v-model="drawer" app >
@@ -56,24 +56,17 @@
       <v-toolbar-items class="hidden-sm-and-down">           
       </v-toolbar-items>
     </v-toolbar>  
-
-<!-- read -->
-
 <v-content>
   <v-container fluid fill-height>
     <router-view></router-view>
+
   </v-container>
 </v-content>
 </div>
 
-<div style="text-align: center" v-else>
-  <p class="text-xs-center">Harap Login Terlebih Dahulu</p>
-  <a class="align-center" href="./login">Login</a>
-</div>
 </template>
 
 <script>
-import { mdiClipboardText } from '@mdi/js';
 export default {
     data: () => ({
 
@@ -81,8 +74,6 @@ export default {
       drawer: null,
       myCompany: null,
       name: null,
-
-    isLoggedIn: localStorage.getItem('jwt') != null,
 
      beforeMount(){
         this.setComponent(this.$route.params.page)
@@ -94,48 +85,34 @@ export default {
   }),
 
   methods:{
-
-    setDefaults() {
-                if (this.isLoggedIn) {
-                    let user = JSON.parse(localStorage.getItem('user'))                       
-                }
-    },
     getInfo(){
-      this.name = localStorage.getItem('name');
-      this.myCompany = localStorage.getItem('company');
-
+      this.name = localStorage.getItem('Owner');
+      this.myCompany = localStorage.getItem('Company');
     },  
-    change() {
-        this.isLoggedIn = localStorage.getItem('jwt') != null
-        this.setDefaults()
-    },
-    logout(){
-        localStorage.removeItem('jwt')
-        localStorage.removeItem('user')
-        localStorage.removeItem('token')
-        localStorage.removeItem('username')
-        localStorage.removeItem('company')
-        this.change()
-        this.$router.push('/')
+    
+   async logout(){
+     try{
+       await this.$user.logout();
+       this.$user.clearStorage();
+       this.$router.replace({path: "/login"})
+     }catch(error){
+       alert(error)
+
+     }
     },
     jurnal(){
-        this.change()
         this.$router.push('/admin/jurnal')
     },
     materi(){
-        this.change()
         this.$router.push('/admin/materi')
     },
     laporan(){
-        this.change()
         this.$router.push('/admin/laporan')
     },
     settings(){
-        this.change()
         this.$router.push('/admin/pengaturan')
     },    
     aboutus(){
-        this.change()
         this.$router.push('/admin/aboutus')
     },
   },

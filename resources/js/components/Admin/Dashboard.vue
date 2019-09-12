@@ -101,7 +101,7 @@ export default {
      }
     },
     jurnal(){
-        this.$router.push('/admin/jurnal')
+        this.$router.push('/admin')
     },
     materi(){
         this.$router.push('/admin/materi')

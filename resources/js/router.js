@@ -20,7 +20,7 @@ const routes = [
     {
         path: '/admin', component: Dashboard,
         children:[
-            { path: 'jurnal', component: Jurnal },
+            { path: '/admin', component: Jurnal },
             { path: 'materi', component: Materi },
             { path: 'laporan', component: Laporan },
             { path: 'pengaturan', component: Settings },

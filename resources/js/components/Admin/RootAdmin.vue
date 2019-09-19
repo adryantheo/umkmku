@@ -45,7 +45,6 @@
         length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
         password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password harus terdiri dari alphabert, angka, huruf kapital, dan karakter spesial',
         required: v => !!v || 'Tidak Boleh Kosong',
-        
       },
       
     }),

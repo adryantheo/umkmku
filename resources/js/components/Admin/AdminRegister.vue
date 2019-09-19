@@ -11,13 +11,13 @@
               </v-toolbar>
               <v-card-text>
                 <v-form ref="register_form" @submit.prevent="register">
-                  <v-text-field prepend-icon="storefront" v-model="company_name" name="company_name" label="Nama Perusahaan" type="text"></v-text-field>
-                  <v-text-field prepend-icon="face" v-model="name" name="name" label="Nama Pemilik" type="text"></v-text-field>
-                  <v-text-field prepend-icon="location_city" v-model="address" name="address" label="Alamat" type="text"></v-text-field>
-                  <v-text-field prepend-icon="phone" v-model="phone" name="phone" label="Telepon" type="text"></v-text-field>
-                  <v-text-field prepend-icon="email" v-model="email" name="email" label="Email" type="text"></v-text-field>
-                  <v-text-field id="password" prepend-icon="lock" v-model="password" name="password" label="Password" type="password"></v-text-field>
-                  <v-text-field id="password" prepend-icon="lock" v-model="c_password" name="c_password" label="Confirm Password" type="password"></v-text-field>
+                  <v-text-field prepend-icon="storefront" v-model="company_name" name="company_name" label="Nama Perusahaan" type="text" :rules="[rules.required]"></v-text-field>
+                  <v-text-field prepend-icon="face" v-model="name" name="name" label="Nama Pemilik" type="text" :rules="[rules.required]"></v-text-field>
+                  <v-text-field prepend-icon="location_city" v-model="address" name="address" label="Alamat" type="text" :rules="[rules.required]"></v-text-field>
+                  <v-text-field prepend-icon="phone" v-model="phone" name="phone" label="Telepon" type="text" :rules="[rules.required]"></v-text-field>
+                  <v-text-field prepend-icon="email" v-model="email" name="email" label="Email" type="text" :rules="[rules.required, rules.email]"></v-text-field>
+                  <v-text-field id="password" prepend-icon="lock" v-model="password" name="password" label="Password" type="password" :rules="[rules.required, rules.password]"></v-text-field>
+                  <v-text-field id="password" prepend-icon="lock" v-model="c_password" name="c_password" label="Confirm Password" type="password" :rules="[rules.required, rules.password]"></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -50,6 +50,12 @@
       password: null,
       c_password: null,
 
+      rules: {
+        email: v => (v || '').match(/@/) || 'Format Email Salah',
+        length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
+        password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password harus terdiri dari alphabert, angka, huruf kapital, dan karakter spesial',
+        required: v => !!v || 'Tidak Boleh Kosong',
+      },
       
     }),
     props: {

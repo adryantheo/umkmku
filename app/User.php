@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -25,6 +24,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function jurnals(){
+        return $this->hasMany(Jurnal::class);
+    }
 
    
     // protected $casts = [

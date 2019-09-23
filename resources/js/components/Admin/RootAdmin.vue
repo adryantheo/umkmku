@@ -55,6 +55,7 @@
     methods: {
       
      async login(){
+       this.loading=true;
         if(this.$refs.login_form.validate()){
           this.loading = true
           try{

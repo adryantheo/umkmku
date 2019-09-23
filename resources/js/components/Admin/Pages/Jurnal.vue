@@ -6,18 +6,63 @@
         </div>        
     </v-layout>
 
-   <div>
-       <v-toolbar flat color="white">
-            <v-toolbar-title>Jurnal</v-toolbar-title>
-            <v-divider
-            class="mx-2"
-            inset
-            vertical
-            ></v-divider>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" dark class="mb-2" @click="openJurnalDialog">+ Tambah Jurnal</v-btn>
-        </v-toolbar>
+  <div>
+    <!-- toolbar table -->
+    <v-toolbar flat color="white">
+        <v-toolbar-title>Jurnal</v-toolbar-title>
+        <v-divider
+          class="mx-2"
+          inset
+          vertical
+        ></v-divider>
+        <v-spacer></v-spacer>
+        <v-dialog v-model="dialog" max-width="800px">
+          <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark class="mb-2" v-on="on">+ Tambah Jurnal</v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+  
+            <v-card-text>
+              <v-container grid-list-md>
+                <v-layout wrap>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.name" label="Date Picker Tanggal Transaksi"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.calories" label="v-select Keterangan Transaksi"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.fat" label="v-select Jenis Transaksi"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.carbs" label="v-select akun debit"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Debit"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.carbs" label="v-select akun Kredit"></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6 md4>
+                    <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Kredit"></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card-text>
+  
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+              <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-toolbar>
 
+      <!-- data table  -->
       <v-data-table
         :headers="headers"
         :items="desserts"
@@ -45,18 +90,24 @@
         <template v-slot:no-data>
           <v-btn color="primary" @click="initialize">Reset</v-btn>
         </template>
-      </v-data-table>
-    </div>
+      </v-data-table>    
 
-       
+      
+  </div>
 </div>
 </template>
 
 <script>
+
+
 export default {
+
     
     data: () => ({
-    dialog: false,
+      jurnalId: 0,
+      openJurnalDialog: false,
+      loading: false,
+      dialog: false,
     headers: [
       {
         text: 'Tanggal',
@@ -70,11 +121,11 @@ export default {
     editedIndex: -1,
     editedItem: {
       name: '',
-      calories: 0,
+      calories: '',
     },
     defaultItem: {
       name: '',
-      calories: 0,
+      calories: '',
     },
   }),
   computed: {
@@ -94,6 +145,7 @@ export default {
   },
 
   methods: {
+    
     initialize () {
       this.desserts = [
         {

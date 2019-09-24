@@ -5,7 +5,7 @@
             <div class="headline font-weight-bold mb-1">Halaman Jurnal</div>
         </div>        
     </v-layout>
-
+  <br>
   <div>
     <!-- toolbar table -->
     <v-toolbar flat color="white">

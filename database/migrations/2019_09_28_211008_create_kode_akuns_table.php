@@ -15,6 +15,8 @@ class CreateKodeAkunsTable extends Migration
     {
         Schema::create('kode_akuns', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('kode_akun')->unique();
+            $table->string('nama_akun');
             $table->timestamps();
         });
     }

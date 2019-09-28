@@ -29,8 +29,4 @@ class User extends Authenticatable
         return $this->hasMany(Jurnal::class);
     }
 
-   
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
 }

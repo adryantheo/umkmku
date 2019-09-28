@@ -32,19 +32,19 @@
                     <v-text-field v-model="editedItem.name" label="Date Picker Tanggal Transaksi"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.calories" label="v-select Keterangan Transaksi"></v-text-field>
+                    <v-select v-model="editedItem.calories" label="v-select Keterangan Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.fat" label="v-select Jenis Transaksi"></v-text-field>
+                    <v-select v-model="editedItem.fat" label="v-select Jenis Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.carbs" label="v-select akun debit"></v-text-field>
+                    <v-select v-model="editedItem.carbs" label="v-select akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
                     <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.carbs" label="v-select akun Kredit"></v-text-field>
+                    <v-select v-model="editedItem.carbs" label="v-select akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
                     <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Kredit"></v-text-field>

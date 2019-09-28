@@ -28,7 +28,6 @@ export default {
     data: () => ({
         activeTab: null,
         tabItems: [
-            {name: "Jurnal Umum"},
             {name: "Neraca Saldo"},
             {name: "Laba Rugi"},
             {name: "Perubahan Ekuitas"},

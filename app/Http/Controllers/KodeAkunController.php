@@ -7,79 +7,71 @@ use Illuminate\Http\Request;
 
 class KodeAkunController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        return response()->json(KodeAkun::all(),200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $kodeAkun = KodeAkun::create
+        ([
+            'kode_akun' => $request->kode_akun,
+            'nama_akun'  => $request->nama_akun,
+        ]);
+
+        return response()->json
+        ([
+            'status' => (bool) $kodeAkun,
+            'data' => $kodeAkun,
+            'messege' => $kodeAkun ? 'Kode Akun Berhasil Ditambakan' : 'Gagal Menambahkan Kode Akun'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\KodeAkun  $kodeAkun
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(KodeAkun $kodeAkun)
     {
-        //
+        return response()->json($kodeAkun, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\KodeAkun  $kodeAkun
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(KodeAkun $kodeAkun)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\KodeAkun  $kodeAkun
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, KodeAkun $kodeAkun)
     {
-        //
+        if($kodeAkun)
+        {
+            $status = $kodeAkun->update
+            (
+                $request->only
+                ([
+                    'kode_akun',
+                    'nama_akun'
+                ])
+            );
+
+            return response()->json
+            ([
+                'status' => $status,
+                'messege' => $status ? 'Kode Akun Berhasil Diupdate' : 'Kode Akun Gagal Diupdate'
+            ]);
+        }
+        else
+        {
+            return response()->json('Data Tidak Ditemukan', 404);
+        }
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\KodeAkun  $kodeAkun
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(KodeAkun $kodeAkun)
     {
-        //
+        $status = $kodeAkun->delete();
+
+        return response()->json
+        ([
+            'status' => $status,
+            'messege' => $status ? 'Kode Akun Berhasil Dihapus' : 'Gagal Menghapus Kode Akun'
+        ]);
     }
 }

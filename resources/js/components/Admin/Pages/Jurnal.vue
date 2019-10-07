@@ -38,29 +38,29 @@
                       min-width="290px"
                     >
                     <template v-slot:activator="{ on }">
-                       <v-text-field v-model="editedItem.date" label="Date Picker Tanggal Transaksi" v-on="on"></v-text-field>
+                       <v-text-field v-model="editedItem.date" label="Tanggal Transaksi Format (Tahun/Bulan/Tanggal)" v-on="on"></v-text-field>
 
                     </template>
-                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                    <v-date-picker v-model="editedItem.date" @input="menu2 = false"></v-date-picker>
                     </v-menu>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
                     <v-text-field v-model="editedItem.calories" label="Keterangan Transaksi"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-select :items="jenisTransaksi" v-model="editedItem.fat" label="v-select Jenis Transaksi"></v-select>
+                    <v-select :items="jenisTransaksi" v-model="editedItem.fat" label="Jenis Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-select v-model="editedItem.carbs" label="v-select akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Debit"></v-text-field>
+                    <v-text-field v-model="editedItem.protein" label="(v-text-field)Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
                     <v-select v-model="editedItem.carbs" label="v-select akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Kredit"></v-text-field>
+                    <v-text-field v-model="editedItem.protein" label="(v-text-field)Masukkan Nominal Kredit"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -123,14 +123,14 @@ export default {
       loading: false,
       dialog: false,
       jenisTransaksi: [
-        'setor modal',
-        'pembelian',
-        'penjualan aset-pendapatan jasa',
-        'pinjaman dari phak luar(utang)',
-        'pembayaran beban','pengambilan untuk pribadi',
-        'barter',
-        'penyesuaian',
-        'pembalik'
+        'Setor modal',
+        'Pembelian',
+        'Penjualan aset-pendapatan jasa',
+        'Pinjaman dari phak luar(utang)',
+        'Pembayaran beban','pengambilan untuk pribadi',
+        'Barter',
+        'Penyesuaian',
+        'Pembalik'
         ],
     headers: [
       {
@@ -144,6 +144,7 @@ export default {
     desserts: [],
     editedIndex: -1,
     editedItem: {
+      date: new Date().toISOString().substr(0, 10),
       name: '',
       calories: '',
     },

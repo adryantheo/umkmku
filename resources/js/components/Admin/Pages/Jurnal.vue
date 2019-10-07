@@ -16,7 +16,7 @@
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="800px">
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
           <template v-slot:activator="{ on }">
             <v-btn color="primary" dark class="mb-2" v-on="on">+ Tambah Jurnal</v-btn>
           </template>
@@ -29,24 +29,37 @@
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.name" label="Date Picker Tanggal Transaksi"></v-text-field>
+                    <v-menu
+                      v-model="menu2"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="290px"
+                    >
+                    <template v-slot:activator="{ on }">
+                       <v-text-field v-model="editedItem.date" label="Date Picker Tanggal Transaksi" v-on="on"></v-text-field>
+
+                    </template>
+                    <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                    </v-menu>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-select v-model="editedItem.calories" label="v-select Keterangan Transaksi"></v-select>
+                    <v-text-field v-model="editedItem.calories" label="Keterangan Transaksi"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-select v-model="editedItem.fat" label="v-select Jenis Transaksi"></v-select>
+                    <v-select :items="jenisTransaksi" v-model="editedItem.fat" label="v-select Jenis Transaksi"></v-select>
                   </v-flex>
-                  <v-flex xs12 sm6 md4>
+                  <v-flex xs12>
                     <v-select v-model="editedItem.carbs" label="v-select akun debit"></v-select>
                   </v-flex>
-                  <v-flex xs12 sm6 md4>
+                  <v-flex xs12>
                     <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
-                  <v-flex xs12 sm6 md4>
+                  <v-flex xs12>
                     <v-select v-model="editedItem.carbs" label="v-select akun Kredit"></v-select>
                   </v-flex>
-                  <v-flex xs12 sm6 md4>
+                  <v-flex xs12>
                     <v-text-field v-model="editedItem.protein" label="Masukkan Nominal Kredit"></v-text-field>
                   </v-flex>
                 </v-layout>
@@ -102,12 +115,23 @@
 
 export default {
 
-    
     data: () => ({
+      date: new Date().toISOString().substr(0, 10),
+      menu2: false,
       jurnalId: 0,
       openJurnalDialog: false,
       loading: false,
       dialog: false,
+      jenisTransaksi: [
+        'setor modal',
+        'pembelian',
+        'penjualan aset-pendapatan jasa',
+        'pinjaman dari phak luar(utang)',
+        'pembayaran beban','pengambilan untuk pribadi',
+        'barter',
+        'penyesuaian',
+        'pembalik'
+        ],
     headers: [
       {
         text: 'Tanggal',

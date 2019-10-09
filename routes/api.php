@@ -18,3 +18,4 @@ Route::delete('/kodeakun/{kodeAkun}', 'KodeAkunController@destroy');
 //Transaksis- API
 Route::get('/transaksi', 'TransaksiController@index');
 Route::post('/transaksi', 'TransaksiController@store');
+Route::delete('/transaksi/{transaksi}', 'TransaksiController@destroy');

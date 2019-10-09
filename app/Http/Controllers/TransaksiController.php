@@ -51,7 +51,7 @@ class TransaksiController extends Controller
         return response()->json
         ([
             'Status' => (bool) $transaksi,
-            'Messege' => $transaksi ? 'Berhasil Menambah Transaksi Baru' : 'Gagal Menambahkan Transaksi Baru'
+            'Message' => $transaksi ? 'Berhasil Menambah Transaksi Baru' : 'Gagal Menambahkan Transaksi Baru'
         ]);
     }
 
@@ -69,7 +69,14 @@ class TransaksiController extends Controller
 
    
     public function destroy(Transaksi $transaksi)
-    {
-        //
+    {        
+        $transaksi->debits()->delete();
+        $transaksi->kredits()->delete();
+        $transaksi->delete();
+        
+        return response()->json([
+            'Status' => (bool) $transaksi,
+            'Message' => $transaksi ? 'Jurnal Terhapus' : 'Gagal Menghapus Jurnal'
+        ]);
     }
 }

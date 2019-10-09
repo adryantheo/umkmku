@@ -185,9 +185,16 @@ export default {
       this.dialog = true
     },
 
-    deleteItem (item) {
+    async deleteItem (item) {
       const index = this.transaksis.indexOf(item)
       confirm('Are you sure you want to delete this item?') && this.transaksis.splice(index, 1)
+      try{
+        const res = await axios.delete(`/api/transaksi/`+item.id, null);
+        console.log(res.data);
+        this.getTransaksis();
+      }catch(errorDelete){
+        console.log(errorDelete);
+      }
     },
 
     close () {

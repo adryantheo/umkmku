@@ -39,28 +39,27 @@
                     >
                     <template v-slot:activator="{ on }">
                        <v-text-field v-model="editedItem.date" label="Tanggal Transaksi Format (Tahun/Bulan/Tanggal)" v-on="on"></v-text-field>
-
                     </template>
                     <v-date-picker v-model="editedItem.date" @input="menu2 = false"></v-date-picker>
                     </v-menu>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.calories" label="Keterangan Transaksi"></v-text-field>
+                    <v-text-field v-model="editedItem.keterangan_transkasi" label="Keterangan Transaksi"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-select :items="jenisTransaksi" v-model="editedItem.fat" label="Jenis Transaksi"></v-select>
+                    <v-select :items="jenisTransaksi" v-model="editedItem.jenis_transaksi" label="Jenis Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select v-model="editedItem.carbs" label="v-select akun debit"></v-select>
+                    <v-select v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="editedItem.protein" label="(v-text-field)Masukkan Nominal Debit"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal_debit" label="(v-text-field)Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select v-model="editedItem.carbs" label="v-select akun Kredit"></v-select>
+                    <v-select v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="editedItem.protein" label="(v-text-field)Masukkan Nominal Kredit"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal_kredit" label="(v-text-field)Masukkan Nominal Kredit"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -78,12 +77,12 @@
       <!-- data table  -->
       <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="transaksis"
         class="elevation-1"
       >
         <template v-slot:items="props">
-          <td>{{ props.item.name }}</td>
-          <td>{{ props.item.calories }}</td>
+          <td>{{ props.item.tanggal_transaksi }}</td>
+          <td>{{ props.item.keterangan_transaksi }}</td>
           <td>
             <v-icon
               small
@@ -101,7 +100,7 @@
           </td>
         </template>
         <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
+          <v-btn color="primary" @click="getTransaksis">Reset</v-btn>
         </template>
       </v-data-table>    
 
@@ -116,13 +115,12 @@
 export default {
 
     data: () => ({
-      date: new Date().toISOString().substr(0, 10),
       menu2: false,
-      jurnalId: 0,
       openJurnalDialog: false,
       loading: false,
       dialog: false,
-      jenisTransaksi: [
+      jenisTransaksi: 
+      [
         'Setor modal',
         'Pembelian',
         'Penjualan aset-pendapatan jasa',
@@ -131,28 +129,34 @@ export default {
         'Barter',
         'Penyesuaian',
         'Pembalik'
-        ],
-    headers: [
-      {
-        text: 'Tanggal',
-        sortable: false,
-        value: 'name',
+      ],
+      headers:[
+        {text: 'Tanggal', sortable: false, value: 'tanggal_transaksi'},
+        { text: 'Keterangan', value: 'keterangan_transaksi' },
+        { text: 'Actions', value: 'action', sortable: false },
+      ],
+      transaksis: [],
+      editedIndex: -1,
+      editedItem: {
+        date: new Date().toISOString().substr(0, 10),
+        keterangan_transkasi: '',
+        jenis_transaksi: '',
+        akun_debit: '',
+        akun_kredit: '',
+        nominal_debit: '',
+        nominal_kredit: '',
       },
-      { text: 'Keterangan', value: 'calories' },
-      { text: 'Actions', value: 'action', sortable: false },
-    ],
-    desserts: [],
-    editedIndex: -1,
-    editedItem: {
-      date: new Date().toISOString().substr(0, 10),
-      name: '',
-      calories: '',
-    },
-    defaultItem: {
-      name: '',
-      calories: '',
-    },
+      defaultItem: {
+        date: new Date().toISOString().substr(0, 10),
+        keterangan_transkasi: '',
+        jenis_transaksi: '',
+        akun_debit: '',
+        akun_kredit: '',
+        nominal_debit: '',
+        nominal_kredit: '',
+      },
   }),
+  
   computed: {
     formTitle () {
       return this.editedIndex === -1 ? 'Tambah Jurnal' : 'Edit Jurnal'
@@ -165,66 +169,25 @@ export default {
     },
   },
 
-  created () {
-    this.initialize()
+  mounted () {
+    this.getTransaksis()
   },
 
   methods: {
-    
-    initialize () {
-      this.desserts = [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-        },
-      ]
-    },
-
+    async getTransaksis()
+    {
+      const res = await axios.get('/api/transaksi');
+      this.transaksis = res.data;
+    }, 
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.transaksis.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      const index = this.desserts.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      const index = this.transaksis.indexOf(item)
+      confirm('Are you sure you want to delete this item?') && this.transaksis.splice(index, 1)
     },
 
     close () {
@@ -237,9 +200,9 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        Object.assign(this.transaksis[this.editedIndex], this.editedItem)
       } else {
-        this.desserts.push(this.editedItem)
+        this.transaksis.push(this.editedItem)
       }
       this.close()
     },

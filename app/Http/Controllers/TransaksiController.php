@@ -58,13 +58,36 @@ class TransaksiController extends Controller
     
     public function show(Transaksi $transaksi)
     {
-        //
+        return response()->json($transaksi::with(['debits','kredits'])->first(),200);
     }
 
     
     public function update(Request $request, Transaksi $transaksi)
     {
-        //
+        DB::transaction(function() use($request, &$transaksi)
+        {
+            $status = $transaksi->update(
+                $request->only(['jenis_transaksi','keterangan_transaksi','tanggal_transaksi'])
+            );
+            
+            //Update Debit
+            $status = $transaksi->debits()->update(
+                $request->only(['akun_debit','nominal_debit'])
+            );
+
+            //Update Kredit
+            $status = $transaksi->kredits()->update(
+                $request->only(['akun_kredit','nominal_kredit'])
+            );
+
+        },3);
+
+        return response()->json
+        ([
+            'Status' => (bool) $transaksi,
+            'Message' => $transaksi ? 'Berhasil Mengupdate Transaksi' : 'Gagal Mengupdate Transaksi'
+        ]);
+
     }
 
    

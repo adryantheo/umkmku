@@ -44,19 +44,19 @@
                     </v-menu>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="editedItem.keterangan_transkasi" label="Keterangan Transaksi"></v-text-field>
+                    <v-text-field v-model="editedItem.keterangan_transaksi" label="Keterangan Transaksi"></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm6 md4>
                     <v-select :items="jenisTransaksi" v-model="editedItem.jenis_transaksi" label="Jenis Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
+                    <v-select :items="kodeAkun" item-text="nama_akun" item-value="id" v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field v-model="editedItem.nominal_debit" label="(v-text-field)Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
+                    <v-select :items="kodeAkun" item-text="nama_akun" item-value="id" v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field v-model="editedItem.nominal_kredit" label="(v-text-field)Masukkan Nominal Kredit"></v-text-field>
@@ -113,12 +113,26 @@
 
 
 export default {
+  // props:{
+  //   transaksi:{
+  //     type: String,
+  //     required: true,
+  //   }
 
-    data: () => ({
+  // },
+
+  data: () => ({
       menu2: false,
       openJurnalDialog: false,
       loading: false,
       dialog: false,
+      date: new Date().toISOString().substr(0, 10),
+      keterangan_transaksi: '',
+      jenis_transaksi: '',
+      akun_debit: '',
+      akun_kredit: '',
+      nominal_debit: '',
+      nominal_kredit: '',
       jenisTransaksi: 
       [
         'Setor modal',
@@ -136,10 +150,12 @@ export default {
         { text: 'Actions', value: 'action', sortable: false },
       ],
       transaksis: [],
+      dataTransaksi:[],
+      kodeAkun:[],
       editedIndex: -1,
       editedItem: {
-        date: new Date().toISOString().substr(0, 10),
-        keterangan_transkasi: '',
+        date: '',
+        keterangan_transaksi: '',
         jenis_transaksi: '',
         akun_debit: '',
         akun_kredit: '',
@@ -148,7 +164,7 @@ export default {
       },
       defaultItem: {
         date: new Date().toISOString().substr(0, 10),
-        keterangan_transkasi: '',
+        keterangan_transaksi: '',
         jenis_transaksi: '',
         akun_debit: '',
         akun_kredit: '',
@@ -171,17 +187,37 @@ export default {
 
   mounted () {
     this.getTransaksis()
+    this.getKodeAkun()
   },
 
   methods: {
+    async getKodeAkun()
+    {
+      const res = await axios.get('/api/kodeakun');
+      this.kodeAkun = res.data.reverse();
+    },
+
     async getTransaksis()
     {
       const res = await axios.get('/api/transaksi');
-      this.transaksis = res.data;
-    }, 
-    editItem (item) {
-      this.editedIndex = this.transaksis.indexOf(item)
-      this.editedItem = Object.assign({}, item)
+      this.transaksis = res.data.reverse();
+    },   
+
+    async editItem (item) {
+      this.editedIndex = item.id;     
+      const response = await axios.get(`/api/transaksi/${item.id}`).then(response => this.dataTransaksi = response.data)
+      
+      this.editedItem.date = this.dataTransaksi.tanggal_transaksi;
+      this.editedItem.jenis_transaksi = this.dataTransaksi.jenis_transaksi;
+      this.editedItem.keterangan_transaksi = this.dataTransaksi.keterangan_transaksi;
+      this.editedItem.akun_debit = this.dataTransaksi.debits[0].akun_debit;
+      this.editedItem.nominal_debit = this.dataTransaksi.debits[0].nominal_debit;
+      this.editedItem.akun_kredit = this.dataTransaksi.kredits[0].akun_kredit;
+      this.editedItem.nominal_kredit = this.dataTransaksi.kredits[0].nominal_kredit;
+      // this.editedItem = Object.assign({}, item)
+      // if(!!this.editedIndex){
+      //   const res = await axios.patch(`/api/transaksi/`+item.id)
+      // }
       this.dialog = true
     },
 
@@ -205,11 +241,39 @@ export default {
       }, 300)
     },
 
-    save () {
+  async save () {
       if (this.editedIndex > -1) {
         Object.assign(this.transaksis[this.editedIndex], this.editedItem)
+         try{
+          const res = await axios.patch(`api/transaksi/`+this.item.id,{
+          jenis_transaksi: this.editedItem.jenis_transaksi,
+          keterangan_transaksi: this.editedItem.keterangan_transaksi,
+          tanggal_transaksi: this.editedItem.date,
+          akun_debit: this.editedItem.akun_debit,
+          akun_kredit: this.editedItem.akun_kredit,
+          nominal_debit: this.editedItem.nominal_debit,
+          nominal_kredit: this.editedItem.nominal_kredit
+        })
+        alert("Transaksi Berhasil di Update");
+        }catch(err){
+          console.log(err)
+        }
       } else {
         this.transaksis.push(this.editedItem)
+        try{
+          const res = await axios.post('/api/transaksi',{
+            jenis_transaksi: this.editedItem.jenis_transaksi,
+            keterangan_transaksi: this.editedItem.keterangan_transaksi,
+            tanggal_transaksi: this.editedItem.date,
+            akun_debit: this.editedItem.akun_debit,
+            akun_kredit: this.editedItem.akun_kredit,
+            nominal_debit: this.editedItem.nominal_debit,
+            nominal_kredit: this.editedItem.nominal_kredit
+          })
+          alert("Transaksi Baru Berhasil Ditambahkan");
+        }catch(err){
+          console.log(err);
+        } 
       }
       this.close()
     },

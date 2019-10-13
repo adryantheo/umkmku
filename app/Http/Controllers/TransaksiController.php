@@ -58,7 +58,9 @@ class TransaksiController extends Controller
     
     public function show(Transaksi $transaksi)
     {
-        return response()->json($transaksi::with(['debits','kredits'])->first(),200);
+        $status = Transaksi::with(['debits','kredits'])
+        ->find($transaksi);
+        return response()->json($status->first(),200);
     }
 
     

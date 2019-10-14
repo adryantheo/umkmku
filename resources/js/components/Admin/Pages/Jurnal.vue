@@ -245,7 +245,7 @@ export default {
       if (this.editedIndex > -1) {
         Object.assign(this.transaksis[this.editedIndex], this.editedItem)
          try{
-          const res = await axios.patch(`api/transaksi/`+this.item.id,{
+          const res = await axios.patch(`api/transaksi/`+this.editedIndex,{
           jenis_transaksi: this.editedItem.jenis_transaksi,
           keterangan_transaksi: this.editedItem.keterangan_transaksi,
           tanggal_transaksi: this.editedItem.date,

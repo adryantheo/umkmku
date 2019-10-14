@@ -64,9 +64,11 @@
                 </v-layout>
               </v-container>
             </v-card-text>
+            
   
             <v-card-actions>
               <v-spacer></v-spacer>
+              <!-- <v-btn color="blue darken-1" flat @click="getOptions">Options</v-btn> -->
               <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
               <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
             </v-card-actions>
@@ -113,14 +115,7 @@
 
 
 export default {
-  // props:{
-  //   transaksi:{
-  //     type: String,
-  //     required: true,
-  //   }
-
-  // },
-
+  
   data: () => ({
       menu2: false,
       openJurnalDialog: false,
@@ -133,6 +128,8 @@ export default {
       akun_kredit: '',
       nominal_debit: '',
       nominal_kredit: '',
+      prefix: '',
+      hasKode: [],
       jenisTransaksi: 
       [
         'Setor modal',
@@ -183,6 +180,10 @@ export default {
     dialog (val) {
       val || this.close()
     },
+
+    'editedItem.jenis_transaksi' (){
+      this.getOptions()
+    } 
   },
 
   mounted () {
@@ -191,6 +192,14 @@ export default {
   },
 
   methods: {
+     getOptions(){
+      const jenisTransaksi = this.editedItem.jenis_transaksi;
+      if(jenisTransaksi === 'Setor modal'){
+        console.log('watch e dadi mas');
+        //array anyar = fungsi filter
+      }
+    },
+
     async getKodeAkun()
     {
       const res = await axios.get('/api/kodeakun');
@@ -206,7 +215,6 @@ export default {
     async editItem (item) {
       this.editedIndex = item.id;     
       const response = await axios.get(`/api/transaksi/${item.id}`).then(response => this.dataTransaksi = response.data)
-      
       this.editedItem.date = this.dataTransaksi.tanggal_transaksi;
       this.editedItem.jenis_transaksi = this.dataTransaksi.jenis_transaksi;
       this.editedItem.keterangan_transaksi = this.dataTransaksi.keterangan_transaksi;
@@ -214,10 +222,6 @@ export default {
       this.editedItem.nominal_debit = this.dataTransaksi.debits[0].nominal_debit;
       this.editedItem.akun_kredit = this.dataTransaksi.kredits[0].akun_kredit;
       this.editedItem.nominal_kredit = this.dataTransaksi.kredits[0].nominal_kredit;
-      // this.editedItem = Object.assign({}, item)
-      // if(!!this.editedIndex){
-      //   const res = await axios.patch(`/api/transaksi/`+item.id)
-      // }
       this.dialog = true
     },
 

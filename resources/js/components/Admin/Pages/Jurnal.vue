@@ -50,13 +50,13 @@
                     <v-select :items="jenisTransaksi" v-model="editedItem.jenis_transaksi" label="Jenis Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select :items="kodeAkun" item-text="nama_akun" item-value="id" v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
+                    <v-select :items="kodeAkun" item-text="nama_akun" v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field v-model="editedItem.nominal_debit" label="(v-text-field)Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select :items="kodeAkun" item-text="nama_akun" item-value="id" v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
+                    <v-select :items="kodeAkun" item-text="nama_akun" v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field v-model="editedItem.nominal_kredit" label="(v-text-field)Masukkan Nominal Kredit"></v-text-field>

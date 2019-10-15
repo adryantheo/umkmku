@@ -50,13 +50,13 @@
                     <v-select :items="jenisTransaksi" v-model="editedItem.jenis_transaksi" label="Jenis Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select :items="kodeAkun" item-text="nama_akun" v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
+                    <v-select :items="debitAkun" item-text="Nama" v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field v-model="editedItem.nominal_debit" label="(v-text-field)Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select :items="kodeAkun" item-text="nama_akun" v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
+                    <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field v-model="editedItem.nominal_kredit" label="(v-text-field)Masukkan Nominal Kredit"></v-text-field>
@@ -128,8 +128,6 @@ export default {
       akun_kredit: '',
       nominal_debit: '',
       nominal_kredit: '',
-      prefix: '',
-      hasKode: [],
       jenisTransaksi: 
       [
         'Setor modal',
@@ -184,7 +182,7 @@ export default {
       val || this.close()
     },
 
-    'editedItem.jenis_transaksi' (){
+    'editedItem.jenis_transaksi'(){
       this.getOptions()
     } 
   },
@@ -197,28 +195,67 @@ export default {
   // return array.Mu.filter(item => substring(0,2) == "11");
 
   methods: {
-    filterItems: function(items){
-      return items.filter(function(item){
-        return item.kode_akun.toString().substring(0,2) == "11";
-      })
-      console.log(items)
-    },
+   
      getOptions(){
       const jenisTransaksi = this.editedItem.jenis_transaksi;
+      //Create Array Kode Akun
+       var newArray = this.kodeAkun.map(item => ({
+          Code: item.kode_akun.toString(),
+          Nama: item.nama_akun,
+        }));
+        //Create Array Khusus Substring
+         var getDataAkun = newArray.map(item =>({
+           Code: item.Code.substring(0,2),
+           Nama: item.Nama
+         }));
+
       if(jenisTransaksi === 'Setor modal'){
-        console.log(jenisTransaksi);
-        this.filterItems(this.kodeAkun);
-        console.log(this.filterItems)
-        //newArray  = fungsi filter
-        console.log(item);
-        // this.debitAkun = this.kodeAkun.filter(item => substring(0,2) == "11");
-        console.log(this.debitAkun);
+        // console.log(jenisTransaksi);      
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "31"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
+        // console.log(getDataAkun);
+        // console.log(this.debitAkun);
+        // console.log(this.kreditAkun);
       }
       else if(jenisTransaksi === 'Pembelian'){
         console.log(jenisTransaksi);
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "22" || getDataAkun[i].Code === "31"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }                
       }
       else if(jenisTransaksi === 'Penjualan aset-pendapatan jasa'){
         console.log(jenisTransaksi);
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12" || getDataAkun[i].Code === "31" || getDataAkun[i].Code === "41" || getDataAkun[i].Code === "42" || getDataAkun[i].Code === "52" || getDataAkun[i].Code === "61" || getDataAkun[i].Code === "71"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12" || getDataAkun[i].Code === "31" || getDataAkun[i].Code === "41" || getDataAkun[i].Code === "42" || getDataAkun[i].Code === "71"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
       }
       else if(jenisTransaksi === 'Pinjaman dari phak luar(utang)'){
         console.log(jenisTransaksi);
@@ -247,7 +284,7 @@ export default {
     async getKodeAkun()
     {
       const res = await axios.get('/api/kodeakun');
-      this.kodeAkun = res.data.reverse();
+      this.kodeAkun = res.data;
     },
 
     async getTransaksis()

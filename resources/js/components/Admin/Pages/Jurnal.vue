@@ -136,7 +136,8 @@ export default {
         'Pembelian',
         'Penjualan aset-pendapatan jasa',
         'Pinjaman dari phak luar(utang)',
-        'Pembayaran beban','pengambilan untuk pribadi',
+        'Pembayaran beban',
+        'Pengambilan untuk pribadi',
         'Barter',
         'Penyesuaian',
         'Pembalik'
@@ -149,6 +150,8 @@ export default {
       transaksis: [],
       dataTransaksi:[],
       kodeAkun:[],
+      debitAkun: [],
+      kreditAkun: [],
       editedIndex: -1,
       editedItem: {
         date: '',
@@ -191,12 +194,53 @@ export default {
     this.getKodeAkun()
   },
 
+  // return array.Mu.filter(item => substring(0,2) == "11");
+
   methods: {
+    filterItems: function(items){
+      return items.filter(function(item){
+        return item.kode_akun.toString().substring(0,2) == "11";
+      })
+      console.log(items)
+    },
      getOptions(){
       const jenisTransaksi = this.editedItem.jenis_transaksi;
       if(jenisTransaksi === 'Setor modal'){
-        console.log('watch e dadi mas');
-        //array anyar = fungsi filter
+        console.log(jenisTransaksi);
+        this.filterItems(this.kodeAkun);
+        console.log(this.filterItems)
+        //newArray  = fungsi filter
+        console.log(item);
+        // this.debitAkun = this.kodeAkun.filter(item => substring(0,2) == "11");
+        console.log(this.debitAkun);
+      }
+      else if(jenisTransaksi === 'Pembelian'){
+        console.log(jenisTransaksi);
+      }
+      else if(jenisTransaksi === 'Penjualan aset-pendapatan jasa'){
+        console.log(jenisTransaksi);
+      }
+      else if(jenisTransaksi === 'Pinjaman dari phak luar(utang)'){
+        console.log(jenisTransaksi);
+      }
+      else if(jenisTransaksi === 'Pembayaran beban'){
+        console.log(jenisTransaksi);
+      }
+      else if(jenisTransaksi === 'Pengambilan untuk pribadi'){
+        console.log(jenisTransaksi);
+      }
+      else if(jenisTransaksi === 'Barter'){
+        console.log(jenisTransaksi);
+      }
+      else if(jenisTransaksi === 'Penyesuaian'){
+        console.log(jenisTransaksi);
+      }
+      else if(jenisTransaksi === 'Pembalik'){
+        console.log(jenisTransaksi);
+      }
+      else{
+        console.log("Invalid Input");
+
       }
     },
 

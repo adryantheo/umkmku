@@ -50,16 +50,16 @@
                     <v-select :items="jenisTransaksi" v-model="editedItem.jenis_transaksi" label="Jenis Transaksi"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select :items="debitAkun" item-text="Nama" v-model="editedItem.akun_debit" label="v-select akun debit"></v-select>
+                    <v-select :items="debitAkun" item-text="Nama" v-model="editedItem.akun_debit" label="Akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="editedItem.nominal_debit" label="(v-text-field)Masukkan Nominal Debit"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal_debit" label="Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="v-select akun Kredit"></v-select>
+                    <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="Akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="editedItem.nominal_kredit" label="(v-text-field)Masukkan Nominal Kredit"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit"></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -258,21 +258,93 @@ export default {
          }
       }
       else if(jenisTransaksi === 'Pinjaman dari phak luar(utang)'){
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "22"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "22"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
         console.log(jenisTransaksi);
       }
       else if(jenisTransaksi === 'Pembayaran beban'){
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "51" || getDataAkun[i].Code === "52"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "31"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
         console.log(jenisTransaksi);
       }
       else if(jenisTransaksi === 'Pengambilan untuk pribadi'){
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "61"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12" || getDataAkun[i].Code === "31" || getDataAkun[i].Code === "41" || getDataAkun[i].Code === "42"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
         console.log(jenisTransaksi);
       }
       else if(jenisTransaksi === 'Barter'){
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "22" || getDataAkun[i].Code === "51" || getDataAkun[i].Code === "52"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12" || getDataAkun[i].Code === "31" || getDataAkun[i].Code === "41" || getDataAkun[i].Code === "42"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
         console.log(jenisTransaksi);
       }
       else if(jenisTransaksi === 'Penyesuaian'){
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "51"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "31" || getDataAkun[i].Code === "41" || getDataAkun[i].Code === "42" || getDataAkun[i].Code === "71"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
         console.log(jenisTransaksi);
       }
       else if(jenisTransaksi === 'Pembalik'){
+        // Create Array Debit;
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "31"){
+              this.debitAkun.push(getDataAkun[i]);
+          }
+         }
+         //Create Array Kredit
+         for(var i=0; i<getDataAkun.length; i++){
+          if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "21" || getDataAkun[i].Code === "51" || getDataAkun[i].Code === "52"){
+              this.kreditAkun.push(getDataAkun[i]);
+          }
+         }
         console.log(jenisTransaksi);
       }
       else{

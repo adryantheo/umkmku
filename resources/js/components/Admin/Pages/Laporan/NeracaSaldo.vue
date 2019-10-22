@@ -1,9 +1,46 @@
 <template>
-  <p>test</p>
+  <div style="width: 100%">
+    <v-container grid-list-md>
+      <v-layout align-space-around justify-center fill-height>
+          <!-- <p>Neraca Saldo</p> -->
+          <v-flex xs12 sm6 md4>
+            <v-select :items="bulan" v-model="getBulan" label="Bulan"></v-select>
+          </v-flex>
+          <v-flex xs12 sm6 md4>
+            <v-select :items="tahun" v-model="getTahun" label="Tahun"></v-select>
+          </v-flex>
+      </v-layout>
+
+      <v-layout align-space-around justify-center fill-height>
+        <v-card width="100%">
+          <v-card-title class="justify-center">
+            <span class="headline">Laporan Neraca Saldo</span>
+          </v-card-title>
+          <v-card-title class="justify-center">
+            <span class="headline">Periode {{ getBulan }} {{ getTahun }}</span>
+          </v-card-title>
+        </v-card>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    bulan: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
+    tahun: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021'],
+    getBulan: '',
+    getTahun: '',
+  }),
+  watch: {
+    'getBulan': function(){
+      return this.getBulan;
+    },
+    'getTahun': function(){
+      return this.getTahun;
+    } 
+  },
 
 }
 </script>

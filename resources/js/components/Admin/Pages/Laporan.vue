@@ -19,12 +19,22 @@
             >
                 {{item.name}}
             </v-tab>
-    </v-tabs>    
+    </v-tabs>
+    <v-tab-item value="tab-0">
+                <v-layout row wrap>
+                    <neracaSaldo></neracaSaldo>
+                </v-layout>
+    </v-tab-item>    
 </div>
 </template>
 
 <script>
+import neracaSaldo from './Laporan/NeracaSaldo.vue'
 export default {
+    components:{
+        neracaSaldo
+
+    },
     data: () => ({
         activeTab: null,
         tabItems: [

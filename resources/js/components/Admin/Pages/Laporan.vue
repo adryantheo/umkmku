@@ -19,12 +19,12 @@
             >
                 {{item.name}}
             </v-tab>
-    </v-tabs>
-    <v-tab-item value="tab-0">
+            <v-tab-item value="tab-0">
                 <v-layout row wrap>
-                    <neracaSaldo></neracaSaldo>
+                    <neraca-saldo></neraca-saldo>                        
                 </v-layout>
-    </v-tab-item>    
+            </v-tab-item>
+    </v-tabs>    
 </div>
 </template>
 

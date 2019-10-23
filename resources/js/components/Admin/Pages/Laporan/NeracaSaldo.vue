@@ -19,6 +19,22 @@
           <v-card-title class="justify-center">
             <span class="headline">Periode {{ getBulan }} {{ getTahun }}</span>
           </v-card-title>
+
+          <v-data-table
+          :headers="headers"
+          :items="transaksis"
+          class="elevation-1"
+        >
+          <template v-slot:items="props">
+            <td>{{ props.item.tanggal_transaksi }}</td>
+            <td>{{ props.item.keterangan_transaksi }}</td>
+            <td>{{ props.item.keterangan_transaksi }}</td>
+            <td>{{ props.item.keterangan_transaksi }}</td>
+          </template>
+          <template v-slot:no-data>
+            <v-btn color="primary" @click="getTransaksis">Reset</v-btn>
+          </template>
+        </v-data-table>
         </v-card>
       </v-layout>
     </v-container>
@@ -28,10 +44,17 @@
 <script>
 export default {
   data: () => ({
+    headers:[
+      {text: 'Kode Akun', sortable: false, value: 'tanggal_transaksi'},
+      {text: 'Nama Akun', sortable: false, value: 'tanggal_transaksi'},
+      {text: 'Debet',  sortable: false, value: 'keterangan_transaksi' },
+      {text: 'Kredit', value: 'action', sortable: false },
+    ],
     bulan: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
     tahun: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021'],
     getBulan: '',
     getTahun: '',
+    transaksis: [],
   }),
   watch: {
     'getBulan': function(){
@@ -40,6 +63,18 @@ export default {
     'getTahun': function(){
       return this.getTahun;
     } 
+  },
+  mounted(){
+    this.getTransaksis();
+
+  },
+  methods:{
+    async getTransaksis(){
+      const res = await axios.get('/api/transaksi-all/');
+      this.transaksis = res.data;
+      console.log(this.transaksis);
+    }
+
   },
 
 }

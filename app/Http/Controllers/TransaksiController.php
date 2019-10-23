@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 class TransaksiController extends Controller
 {
    
+    public function all()
+    {
+        return response()->json(Transaksi::with('debits', 'kredits')->get(),200);
+    }
+
     public function index()
     {
         return response()->json(Transaksi::all(),200);

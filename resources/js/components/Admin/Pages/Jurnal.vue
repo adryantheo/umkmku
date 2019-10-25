@@ -27,7 +27,9 @@
   
             <v-card-text>
               <v-container grid-list-md>
+                <v-form ref="transaksi_form">
                 <v-layout wrap>
+                  
                   <v-flex xs12 sm6 md4>
                     <v-menu
                       v-model="menu2"
@@ -59,16 +61,18 @@
                     <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="Akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit" :rules="mustSame"></v-text-field>
                   </v-flex>
                 </v-layout>
+                </v-form>
               </v-container>
             </v-card-text>
             
   
             <v-card-actions>
+              <v-btn color="blue darken-1" flat >Tambah Akun Debit</v-btn>
+              <v-btn color="blue darken-1" flat >Tambah Akun Kredit</v-btn>
               <v-spacer></v-spacer>
-              <!-- <v-btn color="blue darken-1" flat @click="getOptions">Options</v-btn> -->
               <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
               <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
             </v-card-actions>
@@ -175,6 +179,11 @@ export default {
     formTitle () {
       return this.editedIndex === -1 ? 'Tambah Jurnal' : 'Edit Jurnal'
     },
+    mustSame() {
+      return [
+        () => (this.editedItem.nominal_debit === this.editedItem.nominal_kredit) || 'Jumlah Debit Kredit Tidak Seimbang',
+      ]
+    }
   },
 
   watch: {
@@ -184,7 +193,14 @@ export default {
 
     'editedItem.jenis_transaksi'(){
       this.getOptions()
-    } 
+    },
+    // 'editedItem.nominal_kredit'(){
+    //   if(this.editedItem.nominal_debit === this.editedItem.nominal_kredit){
+    //     console.log("true");
+    //   }else{
+    //     alert("Jumlah Nominal Kredit dan Jumlah Nominal Debit Harus Seimbang");
+    //   }
+    // } 
   },
 
   mounted () {
@@ -416,9 +432,12 @@ export default {
           console.log(err)
         }
       } else {
-        this.transaksis.push(this.editedItem)
-        try{
-          const res = await axios.post('/api/transaksi',{
+        if(this.$refs.transaksi_form.validate())
+        {
+          if(this.editedItem.nominal_kredit === this.editedItem.nominal_kredit){
+            this.transaksis.push(this.editedItem)
+            try{
+            const res = await axios.post('/api/transaksi',{
             jenis_transaksi: this.editedItem.jenis_transaksi,
             keterangan_transaksi: this.editedItem.keterangan_transaksi,
             tanggal_transaksi: this.editedItem.date,
@@ -426,11 +445,14 @@ export default {
             akun_kredit: this.editedItem.akun_kredit,
             nominal_debit: this.editedItem.nominal_debit,
             nominal_kredit: this.editedItem.nominal_kredit
-          })
-          alert("Transaksi Baru Berhasil Ditambahkan");
+            })
+            alert("Transaksi Baru Berhasil Ditambahkan");           
         }catch(err){
           console.log(err);
-        } 
+        }
+          }
+          
+      } 
       }
       this.close()
     },

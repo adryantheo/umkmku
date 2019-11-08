@@ -15,31 +15,35 @@
             <v-tab
                 v-for="(item, i) in tabItems"
                 :key="i" ripple
-                :href="`#tab-${i}`"
-            >
+                :href="`#tab-${i}`">
                 {{item.name}}
             </v-tab>
             <v-tab-item value="tab-0">
                 <v-container fluid fill-height>
-                    <neraca-saldo></neraca-saldo>
+                    <jurnal-umum></jurnal-umum>
                 </v-container>
             </v-tab-item>
             <v-tab-item value="tab-1">
                 <v-layout row wrap>
-                    <laba-rugi></laba-rugi>
+                    <neraca-saldo></neraca-saldo>
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-2">
                 <v-layout row wrap>
-                    <perubahan-ekuitas></perubahan-ekuitas>
+                    <laba-rugi></laba-rugi>
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-3">
                 <v-layout row wrap>
-                    <posisi-keuangan></posisi-keuangan>
+                    <perubahan-ekuitas></perubahan-ekuitas>
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-4">
+                <v-layout row wrap>
+                    <posisi-keuangan></posisi-keuangan>
+                </v-layout>
+            </v-tab-item>
+            <v-tab-item value="tab-5">
                 <v-layout row wrap>
                     <arus-kas></arus-kas>
                 </v-layout>
@@ -49,6 +53,7 @@
 </template>
 
 <script>
+import jurnalUmum from './Laporan/JurnalUmum'
 import neracaSaldo from './Laporan/NeracaSaldo';
 import labaRugi from './Laporan/LabaRugi';
 import perubahanEkuitas from './Laporan/PerubahanEkuitas';
@@ -56,6 +61,7 @@ import posisiKeuangan from './Laporan/PosisiKeuangan';
 import arusKas from './Laporan/ArusKas';
 export default {
     components:{
+        jurnalUmum,
         neracaSaldo,
         labaRugi,
         perubahanEkuitas,
@@ -65,6 +71,7 @@ export default {
     data: () => ({
         activeTab: null,
         tabItems: [
+            {name: "Jurnal Umum"},
             {name: "Neraca Saldo"},
             {name: "Laba Rugi"},
             {name: "Perubahan Ekuitas"},

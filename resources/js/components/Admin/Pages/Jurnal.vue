@@ -51,18 +51,22 @@
                   <v-flex xs12 sm6 md4>
                     <v-select :items="jenisTransaksi" v-model="editedItem.jenis_transaksi" label="Jenis Transaksi"></v-select>
                   </v-flex>
-                  <v-flex xs12>
+                  <template v-for="editedItem in akunDebits">
+                  <v-flex xs12 sm6>
                     <v-select :items="debitAkun" item-text="Nama" v-model="editedItem.akun_debit" label="Akun debit"></v-select>
                   </v-flex>
-                  <v-flex xs12>
+                  <v-flex xs12 sm6>
                     <v-text-field v-model="editedItem.nominal_debit" label="Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
-                  <v-flex xs12>
+                  </template>
+                  <template v-for="editedItem in akunKredits">
+                  <v-flex xs12 sm6>
                     <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="Akun Kredit"></v-select>
                   </v-flex>
-                  <v-flex xs12>
+                  <v-flex xs12 sm6>
                     <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit" :rules="mustSame"></v-text-field>
                   </v-flex>
+                  </template>
                 </v-layout>
                 </v-form>
               </v-container>
@@ -70,8 +74,8 @@
             
   
             <v-card-actions>
-              <v-btn color="blue darken-1" flat >Tambah Akun Debit</v-btn>
-              <v-btn color="blue darken-1" flat >Tambah Akun Kredit</v-btn>
+              <v-btn color="blue darken-1" flat @click="addDebit">Tambah Akun Debit</v-btn>
+              <v-btn color="blue darken-1" flat @click="addKredit">Tambah Akun Kredit</v-btn>
               <v-spacer></v-spacer>
               <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
               <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
@@ -128,10 +132,23 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       keterangan_transaksi: '',
       jenis_transaksi: '',
-      akun_debit: '',
-      akun_kredit: '',
-      nominal_debit: '',
-      nominal_kredit: '',
+      // akun_debit: '',
+      // akun_kredit: '',
+      // nominal_debit: '',
+      // nominal_kredit: '',
+      akunDebits: [
+        {
+          akun_debit: "",
+          nominal_debit: "",
+
+        }
+      ],
+      akunKredits:[
+        {
+          akun_kredit: "",
+          nominal_kredit: "",
+        }
+      ],
       jenisTransaksi: 
       [
         'Setor modal',
@@ -159,10 +176,23 @@ export default {
         date: '',
         keterangan_transaksi: '',
         jenis_transaksi: '',
-        akun_debit: '',
-        akun_kredit: '',
-        nominal_debit: '',
-        nominal_kredit: '',
+        akunDebits: [
+        {
+          akun_debit: "",
+          nominal_debit: "",
+
+        }
+      ],
+      akunKredits:[
+        {
+          akun_kredit: "",
+          nominal_kredit: "",
+        }
+      ],
+        // akun_debit: '',
+        // akun_kredit: '',
+        // nominal_debit: '',
+        // nominal_kredit: '',
       },
       defaultItem: {
         date: new Date().toISOString().substr(0, 10),
@@ -211,6 +241,20 @@ export default {
   // return array.Mu.filter(item => substring(0,2) == "11");
 
   methods: {
+
+    addDebit: function() {
+      this.akunDebits.push({
+        akun_debit: "",
+        nominal_debit: "",
+      });
+    },
+
+    addKredit: function() {
+      this.akunKredits.push({
+        akun_kredit: "",
+        nominal_kredit: "",
+      });
+    },
    
      getOptions(){
       const jenisTransaksi = this.editedItem.jenis_transaksi;

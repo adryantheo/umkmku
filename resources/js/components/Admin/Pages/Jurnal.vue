@@ -485,10 +485,12 @@ export default {
             jenis_transaksi: this.editedItem.jenis_transaksi,
             keterangan_transaksi: this.editedItem.keterangan_transaksi,
             tanggal_transaksi: this.editedItem.date,
-            akun_debit: this.editedItem.akun_debit,
-            akun_kredit: this.editedItem.akun_kredit,
-            nominal_debit: this.editedItem.nominal_debit,
-            nominal_kredit: this.editedItem.nominal_kredit
+            debit: this.akunDebits,
+            kredit: this.akunKredits,
+            // akun_debit: this.editedItem.akun_debit,
+            // akun_kredit: this.editedItem.akun_kredit,
+            // nominal_debit: this.editedItem.nominal_debit,
+            // nominal_kredit: this.editedItem.nominal_kredit
             })
             alert("Transaksi Baru Berhasil Ditambahkan");           
         }catch(err){

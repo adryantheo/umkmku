@@ -36,20 +36,35 @@ class TransaksiController extends Controller
             ]);
             
             //create Debit
-            $debit = Debit::create
-            ([
-                'akun_debit' => $request->input('akun_debit'),
-                'nominal_debit' => $request->input('nominal_debit'),
+            // $debit = Debit::create
+            // ([
+            //     'akun_debit' => $request->input('akun_debit'),
+            //     'nominal_debit' => $request->input('nominal_debit'),
+            //     'transaksi_id' => $transaksi->id,
+            // ]);
+            foreach ($request->input('debit') as $debitDetails){
+             Debit::create([
+                'akun_debit' => $debitDetails['akun_debit'],
+                'nominal_debit' => $debitDetails['nominal_debit'],
                 'transaksi_id' => $transaksi->id,
             ]);
+            }
 
             //create Kredit
-            $kredit = Kredit::create
-            ([
-                'akun_kredit' => $request->input('akun_kredit'),
-                'nominal_kredit' => $request->input('nominal_kredit'),
-                'transaksi_id' => $transaksi->id,
-            ]);
+            // $kredit = Kredit::create
+            // ([
+            //     'akun_kredit' => $request->input('akun_kredit'),
+            //     'nominal_kredit' => $request->input('nominal_kredit'),
+            //     'transaksi_id' => $transaksi->id,
+            // ]);
+            foreach ($request->input('kredit') as $kreditDetails){
+            Kredit::create
+                ([
+                    'akun_kredit' => $kreditDetails['akun_kredit'],
+                    'nominal_kredit' => $kreditDetails['nominal_kredit'],
+                    'transaksi_id' => $transaksi->id,
+                ]);
+            }
 
         },3);
 

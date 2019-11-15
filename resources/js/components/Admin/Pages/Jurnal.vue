@@ -112,9 +112,7 @@
         <template v-slot:no-data>
           <v-btn color="primary" @click="getTransaksis">Reset</v-btn>
         </template>
-      </v-data-table>    
-
-      
+      </v-data-table>
   </div>
 </div>
 </template>

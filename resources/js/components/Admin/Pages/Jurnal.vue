@@ -51,7 +51,7 @@
                   <v-flex xs12 sm6 md4>
                     <v-select :items="jenisTransaksi" v-model="editedItem.jenis_transaksi" label="Jenis Transaksi"></v-select>
                   </v-flex>
-                  <template v-for="editedItem in akunDebits">
+                  <template v-for="(editedItem) in akunDebits">
                   <v-flex xs12 sm6>
                     <v-select :items="debitAkun" item-text="Nama" v-model="editedItem.akun_debit" label="Akun debit"></v-select>
                   </v-flex>
@@ -59,7 +59,7 @@
                     <v-text-field v-model="editedItem.nominal_debit" label="Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   </template>
-                  <template v-for="editedItem in akunKredits">
+                  <template v-for="(editedItem) in akunKredits">
                   <v-flex xs12 sm6>
                     <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="Akun Kredit"></v-select>
                   </v-flex>
@@ -132,10 +132,6 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       keterangan_transaksi: '',
       jenis_transaksi: '',
-      // akun_debit: '',
-      // akun_kredit: '',
-      // nominal_debit: '',
-      // nominal_kredit: '',
       akunDebits: [
         {
           akun_debit: "",
@@ -166,7 +162,17 @@ export default {
         { text: 'Keterangan', value: 'keterangan_transaksi' },
         { text: 'Actions', value: 'action', sortable: false },
       ],
-      transaksis: [],
+      transaksis: [{
+        debits:[{
+          akun_debit: null,
+          nominal_debit: null,
+        }],
+        kredits:[{
+          akun_kredit: null,
+          nominal_kredit: null,
+        }],
+        }
+      ],
       dataTransaksi:[],
       kodeAkun:[],
       debitAkun: [],
@@ -178,21 +184,17 @@ export default {
         jenis_transaksi: '',
         akunDebits: [
         {
-          akun_debit: "",
-          nominal_debit: "",
+          akun_debit: null,
+          nominal_debit: null,
 
         }
       ],
       akunKredits:[
         {
-          akun_kredit: "",
-          nominal_kredit: "",
+          akun_kredit: null,
+          nominal_kredit: null,
         }
       ],
-        // akun_debit: '',
-        // akun_kredit: '',
-        // nominal_debit: '',
-        // nominal_kredit: '',
       },
       defaultItem: {
         date: new Date().toISOString().substr(0, 10),
@@ -223,22 +225,13 @@ export default {
 
     'editedItem.jenis_transaksi'(){
       this.getOptions()
-    },
-    // 'editedItem.nominal_kredit'(){
-    //   if(this.editedItem.nominal_debit === this.editedItem.nominal_kredit){
-    //     console.log("true");
-    //   }else{
-    //     alert("Jumlah Nominal Kredit dan Jumlah Nominal Debit Harus Seimbang");
-    //   }
-    // } 
+    }, 
   },
 
   mounted () {
     this.getTransaksis()
     this.getKodeAkun()
   },
-
-  // return array.Mu.filter(item => substring(0,2) == "11");
 
   methods: {
 
@@ -283,9 +276,6 @@ export default {
               this.kreditAkun.push(getDataAkun[i]);
           }
          }
-        // console.log(getDataAkun);
-        // console.log(this.debitAkun);
-        // console.log(this.kreditAkun);
       }
       else if(jenisTransaksi === 'Pembelian'){
         console.log(jenisTransaksi);
@@ -431,8 +421,8 @@ export default {
       this.editedItem.date = this.dataTransaksi.tanggal_transaksi;
       this.editedItem.jenis_transaksi = this.dataTransaksi.jenis_transaksi;
       this.editedItem.keterangan_transaksi = this.dataTransaksi.keterangan_transaksi;
-      this.editedItem.akun_debit = this.dataTransaksi.debits[0].akun_debit;
-      this.editedItem.nominal_debit = this.dataTransaksi.debits[0].nominal_debit;
+      this.akunDebits = this.dataTransaksi.debits;
+      this.akunKredits = this.dataTransaksi.kredits;
       this.editedItem.akun_kredit = this.dataTransaksi.kredits[0].akun_kredit;
       this.editedItem.nominal_kredit = this.dataTransaksi.kredits[0].nominal_kredit;
       this.dialog = true
@@ -487,10 +477,6 @@ export default {
             tanggal_transaksi: this.editedItem.date,
             debit: this.akunDebits,
             kredit: this.akunKredits,
-            // akun_debit: this.editedItem.akun_debit,
-            // akun_kredit: this.editedItem.akun_kredit,
-            // nominal_debit: this.editedItem.nominal_debit,
-            // nominal_kredit: this.editedItem.nominal_kredit
             })
             alert("Transaksi Baru Berhasil Ditambahkan");           
         }catch(err){

@@ -79,6 +79,5 @@ export default {
             {name: "Arus Kas"},
         ],
     }),
-    
 }
 </script>

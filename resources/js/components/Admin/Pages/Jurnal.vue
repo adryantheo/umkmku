@@ -64,7 +64,7 @@
                     <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="Akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit" :rules="mustSame"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit"></v-text-field>
                   </v-flex>
                   </template>
                 </v-layout>
@@ -209,11 +209,6 @@ export default {
     formTitle () {
       return this.editedIndex === -1 ? 'Tambah Jurnal' : 'Edit Jurnal'
     },
-    mustSame() {
-      return [
-        () => (this.editedItem.nominal_debit === this.editedItem.nominal_kredit) || 'Jumlah Debit Kredit Tidak Seimbang',
-      ]
-    }
   },
 
   watch: {

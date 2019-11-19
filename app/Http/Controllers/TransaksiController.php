@@ -34,14 +34,7 @@ class TransaksiController extends Controller
                 'keterangan_transaksi' => $request->input('keterangan_transaksi'),
                 'tanggal_transaksi' => $request->input('tanggal_transaksi'),
             ]);
-            
-            //create Debit
-            // $debit = Debit::create
-            // ([
-            //     'akun_debit' => $request->input('akun_debit'),
-            //     'nominal_debit' => $request->input('nominal_debit'),
-            //     'transaksi_id' => $transaksi->id,
-            // ]);
+
             foreach ($request->input('debit') as $debitDetails){
              Debit::create([
                 'akun_debit' => $debitDetails['akun_debit'],
@@ -49,14 +42,7 @@ class TransaksiController extends Controller
                 'transaksi_id' => $transaksi->id,
             ]);
             }
-
-            //create Kredit
-            // $kredit = Kredit::create
-            // ([
-            //     'akun_kredit' => $request->input('akun_kredit'),
-            //     'nominal_kredit' => $request->input('nominal_kredit'),
-            //     'transaksi_id' => $transaksi->id,
-            // ]);
+            
             foreach ($request->input('kredit') as $kreditDetails){
             Kredit::create
                 ([

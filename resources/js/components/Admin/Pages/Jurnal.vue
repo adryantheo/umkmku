@@ -53,7 +53,7 @@
                   </v-flex>
                   <template v-for="(editedItem) in akunDebits">
                   <v-flex xs12 sm6>
-                    <v-select :items="debitAkun" item-text="Nama" v-model="editedItem.akun_debit" label="Akun debit"></v-select>
+                    <v-select :items="debitAkun" item-text="Nama" item-value="Id" v-model="editedItem.kode_akun_id" label="Akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6>
                     <v-text-field v-model="editedItem.nominal_debit" label="Masukkan Nominal Debit"></v-text-field>
@@ -61,7 +61,7 @@
                   </template>
                   <template v-for="(editedItem) in akunKredits">
                   <v-flex xs12 sm6>
-                    <v-select :items="kreditAkun" item-text="Nama" v-model="editedItem.akun_kredit" label="Akun Kredit"></v-select>
+                    <v-select :items="kreditAkun" item-text="Nama" item-value="Id" v-model="editedItem.kode_akun_id" label="Akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6>
                     <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit"></v-text-field>
@@ -132,14 +132,14 @@ export default {
       jenis_transaksi: '',
       akunDebits: [
         {
-          akun_debit: "",
+          kode_akun_id: null,
           nominal_debit: "",
 
         }
       ],
       akunKredits:[
         {
-          akun_kredit: "",
+          kode_akun_id: null,
           nominal_kredit: "",
         }
       ],
@@ -162,11 +162,11 @@ export default {
       ],
       transaksis: [{
         debits:[{
-          akun_debit: null,
+          kode_akun_id: null,
           nominal_debit: null,
         }],
         kredits:[{
-          akun_kredit: null,
+          kode_akun_id: null,
           nominal_kredit: null,
         }],
         }
@@ -182,14 +182,14 @@ export default {
         jenis_transaksi: '',
         akunDebits: [
         {
-          akun_debit: null,
+          kode_akun_id: null,
           nominal_debit: null,
 
         }
       ],
       akunKredits:[
         {
-          akun_kredit: null,
+          kode_akun_id: null,
           nominal_kredit: null,
         }
       ],
@@ -198,8 +198,8 @@ export default {
         date: new Date().toISOString().substr(0, 10),
         keterangan_transaksi: '',
         jenis_transaksi: '',
-        akun_debit: '',
-        akun_kredit: '',
+        kode_akun_id: '',
+        kode_akun_id: '',
         nominal_debit: '',
         nominal_kredit: '',
       },
@@ -230,14 +230,14 @@ export default {
 
     addDebit: function() {
       this.akunDebits.push({
-        akun_debit: "",
+        kode_akun_id: "",
         nominal_debit: "",
       });
     },
 
     addKredit: function() {
       this.akunKredits.push({
-        akun_kredit: "",
+        kode_akun_id: "",
         nominal_kredit: "",
       });
     },
@@ -246,17 +246,19 @@ export default {
       const jenisTransaksi = this.editedItem.jenis_transaksi;
       //Create Array Kode Akun
        var newArray = this.kodeAkun.map(item => ({
+          Id: item.id,
           Code: item.kode_akun.toString(),
           Nama: item.nama_akun,
         }));
         //Create Array Khusus Substring
          var getDataAkun = newArray.map(item =>({
            Code: item.Code.substring(0,2),
-           Nama: item.Nama
+           Nama: item.Nama,
+           Id: item.Id
          }));
 
       if(jenisTransaksi === 'Setor modal'){
-        // console.log(jenisTransaksi);      
+              
         // Create Array Debit;
          for(var i=0; i<getDataAkun.length; i++){
           if(getDataAkun[i].Code === "11" || getDataAkun[i].Code === "12"){
@@ -449,8 +451,8 @@ export default {
           jenis_transaksi: this.editedItem.jenis_transaksi,
           keterangan_transaksi: this.editedItem.keterangan_transaksi,
           tanggal_transaksi: this.editedItem.date,
-          akun_debit: this.editedItem.akun_debit,
-          akun_kredit: this.editedItem.akun_kredit,
+          kode_akun_id: this.editedItem.kode_akun_id,
+          kode_akun_id: this.editedItem.kode_akun_id,
           nominal_debit: this.editedItem.nominal_debit,
           nominal_kredit: this.editedItem.nominal_kredit
         })

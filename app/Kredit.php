@@ -10,9 +10,12 @@ class Kredit extends Model
     use SoftDeletes;
     protected $fillable = 
     [
-        'akun_kredit',
+        // 'akun_kredit',
         'nominal_kredit',
-        'transaksi_id'
+        'transaksi_id',
+        'kode_akun_id'
     ];
-    //
+    public function kodeakuns(){
+        return $this->belongsTo(KodeAkun::class);
+    }
 }

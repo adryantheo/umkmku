@@ -37,7 +37,7 @@ class TransaksiController extends Controller
 
             foreach ($request->input('debit') as $debitDetails){
              Debit::create([
-                'akun_debit' => $debitDetails['akun_debit'],
+                'kode_akun_id' => $debitDetails['kode_akun_id'],
                 'nominal_debit' => $debitDetails['nominal_debit'],
                 'transaksi_id' => $transaksi->id,
             ]);
@@ -46,7 +46,7 @@ class TransaksiController extends Controller
             foreach ($request->input('kredit') as $kreditDetails){
             Kredit::create
                 ([
-                    'akun_kredit' => $kreditDetails['akun_kredit'],
+                    'kode_akun_id' => $kreditDetails['kode_akun_id'],
                     'nominal_kredit' => $kreditDetails['nominal_kredit'],
                     'transaksi_id' => $transaksi->id,
                 ]);

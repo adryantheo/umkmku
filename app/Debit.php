@@ -11,8 +11,12 @@ class Debit extends Model
 
     protected $fillable = 
     [
-        'akun_debit',
+        // 'akun_debit',
         'nominal_debit',
+        'kode_akun_id',
         'transaksi_id'
     ];
+    public function kodeakuns(){
+        return $this->belongsTo(KodeAkun::class);
+    }
 }

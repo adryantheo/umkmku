@@ -10,4 +10,12 @@ class KodeAkun extends Model
         'kode_akun',
         'nama_akun',   
     ];
+
+    public function debits(){
+        return $this->hasMany(Debit::class);
+    }
+
+    public function kredits(){
+        return $this->hasMany(Kredit::class);
+    }
 }

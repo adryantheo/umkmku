@@ -6,18 +6,20 @@ class AppStorage
     storeUser(user){
         localStorage.setItem('umkm-user', user);
     }
-
     storeName(name){
         localStorage.setItem('Owner', JSON.parse(name));
     }
-
     storeCompany(company){
         localStorage.setItem('Company', JSON.parse(company))
     }
+    storeId(id){
+        localStorage.setItem('Id', JSON.parse(id))
+    }
 
-    store(user,token){
+    store(user,token,id){
         this.storeToken(token);
         this.storeUser(user);
+        this.storeId(id);
     }
 
     getInfo(name,company){
@@ -30,6 +32,7 @@ class AppStorage
         localStorage.removeItem('umkm-user');
         localStorage.removeItem('Owner');
         localStorage.removeItem('Company');
+        localStorage.removeItem('Id');
     }
 
     getToken(){

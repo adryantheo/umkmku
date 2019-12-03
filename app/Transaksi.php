@@ -12,14 +12,17 @@ class Transaksi extends Model
     protected $fillable = [
         'jenis_transaksi',
         'keterangan_transaksi',
-        'tanggal_transaksi',   
+        'tanggal_transaksi',
+        'user_id'
     ];
 
     public function debits(){
         return $this->hasMany(Debit::class);
     }
-
     public function kredits(){
         return $this->hasMany(Kredit::class);
+    }
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 }

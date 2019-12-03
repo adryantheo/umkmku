@@ -25,8 +25,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function jurnals(){
-        return $this->hasMany(Jurnal::class);
+    public function transaksis(){
+        return $this->hasMany(Transaksi::class);
     }
 
 }

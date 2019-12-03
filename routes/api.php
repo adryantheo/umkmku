@@ -17,6 +17,7 @@ Route::delete('/kodeakun/{kodeAkun}', 'KodeAkunController@destroy');
 
 //Transaksis- API
 Route::get('/transaksi-all', 'TransaksiController@all');
+Route::get('/transaksi-user', 'TransaksiController@transaksiUser');
 Route::get('/transaksi', 'TransaksiController@index');
 Route::get('/transaksi/{transaksi}', 'TransaksiController@show');
 Route::post('/transaksi', 'TransaksiController@store');

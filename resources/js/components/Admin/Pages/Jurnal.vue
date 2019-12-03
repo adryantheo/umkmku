@@ -130,6 +130,7 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       keterangan_transaksi: '',
       jenis_transaksi: '',
+      user_id: '',
       akunDebits: [
         {
           kode_akun_id: null,
@@ -406,7 +407,7 @@ export default {
 
     async getTransaksis()
     {
-      const res = await axios.get('/api/transaksi');
+      const res = await axios.get('/api/transaksi-user?Id=' + localStorage.getItem('Id'));
       this.transaksis = res.data.reverse();
     },   
 
@@ -461,8 +462,7 @@ export default {
           console.log(err)
         }
       } else {
-        if(this.$refs.transaksi_form.validate())
-        {
+        if(this.$refs.transaksi_form.validate()){
           if(this.editedItem.nominal_kredit === this.editedItem.nominal_kredit){
             this.transaksis.push(this.editedItem)
             try{
@@ -472,6 +472,7 @@ export default {
             tanggal_transaksi: this.editedItem.date,
             debit: this.akunDebits,
             kredit: this.akunKredits,
+            user_id: localStorage.getItem('Id'),
             })
             alert("Transaksi Baru Berhasil Ditambahkan");           
         }catch(err){

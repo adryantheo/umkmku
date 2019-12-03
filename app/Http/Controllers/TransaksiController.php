@@ -16,6 +16,17 @@ class TransaksiController extends Controller
         return response()->json(Transaksi::with('debits', 'kredits')->get(),200);
     }
 
+    public function transaksiUser(Request $request)
+    {
+        if($request->has('Id')){
+            return response()->json(
+                Transaksi::all()
+                ->where('user_id', '=', $request->input('Id'))
+                ,200);
+        }
+        return response()->json('Data Tidak Ditemukan', 404);
+    }
+
     public function index()
     {
         return response()->json(Transaksi::all(),200);
@@ -33,6 +44,7 @@ class TransaksiController extends Controller
                 'jenis_transaksi' => $request->input('jenis_transaksi'),
                 'keterangan_transaksi' => $request->input('keterangan_transaksi'),
                 'tanggal_transaksi' => $request->input('tanggal_transaksi'),
+                'user_id' => $request->input('user_id')
             ]);
 
             foreach ($request->input('debit') as $debitDetails){

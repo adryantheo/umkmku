@@ -25,7 +25,8 @@ class User {
             const token = data.token;
             const name = JSON.stringify(data.user.name)
             const company = JSON.stringify(data.user.company_name)
-            AppStorage.store(user,token);
+            const id = JSON.stringify(data.user.id)
+            AppStorage.store(user,token,id);
             AppStorage.getInfo(name,company);
             resolve();
         })

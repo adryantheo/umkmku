@@ -18,6 +18,7 @@ class CreateTransaksisTable extends Migration
             $table->string('jenis_transaksi');
             $table->string('keterangan_transaksi');
             $table->String('tanggal_transaksi');
+            $table->unsignedInteger('user_id');
             $table->softDeletes();
             $table->timestamps();
         });

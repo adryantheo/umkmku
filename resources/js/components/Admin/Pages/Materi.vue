@@ -34,7 +34,7 @@
                         </v-card-text>
                         <v-card-text v-text="pengenalanAkuntansi">test</v-card-text>
                         <div class="justify">
-                            <img src="/materi_img/siklus.jpg" alt="siklus akuntansi" position="center" height="auto">
+                            <img src="/materi_img/siklus.png" alt="siklus akuntansi" position="center" height="auto">
                         </div>
                     </v-card>
                 </v-layout>

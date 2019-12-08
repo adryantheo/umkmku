@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import jurnalUmum from './Laporan/JurnalUmum'
+import jurnalUmum from './Laporan/JurnalUmum';
 import neracaSaldo from './Laporan/NeracaSaldo';
 import labaRugi from './Laporan/LabaRugi';
 import perubahanEkuitas from './Laporan/PerubahanEkuitas';

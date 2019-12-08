@@ -41,13 +41,13 @@
             <!-- Penyesuiaan -->
             <v-tab-item value="tab-4">
                 <v-layout row wrap>
-                    <penyesuaian></penyesuaian>
+                    <materi-penyesuaian></materi-penyesuaian>
                 </v-layout>
             </v-tab-item>
             <!-- Manfaat" -->
             <v-tab-item value="tab-5">
                 <v-layout row wrap>
-                    <manfaat></manfaat>
+                    <materi-manfaat></materi-manfaat>
                 </v-layout>
             </v-tab-item>
             <!-- Jurnal Penutup -->
@@ -64,8 +64,8 @@ import pengenalanAkuntansi from './Materi/pengenalanAkuntansi';
 import elemenAkuntansi from './Materi/elemenAkuntansi';
 import kodeAkun from './Materi/kodeAkun';
 import pencatatanTransaksi from './Materi/pencatatanTransaksi';
-import penyesuaian from './Materi/penyesuaian';
-import manfaat from './Materi/manfaat';
+import materiPenyesuaian from './Materi/penyesuaian';
+import materiManfaat from './Materi/manfaat';
 import jurnalPenutup from './Materi/jurnalPenutup';
 export default {
     components:{
@@ -73,8 +73,8 @@ export default {
         elemenAkuntansi,
         kodeAkun,
         pencatatanTransaksi,
-        penyesuaian,
-        manfaat,
+        materiPenyesuaian,
+        materiManfaat,
         jurnalPenutup
     },
     data: () => ({

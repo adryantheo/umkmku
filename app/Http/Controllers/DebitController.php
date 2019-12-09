@@ -14,7 +14,7 @@ class DebitController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Debit::with(['kodeakuns'])->get(),200);
     }
 
     /**

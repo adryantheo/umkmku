@@ -15,6 +15,9 @@ Route::post('/kodeakun', 'KodeAkunController@store');
 Route::patch('/kodeakun/{kodeAkun}', 'KodeAkunController@update');
 Route::delete('/kodeakun/{kodeAkun}', 'KodeAkunController@destroy');
 
+//Debits API
+Route::get('/debits', 'DebitController@index');
+
 //Transaksis- API
 Route::get('/transaksi-all', 'TransaksiController@all');
 Route::get('/transaksi-user', 'TransaksiController@transaksiUser');

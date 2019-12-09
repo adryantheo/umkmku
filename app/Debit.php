@@ -17,6 +17,6 @@ class Debit extends Model
         'transaksi_id'
     ];
     public function kodeakuns(){
-        return $this->belongsTo(KodeAkun::class);
+        return $this->belongsTo(KodeAkun::class,'kode_akun_id');
     }
 }

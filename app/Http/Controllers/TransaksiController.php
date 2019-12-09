@@ -20,8 +20,15 @@ class TransaksiController extends Controller
     {
         if($request->has('Id')){
             return response()->json(
-                Transaksi::all()
+                Transaksi::with([
+                    'debits:id,nominal_debit,kode_akun_id,transaksi_id',
+                    'debits.kodeakuns:id,kode_akun,nama_akun',
+                    'kredits:id,nominal_kredit,kode_akun_id,transaksi_id',
+                    'kredits.kodeakuns:id,kode_akun,nama_akun'
+                    ])
+                ->select('id','jenis_transaksi','keterangan_transaksi','tanggal_transaksi')
                 ->where('user_id', '=', $request->input('Id'))
+                ->get()
                 ,200);
         }
         return response()->json('Data Tidak Ditemukan', 404);

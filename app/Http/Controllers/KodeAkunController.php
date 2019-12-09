@@ -10,7 +10,7 @@ class KodeAkunController extends Controller
    
     public function index()
     {
-        return response()->json(KodeAkun::all(),200);
+        return response()->json(KodeAkun::with(['debits','kredits'])->get(),200);
     }
 
     

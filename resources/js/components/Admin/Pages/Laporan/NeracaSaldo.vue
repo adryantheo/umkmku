@@ -10,7 +10,6 @@
             <v-select :items="tahun" v-model="getTahun" label="Tahun"></v-select>
           </v-flex>
       </v-layout>
-
       <v-layout align-space-around justify-center fill-height>
         <v-card width="100%">
           <v-card-title class="justify-center">
@@ -19,7 +18,6 @@
           <v-card-title class="justify-center">
             <span class="headline">Periode {{ getBulan }} {{ getTahun }}</span>
           </v-card-title>
-
           <v-data-table
           :headers="headers"
           :items="transaksis"
@@ -32,7 +30,7 @@
             <td>{{ props.item.keterangan_transaksi }}</td>
           </template>
           <template v-slot:no-data>
-            <v-btn color="primary" @click="getTransaksis">Reset</v-btn>
+            <!-- <v-btn color="primary" @click="getTransaksis">Reset</v-btn> -->
           </template>
         </v-data-table>
         </v-card>
@@ -65,15 +63,11 @@ export default {
     } 
   },
   mounted(){
-    this.getTransaksis();
+    
 
   },
   methods:{
-    async getTransaksis(){
-      const res = await axios.get('/api/transaksi-all/');
-      this.transaksis = res.data;
-      console.log(this.transaksis);
-    }
+    
 
   },
 

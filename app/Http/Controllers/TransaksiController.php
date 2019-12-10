@@ -21,9 +21,9 @@ class TransaksiController extends Controller
         if($request->has('Id')){
             return response()->json(
                 Transaksi::with([
-                    'debits:id,nominal_debit,kode_akun_id,transaksi_id',
+                    'debits:id,nominal,kode_akun_id,transaksi_id',
                     'debits.kodeakuns:id,kode_akun,nama_akun',
-                    'kredits:id,nominal_kredit,kode_akun_id,transaksi_id',
+                    'kredits:id,nominal,kode_akun_id,transaksi_id',
                     'kredits.kodeakuns:id,kode_akun,nama_akun'
                     ])
                 ->select('id','jenis_transaksi','keterangan_transaksi','tanggal_transaksi')
@@ -57,7 +57,7 @@ class TransaksiController extends Controller
             foreach ($request->input('debit') as $debitDetails){
              Debit::create([
                 'kode_akun_id' => $debitDetails['kode_akun_id'],
-                'nominal_debit' => $debitDetails['nominal_debit'],
+                'nominal' => $debitDetails['nominal'],
                 'transaksi_id' => $transaksi->id,
             ]);
             }
@@ -66,7 +66,7 @@ class TransaksiController extends Controller
             Kredit::create
                 ([
                     'kode_akun_id' => $kreditDetails['kode_akun_id'],
-                    'nominal_kredit' => $kreditDetails['nominal_kredit'],
+                    'nominal' => $kreditDetails['nominal'],
                     'transaksi_id' => $transaksi->id,
                 ]);
             }

@@ -12,7 +12,7 @@ class Debit extends Model
     protected $fillable = 
     [
         // 'akun_debit',
-        'nominal_debit',
+        'nominal',
         'kode_akun_id',
         'transaksi_id'
     ];

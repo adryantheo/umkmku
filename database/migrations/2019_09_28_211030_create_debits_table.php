@@ -16,7 +16,7 @@ class CreateDebitsTable extends Migration
         Schema::create('debits', function (Blueprint $table) {
             $table->bigIncrements('id');
             // $table->String('akun_debit');
-            $table->double('nominal_debit');
+            $table->double('nominal');
             $table->unsignedInteger('transaksi_id');
             $table->unsignedInteger('kode_akun_id');
             $table->softDeletes();

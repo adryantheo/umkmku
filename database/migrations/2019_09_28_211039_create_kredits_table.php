@@ -16,7 +16,7 @@ class CreateKreditsTable extends Migration
         Schema::create('kredits', function (Blueprint $table) {
             $table->bigIncrements('id');
             // $table->String('akun_kredit');
-            $table->double('nominal_kredit');
+            $table->double('nominal');
             $table->unsignedInteger('transaksi_id');
             $table->unsignedInteger('kode_akun_id');
             $table->softDeletes();

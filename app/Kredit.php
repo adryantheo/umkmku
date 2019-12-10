@@ -11,7 +11,7 @@ class Kredit extends Model
     protected $fillable = 
     [
         // 'akun_kredit',
-        'nominal_kredit',
+        'nominal',
         'transaksi_id',
         'kode_akun_id'
     ];

@@ -53,20 +53,20 @@
 </template>
 
 <script>
-import jurnalUmum from './Laporan/JurnalUmum';
-import neracaSaldo from './Laporan/NeracaSaldo';
-import labaRugi from './Laporan/LabaRugi';
-import perubahanEkuitas from './Laporan/PerubahanEkuitas';
-import posisiKeuangan from './Laporan/PosisiKeuangan';
-import arusKas from './Laporan/ArusKas';
+import JurnalUmum from './Laporan/JurnalUmum';
+import NeracaSaldo from './Laporan/NeracaSaldo';
+import LabaRugi from './Laporan/LabaRugi';
+import PerubahanEkuitas from './Laporan/PerubahanEkuitas';
+import PosisiKeuangan from './Laporan/PosisiKeuangan';
+import ArusKas from './Laporan/ArusKas';
 export default {
     components:{
-        jurnalUmum,
-        neracaSaldo,
-        labaRugi,
-        perubahanEkuitas,
-        posisiKeuangan,
-        arusKas
+        JurnalUmum,
+        NeracaSaldo,
+        LabaRugi,
+        PerubahanEkuitas,
+        PosisiKeuangan,
+        ArusKas
     },
     data: () => ({
         activeTab: null,

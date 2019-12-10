@@ -19,11 +19,35 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(transaksi,i) in transaksis" :key="i">
-                    <td>{{ transaksi.tanggal_transaksi }}</td>
-                    <td>{{ transaksis.dataDebits }}</td>
-                  </tr>
+                  <template v-for="transaksi in transaksis">
+                      <tr v-for="(body,i) in transaksi.bodyTransaksi" :key="`tr-${i}`">
+                          <td v-if="i==0">
+                              {{ transaksi.tanggal_transaksi }}
+                          </td>
+                          <td v-else></td>
+                          <td :key="`td1-${i}`">
+                              {{ body.kodeakuns.nama_akun }}
+                          </td>
+                          <td :key="`td2-${i}`">
+                              {{ body.kodeakuns.kode_akun }}
+                          </td>
+                          <td :key="`td3-${i}`">
+                              {{ !!body.isKredit? '' : body.nominal }}
+                          </td>
+                          <td :key="`td4-${i}`">
+                              {{ !!body.isKredit? body.nominal : '' }}
+                          </td>
+                      </tr>
+                  </template>
                 </tbody>
+                <tfoot>
+                    <tr>
+                      <th colspan="3"><b>Total</b></th>
+                      <!-- <th ></th> -->
+                      <th><b>{{ getTotalDebit }}</b></th>
+                      <th><b>{{ getTotalKredit}}</b></th>
+                  </tr>
+                </tfoot>
               </table>
             </v-layout>
           </v-card-text>
@@ -37,30 +61,55 @@
 export default {
   data: ()=>({
     transaksis: [],
-    dataDebits: [
-      {
-        nominal_debit: null,
-      }
-    ],
-    // Mykodeakuns: [],
+    debits: [],
+    TotalDebit: null,
+    TotalKredit: null,
     userId: localStorage.getItem('Id'),
   }),
   watch: {
+  },
 
+  computed: {
+   getTotalKredit(){
+    return this.transaksis.reduce((total1, transaksi) => {
+      return total1 + transaksi.bodyTransaksi.reduce((total2, body) => {
+        return total2 + (!!body.isKredit? body.nominal: 0)
+      }, 0)
+    }, 0)
+   },
+
+    getTotalDebit(){
+     return this.transaksis.reduce((total1, transaksi) => {
+      return total1 + transaksi.bodyTransaksi.reduce((total2, body) => {
+        return total2 + (!!body.isKredit? 0 : body.nominal)
+      }, 0)
+    }, 0)
+   },
+    
   },
   mounted(){
     this.getTransaksis();
+    console.log(getTotalKredit);
+    console.log(getTotalDebit);
   },
   methods: {
     async getTransaksis(){
-      const res = await axios.get('/api/transaksi-user/?Id='+ this.userId);
-      this.transaksis = res.data;
-      this.dataDebits = this.transaksis.map(item => ({
-        id: item.id,
-        nominal_debit: item.nominal_debit,
-      }));
-      console.log(this.dataDebits);
-      // this.Mykodeakuns = this.dataDebits.kodeakuns;
+       axios.get('/api/transaksi-user/?Id='+ this.userId)
+       .then(res => {
+         this.transaksis = res.data.map(transaksi => ({
+           ...transaksi,
+           bodyTransaksi: [
+             ...transaksi.kredits.map(kredit => ({
+               ...kredit,
+               isKredit: true,
+             })),
+             ...transaksi.debits.map(debit => ({
+               ...debit,
+               isKredit: false,
+             }))
+           ]
+         }))
+       })
     }
 
   }
@@ -69,10 +118,14 @@ export default {
 </script>
 
 <style scoped>
-table, th, td {
+table, th, tfoot {
   border: 1px solid black;
 }
 th, td {
   padding: 15px;
 }
+td {
+  text-align: center;
+}
+
 </style>

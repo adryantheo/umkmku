@@ -89,8 +89,6 @@ export default {
   },
   mounted(){
     this.getTransaksis();
-    console.log(getTotalKredit);
-    console.log(getTotalDebit);
   },
   methods: {
     async getTransaksis(){

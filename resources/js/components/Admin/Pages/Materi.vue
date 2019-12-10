@@ -17,65 +17,72 @@
             <!-- pengenalan akutansi -->
             <v-tab-item value="tab-0">
                 <v-layout row wrap>
-                    <pengenalan-akuntansi></pengenalan-akuntansi>
+                    <keep-alive v-if="activeTab === 'tab-0'">
+                        <pengenalan-akuntansi></pengenalan-akuntansi>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <!-- elemen dan akun" -->
             <v-tab-item value="tab-1">
                 <v-layout row wrap>
-                    <elemen-akuntansi></elemen-akuntansi>
+                    <keep-alive v-if="activeTab === 'tab-1'">
+                        <elemen-akuntansi></elemen-akuntansi>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <!-- Kode Akun -->
             <v-tab-item value="tab-2">
                 <v-layout row wrap>
-                    <kode-akun></kode-akun>
+                    <keep-alive v-if="activeTab === 'tab-2'">
+                        <kode-akun></kode-akun>
+                    </keep-alive>                    
                 </v-layout>
             </v-tab-item>
             <!-- Pencatatan Transaksi -->
             <v-tab-item value="tab-3">
                 <v-layout row wrap>
-                    <pencatatan-transaksi></pencatatan-transaksi>
+                    <keep-alive v-if="activeTab === 'tab-3'">
+                        <pencatatan-transaksi></pencatatan-transaksi>
+                    </keep-alive>                    
                 </v-layout>
             </v-tab-item>
             <!-- Penyesuiaan -->
             <v-tab-item value="tab-4">
                 <v-layout row wrap>
-                    <materi-penyesuaian></materi-penyesuaian>
+                    <keep-alive v-if="activeTab === 'tab-4'">
+                        <materi-penyesuaian></materi-penyesuaian>                        
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <!-- Manfaat" -->
             <v-tab-item value="tab-5">
                 <v-layout row wrap>
-                    <materi-manfaat></materi-manfaat>
+                    <keep-alive v-if="activeTab === 'tab-5'">
+                        <materi-manfaat></materi-manfaat>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <!-- Jurnal Penutup -->
             <v-tab-item value="tab-6">
                 <v-layout row wrap>
-                    <jurnal-penutup></jurnal-penutup>
+                    <keep-alive v-if="activeTab === 'tab-6'">
+                        <jurnal-penutup></jurnal-penutup>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
     </v-tabs>
 </div>
 </template>
 <script>
-import pengenalanAkuntansi from './Materi/pengenalanAkuntansi';
-import elemenAkuntansi from './Materi/elemenAkuntansi';
-import kodeAkun from './Materi/kodeAkun';
-import pencatatanTransaksi from './Materi/pencatatanTransaksi';
-import materiPenyesuaian from './Materi/penyesuaian';
-import materiManfaat from './Materi/manfaat';
-import jurnalPenutup from './Materi/jurnalPenutup';
 export default {
     components:{
-        pengenalanAkuntansi,
-        elemenAkuntansi,
-        kodeAkun,
-        pencatatanTransaksi,
-        materiPenyesuaian,
-        materiManfaat,
-        jurnalPenutup
+        'PengenalanAkuntansi': () => import('./Materi/pengenalanAkuntansi'/* webpackChunkName: "js/chunk-Materi-PengenalanAkuntansi" */),
+        'ElemenAkuntansi': () => import('./Materi/elemenAkuntansi'/* webpackChunkName: "js/chunk-Materi-ElemenAkuntansi" */),
+        'KodeAkun': () => import('./Materi/kodeAkun'/* webpackChunkName: "js/chunk-Materi-KodeAkun" */),
+        'PencatatanTransaksi': () => import('./Materi/pencatatanTransaksi'/* webpackChunkName: "js/chunk-Materi-PencatatanTransaksi" */),
+        'MateriPenyesuaian': () => import('./Materi/penyesuaian'/* webpackChunkName: "js/chunk-Materi-MateriPenyesuaian" */),
+        'MateriManfaat': () => import('./Materi/manfaat'/* webpackChunkName: "js/chunk-MateriManfaat" */),
+        'JurnalPenutup': () => import('./Materi/jurnalPenutup'/* webpackChunkName: "js/chunk-Materi-JurnalPenutup" */)
     },
     data: () => ({
         activeTab: null,

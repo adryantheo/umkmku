@@ -20,32 +20,44 @@
             </v-tab>
             <v-tab-item value="tab-0">
                 <v-container fluid fill-height>
-                    <jurnal-umum></jurnal-umum>
+                    <keep-alive v-if="activeTab === 'tab-0'">
+                        <jurnal-umum></jurnal-umum>
+                    </keep-alive>
                 </v-container>
             </v-tab-item>
             <v-tab-item value="tab-1">
                 <v-layout row wrap>
-                    <neraca-saldo></neraca-saldo>
+                    <keep-alive v-if="activeTab === 'tab-1'">
+                        <neraca-saldo></neraca-saldo>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-2">
                 <v-layout row wrap>
-                    <laba-rugi></laba-rugi>
+                    <keep-alive v-if="activeTab === 'tab-2'">
+                        <laba-rugi></laba-rugi>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-3">
                 <v-layout row wrap>
-                    <perubahan-ekuitas></perubahan-ekuitas>
+                    <keep-alive v-if="activeTab === 'tab-3'">
+                        <perubahan-ekuitas></perubahan-ekuitas>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-4">
                 <v-layout row wrap>
-                    <posisi-keuangan></posisi-keuangan>
+                    <keep-alive v-if="activeTab === 'tab-4'">
+                        <posisi-keuangan></posisi-keuangan>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-5">
                 <v-layout row wrap>
-                    <arus-kas></arus-kas>
+                    <keep-alive v-if="activeTab === 'tab-5'">
+                        <arus-kas></arus-kas>
+                    </keep-alive>
                 </v-layout>
             </v-tab-item>
     </v-tabs>    
@@ -53,20 +65,14 @@
 </template>
 
 <script>
-import JurnalUmum from './Laporan/JurnalUmum';
-import NeracaSaldo from './Laporan/NeracaSaldo';
-import LabaRugi from './Laporan/LabaRugi';
-import PerubahanEkuitas from './Laporan/PerubahanEkuitas';
-import PosisiKeuangan from './Laporan/PosisiKeuangan';
-import ArusKas from './Laporan/ArusKas';
 export default {
     components:{
-        JurnalUmum,
-        NeracaSaldo,
-        LabaRugi,
-        PerubahanEkuitas,
-        PosisiKeuangan,
-        ArusKas
+        'JurnalUmum' : () => import('./Laporan/JurnalUmum'/* webpackChunkName: "js/chunk-Laporan-JurnalUmum" */),
+        'NeracaSaldo': () => import('./Laporan/NeracaSaldo'/* webpackChunkName: "js/chunk-Laporan-NeracaSaldo" */),
+        'LabaRugi': () => import('./Laporan/LabaRugi'/* webpackChunkName: "js/chunk-Laporan-LabaRugi" */),
+        'PerubahanEkuitas': () => import('./Laporan/PerubahanEkuitas'/* webpackChunkName: "js/chunk-Laporan-PerubahanEkuitas" */),
+        'PosisiKeuangan': () => import('./Laporan/PosisiKeuangan'/* webpackChunkName: "js/chunk-Laporan-PosisiKeuangan" */),
+        'ArusKas': () => import('./Laporan/ArusKas'/* webpackChunkName: "js/chunk-Laporan-ArusKas" */)
     },
     data: () => ({
         activeTab: null,

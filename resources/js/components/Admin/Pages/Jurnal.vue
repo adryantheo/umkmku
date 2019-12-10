@@ -56,7 +56,7 @@
                     <v-select :items="debitAkun" item-text="Nama" item-value="Id" v-model="editedItem.kode_akun_id" label="Akun debit"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <v-text-field v-model="editedItem.nominal_debit" label="Masukkan Nominal Debit"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal" label="Masukkan Nominal Debit"></v-text-field>
                   </v-flex>
                   </template>
                   <template v-for="(editedItem) in akunKredits">
@@ -64,7 +64,7 @@
                     <v-select :items="kreditAkun" item-text="Nama" item-value="Id" v-model="editedItem.kode_akun_id" label="Akun Kredit"></v-select>
                   </v-flex>
                   <v-flex xs12 sm6>
-                    <v-text-field v-model="editedItem.nominal_kredit" label="Masukkan Nominal Kredit"></v-text-field>
+                    <v-text-field v-model="editedItem.nominal" label="Masukkan Nominal Kredit"></v-text-field>
                   </v-flex>
                   </template>
                 </v-layout>
@@ -134,14 +134,14 @@ export default {
       akunDebits: [
         {
           kode_akun_id: null,
-          nominal_debit: "",
+          nominal: "",
 
         }
       ],
       akunKredits:[
         {
           kode_akun_id: null,
-          nominal_kredit: "",
+          nominal: "",
         }
       ],
       jenisTransaksi: 
@@ -164,11 +164,11 @@ export default {
       transaksis: [{
         debits:[{
           kode_akun_id: null,
-          nominal_debit: null,
+          nominal: null,
         }],
         kredits:[{
           kode_akun_id: null,
-          nominal_kredit: null,
+          nominal: null,
         }],
         }
       ],
@@ -184,14 +184,14 @@ export default {
         akunDebits: [
         {
           kode_akun_id: null,
-          nominal_debit: null,
+          nominal: null,
 
         }
       ],
       akunKredits:[
         {
           kode_akun_id: null,
-          nominal_kredit: null,
+          nominal: null,
         }
       ],
       },
@@ -201,8 +201,8 @@ export default {
         jenis_transaksi: '',
         kode_akun_id: '',
         kode_akun_id: '',
-        nominal_debit: '',
-        nominal_kredit: '',
+        nominal: '',
+        nominal: '',
       },
   }),
   
@@ -232,14 +232,14 @@ export default {
     addDebit: function() {
       this.akunDebits.push({
         kode_akun_id: "",
-        nominal_debit: "",
+        nominal: "",
       });
     },
 
     addKredit: function() {
       this.akunKredits.push({
         kode_akun_id: "",
-        nominal_kredit: "",
+        nominal: "",
       });
     },
    
@@ -420,7 +420,7 @@ export default {
       this.akunDebits = this.dataTransaksi.debits;
       this.akunKredits = this.dataTransaksi.kredits;
       this.editedItem.akun_kredit = this.dataTransaksi.kredits[0].akun_kredit;
-      this.editedItem.nominal_kredit = this.dataTransaksi.kredits[0].nominal_kredit;
+      this.editedItem.nominal = this.dataTransaksi.kredits[0].nominal;
       this.dialog = true
     },
 
@@ -454,8 +454,8 @@ export default {
           tanggal_transaksi: this.editedItem.date,
           kode_akun_id: this.editedItem.kode_akun_id,
           kode_akun_id: this.editedItem.kode_akun_id,
-          nominal_debit: this.editedItem.nominal_debit,
-          nominal_kredit: this.editedItem.nominal_kredit
+          nominal: this.editedItem.nominal,
+          nominal: this.editedItem.nominal
         })
         alert("Transaksi Berhasil di Update");
         }catch(err){
@@ -463,7 +463,7 @@ export default {
         }
       } else {
         if(this.$refs.transaksi_form.validate()){
-          if(this.editedItem.nominal_kredit === this.editedItem.nominal_kredit){
+          if(this.editedItem.nominal === this.editedItem.nominal){
             this.transaksis.push(this.editedItem)
             try{
             const res = await axios.post('/api/transaksi',{

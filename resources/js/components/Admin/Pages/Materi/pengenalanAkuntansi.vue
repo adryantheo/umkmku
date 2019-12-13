@@ -3,7 +3,11 @@
     <v-card-text>
         <p class="title font-weight-regular-bold">Apa yang dimaksud dengan akuntansi?</p>
     </v-card-text>
-    <v-card-text v-text="pengenalanAkuntansi"></v-card-text>
+    <v-card-text >
+        <p>
+            Akuntansi adalah sistem informasi yang mengukur aktivitas bisnis,mengolah data menjadi laporan dan mengkomunikasikan hasilnya kepadapara pengambil keputusan. Akuntansi digunakan oleh perusahaan untukmenghasilkan informasi keuangan dalam wujud laporan keuangan.Akuntansi dapat digunakan untuk perusahaan jasa, dagang, maupun manufaktur (memproduksi barang). Adapun pihak-pihak pemakai informasi akuntansi antara lain pemilik, kreditur (pemberi pinjaman), pemerintah,investor, maupun karyawan perusahaan.
+        </p>
+    </v-card-text>
         <v-card-text>
         <p class="title font-weight-regular-bold">Siklus Akuntansi</p>
     </v-card-text>
@@ -17,13 +21,16 @@
 <script>
 export default {
     data: ()=> ({
-        pengenalanAkuntansi: 'Akuntansi adalah sistem informasi yang mengukur aktivitas bisnis,mengolah data menjadi laporan dan mengkomunikasikan hasilnya kepadapara pengambil keputusan. Akuntansi digunakan oleh perusahaan untukmenghasilkan informasi keuangan dalam wujud laporan keuangan.Akuntansi dapat digunakan untuk perusahaan jasa, dagang, maupun manufaktur (memproduksi barang). Adapun pihak-pihak pemakai informasi akuntansi antara lain pemilik, kreditur (pemberi pinjaman), pemerintah,investor, maupun karyawan perusahaan.',
+        pengenalanAkuntansi: '',
         siklusAkuntansi: 'Siklus akuntansi merupakan proses pencatatan akuntansi mulai dari analisis bukti transaksi sampai pada neraca saldo awal periode.',
     })
 
 }
 </script>
 
-<style>
+<style scoped>
+p{
+    text-align: justify
+}
 
 </style>

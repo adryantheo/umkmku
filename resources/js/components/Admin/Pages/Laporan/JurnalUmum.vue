@@ -25,8 +25,9 @@
                               {{ transaksi.tanggal_transaksi }}
                           </td>
                           <td v-else></td>
-                          <td :key="`td1-${i}`">
-                              {{ body.kodeakuns.nama_akun }}
+                          <template v-if="body.isKredit == true">
+                          <td  :key="`td1-${i}`">
+                              &emsp;&emsp;{{ body.kodeakuns.nama_akun }}
                           </td>
                           <td :key="`td2-${i}`">
                               {{ body.kodeakuns.kode_akun }}
@@ -37,15 +38,29 @@
                           <td :key="`td4-${i}`">
                               {{ !!body.isKredit? body.nominal : '' }}
                           </td>
+                          </template>
+                          <template v-else>
+                            <td :key="`td1-${i}`">
+                              {{ body.kodeakuns.nama_akun }}
+                          </td>
+                          <td :key="`td2-${i}`">
+                              {{ body.kodeakuns.kode_akun }}
+                          </td>
+                          <td :key="`td3-${i}`">
+                              {{ !!body.isKredit? '' : body.nominal }}
+                          </td>
+                          <td :key="`td4-${i}`">
+                              {{ !!body.isKredit? body.nominal : '' }}
+                          </td>                            
+                          </template>
                       </tr>
                   </template>
                 </tbody>
                 <tfoot>
                     <tr>
                       <th colspan="3"><b>Total</b></th>
-                      <!-- <th ></th> -->
-                      <th><b>{{ getTotalDebit }}</b></th>
-                      <th><b>{{ getTotalKredit}}</b></th>
+                      <th><b>Rp. {{ getTotalDebit }}</b></th>
+                      <th><b>Rp. {{ getTotalKredit}}</b></th>
                   </tr>
                 </tfoot>
               </table>
@@ -97,13 +112,13 @@ export default {
          this.transaksis = res.data.map(transaksi => ({
            ...transaksi,
            bodyTransaksi: [
-             ...transaksi.kredits.map(kredit => ({
-               ...kredit,
-               isKredit: true,
-             })),
              ...transaksi.debits.map(debit => ({
                ...debit,
                isKredit: false,
+             })),
+             ...transaksi.kredits.map(kredit => ({
+               ...kredit,
+               isKredit: true,
              }))
            ]
          }))
@@ -122,8 +137,4 @@ table, th, tfoot {
 th, td {
   padding: 15px;
 }
-td {
-  text-align: center;
-}
-
 </style>

@@ -36,7 +36,7 @@
                               {{ !!body.isKredit? '' : body.nominal }}
                           </td>
                           <td :key="`td4-${i}`">
-                              {{ !!body.isKredit? body.nominal : '' }}
+                              Rp. {{ !!body.isKredit? body.nominal : '' }}
                           </td>
                           </template>
                           <template v-else>
@@ -47,7 +47,7 @@
                               {{ body.kodeakuns.kode_akun }}
                           </td>
                           <td :key="`td3-${i}`">
-                              {{ !!body.isKredit? '' : body.nominal }}
+                              Rp. {{ !!body.isKredit? '' : body.nominal }}
                           </td>
                           <td :key="`td4-${i}`">
                               {{ !!body.isKredit? body.nominal : '' }}

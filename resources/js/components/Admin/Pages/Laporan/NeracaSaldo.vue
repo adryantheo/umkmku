@@ -18,21 +18,43 @@
           <v-card-title class="justify-center">
             <span class="headline">Periode {{ getBulan }} {{ getTahun }}</span>
           </v-card-title>
-          <v-data-table
-          :headers="headers"
-          :items="transaksis"
-          class="elevation-1"
-        >
-          <template v-slot:items="props">
-            <td>{{ props.item.tanggal_transaksi }}</td>
-            <td>{{ props.item.keterangan_transaksi }}</td>
-            <td>{{ props.item.keterangan_transaksi }}</td>
-            <td>{{ props.item.keterangan_transaksi }}</td>
-          </template>
-          <template v-slot:no-data>
-            <!-- <v-btn color="primary" @click="getTransaksis">Reset</v-btn> -->
-          </template>
-        </v-data-table>
+          <v-layout justify-center>
+              <table style="width: 90%">
+                <thead>
+                  <tr>
+                  <th>Kode Akun</th>
+                  <th>Nama AKun</th>
+                  <th>Debet</th>
+                  <th>Kredit</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <template v-for="transaksi in transaksis">
+                      <tr v-for="(body,i) in transaksi.bodyTransaksi" :key="`tr-${i}`">
+                          <td :key="`td0-${i}`">
+                              {{ body.kodeakuns.kode_akun }}
+                          </td>
+                          <td :key="`td1-${i}`">
+                              {{ body.kodeakuns.nama_akun }}
+                          </td>
+                          <td :key="`td2-${i}`">
+                              {{ !!body.isKredit? '' : body.nominal }}
+                          </td>
+                          <td :key="`td3-${i}`">
+                              {{ !!body.isKredit? body.nominal : '' }}
+                          </td>
+                      </tr>
+                  </template>
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <th colspan="2"><b>Total</b></th>
+                      <th><b>{{ getTotalDebit }}</b></th>
+                      <th><b>{{ getTotalKredit}}</b></th>
+                  </tr>
+                </tfoot>
+              </table>
+            </v-layout>
         </v-card>
       </v-layout>
     </v-container>
@@ -42,17 +64,15 @@
 <script>
 export default {
   data: () => ({
-    headers:[
-      {text: 'Kode Akun', sortable: false, value: 'tanggal_transaksi'},
-      {text: 'Nama Akun', sortable: false, value: 'tanggal_transaksi'},
-      {text: 'Debet',  sortable: false, value: 'keterangan_transaksi' },
-      {text: 'Kredit', value: 'action', sortable: false },
-    ],
     bulan: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
     tahun: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021'],
     getBulan: '',
     getTahun: '',
     transaksis: [],
+    debits: [],
+    TotalDebit: null,
+    TotalKredit: null,
+    userId: localStorage.getItem('Id'),
   }),
   watch: {
     'getBulan': function(){
@@ -63,10 +83,46 @@ export default {
     } 
   },
   mounted(){
-    
+    this.getTransaksis();
+
+  },
+  computed: {
+    getTotalKredit(){
+    return this.transaksis.reduce((total1, transaksi) => {
+      return total1 + transaksi.bodyTransaksi.reduce((total2, body) => {
+        return total2 + (!!body.isKredit? body.nominal: 0)
+      }, 0)
+    }, 0)
+   },
+
+    getTotalDebit(){
+     return this.transaksis.reduce((total1, transaksi) => {
+      return total1 + transaksi.bodyTransaksi.reduce((total2, body) => {
+        return total2 + (!!body.isKredit? 0 : body.nominal)
+      }, 0)
+    }, 0)
+   },
 
   },
   methods:{
+    async getTransaksis(){
+       axios.get('/api/transaksi-user/?Id='+ this.userId)
+       .then(res => {
+         this.transaksis = res.data.map(transaksi => ({
+           ...transaksi,
+           bodyTransaksi: [
+             ...transaksi.kredits.map(kredit => ({
+               ...kredit,
+               isKredit: true,
+             })),
+             ...transaksi.debits.map(debit => ({
+               ...debit,
+               isKredit: false,
+             }))
+           ]
+         }))
+       })
+    },
     
 
   },
@@ -74,6 +130,14 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+table, th, tfoot {
+  border: 1px solid black;
+}
+th, td {
+  padding: 15px;
+}
+td {
+  text-align: center;
+}
 </style>

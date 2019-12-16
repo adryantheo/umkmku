@@ -26,3 +26,6 @@ Route::get('/transaksi/{transaksi}', 'TransaksiController@show');
 Route::post('/transaksi', 'TransaksiController@store');
 Route::patch('/transaksi/{transaksi}', 'TransaksiController@update');
 Route::delete('/transaksi/{transaksi}', 'TransaksiController@destroy');
+
+//Laporan API
+Route::get('/transaksi-tgl/{year}/{month}/', 'TransaksiController@selectedTransaksi');

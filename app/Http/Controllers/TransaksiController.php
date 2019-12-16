@@ -15,7 +15,31 @@ class TransaksiController extends Controller
     {
         return response()->json(Transaksi::with('debits', 'kredits')->get(),200);
     }
+    
+    public function selectedTransaksi(Request $request, $year, $month)
+    {
+        if($request->has('Id')){
+            // if($request->has($tanggal)){
+                return response()->json(
+                    Transaksi::with([
+                        'debits:id,nominal,kode_akun_id,transaksi_id',
+                        'debits.kodeakuns:id,kode_akun,nama_akun',
+                        'kredits:id,nominal,kode_akun_id,transaksi_id',
+                        'kredits.kodeakuns:id,kode_akun,nama_akun'
+                        ])
+                    ->select('id','jenis_transaksi','keterangan_transaksi','tanggal_transaksi')
+                    ->whereYear('tanggal_transaksi', $year)
+                    ->whereMonth('tanggal_transaksi', $month)
+                    ->whereRaw('user_id', $request->input('Id'))
+                    ->get()
+                    ,200);
+            // }
+        }
+        // return response()->json('Data Tidak Ditemukan', 404);
+    }
 
+
+    //API Transaksi - User Only
     public function transaksiUser(Request $request)
     {
         if($request->has('Id')){
@@ -99,12 +123,12 @@ class TransaksiController extends Controller
             
             //Update Debit
             $status = $transaksi->debits()->update(
-                $request->only(['akun_debit','nominal_debit'])
+                $request->only(['akun_debit','nominal'])
             );
 
             //Update Kredit
             $status = $transaksi->kredits()->update(
-                $request->only(['akun_kredit','nominal_kredit'])
+                $request->only(['akun_kredit','nominal'])
             );
 
         },3);

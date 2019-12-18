@@ -19,38 +19,38 @@
             <span class="headline">Periode {{ getBulan }} {{ getTahun }}</span>
           </v-card-title>
           <v-layout justify-center>
-              <table style="width: 90%">
+              <table class="border" style="width: 90%">
                 <thead>
                   <tr>
-                  <th>Kode Akun</th>
-                  <th>Nama AKun</th>
-                  <th>Debet</th>
-                  <th>Kredit</th>
+                  <th class="border padding">Kode Akun</th>
+                  <th class="border padding">Nama AKun</th>
+                  <th class="border padding">Debet</th>
+                  <th class="border padding">Kredit</th>
                 </tr>
                 </thead>
                 <tbody>
                   <template v-for="transaksi in transaksis">
                       <tr v-for="(body,i) in transaksi.bodyTransaksi" :key="`tr-${i}`">
-                          <td :key="`td0-${i}`">
+                          <td class="padding alignment" :key="`td0-${i}`">
                               {{ body.kodeakuns.kode_akun }}
                           </td>
-                          <td :key="`td1-${i}`">
+                          <td class="padding alignment" :key="`td1-${i}`">
                               {{ body.kodeakuns.nama_akun }}
                           </td>
-                          <td :key="`td2-${i}`">
+                          <td class="padding alignment" :key="`td2-${i}`">
                               {{ !!body.isKredit? '' : body.nominal }}
                           </td>
-                          <td :key="`td3-${i}`">
+                          <td class="padding alignment" :key="`td3-${i}`">
                               {{ !!body.isKredit? body.nominal : '' }}
                           </td>
                       </tr>
                   </template>
                 </tbody>
-                <tfoot>
+                <tfoot class="border">
                     <tr>
-                      <th colspan="2"><b>Total</b></th>
-                      <th><b>{{ getTotalDebit }}</b></th>
-                      <th><b>{{ getTotalKredit}}</b></th>
+                      <th class="border padding" colspan="2"><b>Total</b></th>
+                      <th class="border padding"><b>{{ getTotalDebit }}</b></th>
+                      <th class="border padding"><b>{{ getTotalKredit}}</b></th>
                   </tr>
                 </tfoot>
               </table>
@@ -131,13 +131,16 @@ export default {
 </script>
 
 <style scoped>
-table, th, tfoot {
+/* table, th, tfoot */
+.border{
   border: 1px solid black;
 }
-th, td {
+/* th, td */
+.padding{
   padding: 15px;
 }
-td {
+/* td */
+.alignment {
   text-align: center;
 }
 </style>

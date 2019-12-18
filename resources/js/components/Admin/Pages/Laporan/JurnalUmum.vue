@@ -8,59 +8,59 @@
           </v-card-title>
           <v-card-text>
             <v-layout justify-center>
-              <table style="width: 90%">
+              <table class="border" style="width: 90%">
                 <thead>
                   <tr>
-                  <th>Tanggal</th>
-                  <th>Nama Akun & Deskripsi Transaksi</th>
-                  <th>Kode Akun</th>
-                  <th>Debet</th>
-                  <th>Kredit</th>
+                  <th class="border padding">Tanggal</th>
+                  <th class="border padding">Nama Akun & Deskripsi Transaksi</th>
+                  <th class="border padding">Kode Akun</th>
+                  <th class="border padding">Debet</th>
+                  <th class="border padding">Kredit</th>
                 </tr>
                 </thead>
                 <tbody>
                   <template v-for="transaksi in transaksis">
                       <tr v-for="(body,i) in transaksi.bodyTransaksi" :key="`tr-${i}`">
-                          <td v-if="i==0">
+                          <td class="padding" v-if="i==0">
                               {{ transaksi.tanggal_transaksi }}
                           </td>
-                          <td v-else></td>
+                          <td class="padding" v-else></td>
                           <template v-if="body.isKredit == true">
-                          <td  :key="`td1-${i}`">
+                          <td class="padding"  :key="`td1-${i}`">
                               &emsp;&emsp;{{ body.kodeakuns.nama_akun }}
                           </td>
-                          <td :key="`td2-${i}`">
+                          <td class="padding" :key="`td2-${i}`">
                               {{ body.kodeakuns.kode_akun }}
                           </td>
-                          <td :key="`td3-${i}`">
+                          <td class="padding" :key="`td3-${i}`">
                               {{ !!body.isKredit? '' : body.nominal }}
                           </td>
-                          <td :key="`td4-${i}`">
+                          <td class="padding" :key="`td4-${i}`">
                               Rp. {{ !!body.isKredit? body.nominal : '' }}
                           </td>
                           </template>
                           <template v-else>
-                            <td :key="`td1-${i}`">
+                            <td class="padding" :key="`td1-${i}`">
                               {{ body.kodeakuns.nama_akun }}
                           </td>
-                          <td :key="`td2-${i}`">
+                          <td class="padding" :key="`td2-${i}`">
                               {{ body.kodeakuns.kode_akun }}
                           </td>
-                          <td :key="`td3-${i}`">
+                          <td class="padding" :key="`td3-${i}`">
                               Rp. {{ !!body.isKredit? '' : body.nominal }}
                           </td>
-                          <td :key="`td4-${i}`">
+                          <td class="padding" :key="`td4-${i}`">
                               {{ !!body.isKredit? body.nominal : '' }}
                           </td>                            
                           </template>
                       </tr>
                   </template>
                 </tbody>
-                <tfoot>
+                <tfoot class="border">
                     <tr>
-                      <th colspan="3"><b>Total</b></th>
-                      <th><b>Rp. {{ getTotalDebit }}</b></th>
-                      <th><b>Rp. {{ getTotalKredit}}</b></th>
+                      <th class="border padding" colspan="3"><b>Total</b></th>
+                      <th class="border padding"><b>Rp. {{ getTotalDebit }}</b></th>
+                      <th class="border padding"><b>Rp. {{ getTotalKredit}}</b></th>
                   </tr>
                 </tfoot>
               </table>
@@ -131,10 +131,12 @@ export default {
 </script>
 
 <style scoped>
-table, th, tfoot {
+/* table,th,tfoot */
+.border{
   border: 1px solid black;
 }
-th, td {
+/* th,td */
+.padding{
   padding: 15px;
 }
 </style>

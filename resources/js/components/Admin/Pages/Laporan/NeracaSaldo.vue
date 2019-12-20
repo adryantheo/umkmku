@@ -23,7 +23,7 @@
                 <thead>
                   <tr>
                   <th class="border padding">Kode Akun</th>
-                  <th class="border padding">Nama AKun</th>
+                  <th class="border padding">Nama Akun</th>
                   <th class="border padding">Debet</th>
                   <th class="border padding">Kredit</th>
                 </tr>
@@ -68,6 +68,7 @@ export default {
     bulan: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
     tahun: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021'],
     getBulan: '',
+    getBulanValue: null,
     getTahun: '',
     transaksis: [],
     debits: [],
@@ -81,10 +82,17 @@ export default {
     },
     'getTahun': function(){
       return this.getTahun;
+    },
+    'getBulan'(){
+      this.getBulanNumber();
+      this.getTransaksis(); 
+    },
+    'getTahun'(){
+      this.getTransaksis();
     } 
   },
   mounted(){
-    this.getTransaksis();
+    // this.getTransaksis();
 
   },
   computed: {
@@ -107,7 +115,7 @@ export default {
   },
   methods:{
     async getTransaksis(){
-       axios.get('/api/transaksi-user/?Id='+ this.userId)
+       axios.get('/api/transaksi-tgl/' + this.getTahun + '/' + this.getBulanValue + '?Id=' + this.userId)
        .then(res => {
          this.transaksis = res.data.map(transaksi => ({
            ...transaksi,
@@ -124,6 +132,61 @@ export default {
          }))
        })
     },
+    getBulanNumber(){
+      switch(this.getBulan){
+        case "Januari":
+          this.getBulanValue = '01';
+          console.log(this.getBulanValue);
+          break;
+        case "Februari":
+          this.getBulanValue = '02';
+          console.log(this.getBulanValue);
+          break;
+          case "Maret":
+          this.getBulanValue = '03';
+          console.log(this.getBulanValue);
+          break;
+        case "April":
+          this.getBulanValue = '04';
+          console.log(this.getBulanValue);
+          break;
+          case "Mei":
+          this.getBulanValue = '05';
+          console.log(this.getBulanValue);
+          break;
+        case "Juni":
+          this.getBulanValue = '06';
+          console.log(this.getBulanValue);
+          break;
+          case "Juli":
+          this.getBulanValue = '07';
+          console.log(this.getBulanValue);
+          break;
+        case "Agustus":
+          this.getBulanValue = '08';
+          console.log(this.getBulanValue);
+          break;
+          case "September":
+          this.getBulanValue = '09';
+          console.log(this.getBulanValue);
+          break;
+        case "Oktober":
+          this.getBulanValue = '10';
+          console.log(this.getBulanValue);
+          break;
+          case "November":
+          this.getBulanValue = '11';
+          console.log(this.getBulanValue);
+          break;
+        case "Desember":
+          this.getBulanValue = '12';
+          console.log(this.getBulanValue);
+          break;
+        default:
+          this.getBulanValue = null;
+          console.log(this.getBulanValue);
+      }
+    }
     
 
   },

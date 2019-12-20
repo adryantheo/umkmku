@@ -35,7 +35,7 @@ class TransaksiController extends Controller
                     ,200);
             // }
         }
-        // return response()->json('Data Tidak Ditemukan', 404);
+        return response()->json('Data Tidak Ditemukan', 404);
     }
 
 

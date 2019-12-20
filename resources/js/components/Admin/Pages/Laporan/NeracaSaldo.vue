@@ -136,59 +136,44 @@ export default {
       switch(this.getBulan){
         case "Januari":
           this.getBulanValue = '01';
-          console.log(this.getBulanValue);
           break;
         case "Februari":
           this.getBulanValue = '02';
-          console.log(this.getBulanValue);
           break;
-          case "Maret":
+        case "Maret":
           this.getBulanValue = '03';
-          console.log(this.getBulanValue);
           break;
         case "April":
           this.getBulanValue = '04';
-          console.log(this.getBulanValue);
           break;
-          case "Mei":
+        case "Mei":
           this.getBulanValue = '05';
-          console.log(this.getBulanValue);
           break;
         case "Juni":
           this.getBulanValue = '06';
-          console.log(this.getBulanValue);
           break;
-          case "Juli":
+        case "Juli":
           this.getBulanValue = '07';
-          console.log(this.getBulanValue);
           break;
         case "Agustus":
           this.getBulanValue = '08';
-          console.log(this.getBulanValue);
           break;
-          case "September":
+        case "September":
           this.getBulanValue = '09';
-          console.log(this.getBulanValue);
           break;
         case "Oktober":
           this.getBulanValue = '10';
-          console.log(this.getBulanValue);
           break;
-          case "November":
+        case "November":
           this.getBulanValue = '11';
-          console.log(this.getBulanValue);
           break;
         case "Desember":
           this.getBulanValue = '12';
-          console.log(this.getBulanValue);
           break;
         default:
           this.getBulanValue = null;
-          console.log(this.getBulanValue);
       }
     }
-    
-
   },
 
 }

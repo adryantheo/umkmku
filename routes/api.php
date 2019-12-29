@@ -29,3 +29,4 @@ Route::delete('/transaksi/{transaksi}', 'TransaksiController@destroy');
 
 //Laporan API
 Route::get('/transaksi-tgl/{year}/{month}/', 'TransaksiController@selectedTransaksi');
+Route::get('/labarugi/{year}/{month}/', 'TransaksiController@labaRugi');

@@ -38,6 +38,36 @@ class TransaksiController extends Controller
         return response()->json('Data Tidak Ditemukan', 404);
     }
 
+    public function labaRugi(Request $request, $year, $month)
+    {
+        if($request->has('Id')){
+            // if($request->has($tanggal)){
+                return response()->json(
+                    Transaksi::with([
+                        'debits:id,nominal,kode_akun_id,transaksi_id',
+                        'debits.kodeakuns' => function($query) {
+                            $query->where('kode_akun','LIKE','4%')
+                                    ->orWhere('kode_akun','LIKE','5%');
+                            $query->select('id','kode_akun','nama_akun');
+                        },
+                        'kredits:id,nominal,kode_akun_id,transaksi_id',
+                        'kredits.kodeakuns' => function($query) {
+                            $query->where('kode_akun','LIKE','4%')
+                                    ->orWhere('kode_akun','LIKE','5%');
+                            $query->select('id','kode_akun','nama_akun');
+                        }
+                        ])
+                    ->select('id','jenis_transaksi','keterangan_transaksi','tanggal_transaksi')
+                    ->whereYear('tanggal_transaksi', $year)
+                    ->whereMonth('tanggal_transaksi', $month)
+                    ->whereRaw('user_id', $request->input('Id'))
+                    ->get()
+                    ,200);
+            // }
+        }
+        return response()->json('Data Tidak Ditemukan', 404);
+    }
+
 
     //API Transaksi - User Only
     public function transaksiUser(Request $request)

@@ -474,7 +474,8 @@ export default {
             kredit: this.akunKredits,
             user_id: localStorage.getItem('Id'),
             })
-            alert("Transaksi Baru Berhasil Ditambahkan");           
+            alert("Transaksi Baru Berhasil Ditambahkan");
+            this.getTransaksis(); 
         }catch(err){
           console.log(err);
         }

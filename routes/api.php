@@ -13,6 +13,7 @@ Route::get('/kodeakun', 'KodeAkunController@index');
 Route::get('/kodeakun/{kodeAkun}', 'KodeAkunController@show');
 Route::post('/kodeakun', 'KodeAkunController@store');
 Route::patch('/kodeakun/{kodeAkun}', 'KodeAkunController@update');
+Route::delete('/kodeakun/delete-all', 'KodeAkunController@deleteAll');
 Route::delete('/kodeakun/{kodeAkun}', 'KodeAkunController@destroy');
 
 //Debits API

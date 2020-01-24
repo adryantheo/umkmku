@@ -8,7 +8,8 @@ class KodeAkun extends Model
 {
     protected $fillable = [
         'kode_akun',
-        'nama_akun',   
+        'nama_akun',
+        'deleteable',
     ];
 
     public function debits(){

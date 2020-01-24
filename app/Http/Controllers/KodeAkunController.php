@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\KodeAkun;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KodeAkunController extends Controller
 {
@@ -26,7 +27,7 @@ class KodeAkunController extends Controller
         ([
             'status' => (bool) $kodeAkun,
             'data' => $kodeAkun,
-            'messege' => $kodeAkun ? 'Kode Akun Berhasil Ditambakan' : 'Gagal Menambahkan Kode Akun'
+            'message' => $kodeAkun ? 'Kode Akun Berhasil Ditambakan' : 'Gagal Menambahkan Kode Akun'
         ]);
     }
 
@@ -53,7 +54,7 @@ class KodeAkunController extends Controller
             return response()->json
             ([
                 'status' => $status,
-                'messege' => $status ? 'Kode Akun Berhasil Diupdate' : 'Kode Akun Gagal Diupdate'
+                'message' => $status ? 'Kode Akun Berhasil Diupdate' : 'Kode Akun Gagal Diupdate'
             ]);
         }
         else
@@ -62,8 +63,7 @@ class KodeAkunController extends Controller
         }
         
     }
-
-    
+    //Delete One by Id
     public function destroy(KodeAkun $kodeAkun)
     {
         $status = $kodeAkun->delete();
@@ -71,7 +71,17 @@ class KodeAkunController extends Controller
         return response()->json
         ([
             'status' => $status,
-            'messege' => $status ? 'Kode Akun Berhasil Dihapus' : 'Gagal Menghapus Kode Akun'
+            'message' => $status ? 'Kode Akun Berhasil Dihapus' : 'Gagal Menghapus Kode Akun'
+        ]);
+    }
+    
+    //Delete All
+    public function deleteAll(){
+        // $status = KodeAkun::where('deleteable', '=', true)->delete();
+        $status = DB::table('kode_akuns')->where('deleteable', true)->delete();
+        return response()->json([
+            'status' => $status, 
+            'message' => $status ? 'Wiped All' : 'Failed Wipe All Data'
         ]);
     }
 }

@@ -71,8 +71,6 @@
                 </v-form>
               </v-container>
             </v-card-text>
-            
-  
             <v-card-actions>
               <v-btn color="blue darken-1" flat @click="addDebit">Tambah Akun Debit</v-btn>
               <v-btn color="blue darken-1" flat @click="addKredit">Tambah Akun Kredit</v-btn>
@@ -475,7 +473,8 @@ export default {
             user_id: localStorage.getItem('Id'),
             })
             alert("Transaksi Baru Berhasil Ditambahkan");
-            this.getTransaksis(); 
+            // this.getTransaksis();
+            location.reload();
         }catch(err){
           console.log(err);
         }

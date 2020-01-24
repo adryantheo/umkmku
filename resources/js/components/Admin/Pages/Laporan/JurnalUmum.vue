@@ -132,11 +132,11 @@ export default {
 
 <style scoped>
 /* table,th,tfoot */
-.border{
+/* .border{
   border: 1px solid black;
-}
+} */
 /* th,td */
-.padding{
+/* .padding{
   padding: 15px;
-}
+} */
 </style>

@@ -67,12 +67,12 @@
 <script>
 export default {
     components:{
-        'JurnalUmum' : () => import('./Laporan/JurnalUmum'/* webpackChunkName: "js/chunk-Laporan-JurnalUmum" */),
-        'NeracaSaldo': () => import('./Laporan/NeracaSaldo'/* webpackChunkName: "js/chunk-Laporan-NeracaSaldo" */),
-        'LabaRugi': () => import('./Laporan/LabaRugi'/* webpackChunkName: "js/chunk-Laporan-LabaRugi" */),
-        'PerubahanEkuitas': () => import('./Laporan/PerubahanEkuitas'/* webpackChunkName: "js/chunk-Laporan-PerubahanEkuitas" */),
-        'PosisiKeuangan': () => import('./Laporan/PosisiKeuangan'/* webpackChunkName: "js/chunk-Laporan-PosisiKeuangan" */),
-        'ArusKas': () => import('./Laporan/ArusKas'/* webpackChunkName: "js/chunk-Laporan-ArusKas" */)
+        JurnalUmum : () => import('./Laporan/JurnalUmum'/* webpackChunkName: "js/chunk-Laporan-JurnalUmum" */),
+        NeracaSaldo: () => import('./Laporan/NeracaSaldo'/* webpackChunkName: "js/chunk-Laporan-NeracaSaldo" */),
+        LabaRugi: () => import('./Laporan/LabaRugi'/* webpackChunkName: "js/chunk-Laporan-LabaRugi" */),
+        PerubahanEkuitas: () => import('./Laporan/PerubahanEkuitas'/* webpackChunkName: "js/chunk-Laporan-PerubahanEkuitas" */),
+        PosisiKeuangan: () => import('./Laporan/PosisiKeuangan'/* webpackChunkName: "js/chunk-Laporan-PosisiKeuangan" */),
+        ArusKas: () => import('./Laporan/ArusKas'/* webpackChunkName: "js/chunk-Laporan-ArusKas" */)
     },
     data: () => ({
         activeTab: null,

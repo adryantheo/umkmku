@@ -22,22 +22,25 @@
                 <thead>
                   <tr>
                   <th class="border padding">Kode Akun</th>
-                  <th class="border padding">Nama AKun</th>
+                  <th class="border padding">Nama Akun</th>
                   <th class="border padding">Jumlah</th>
                 </tr>
                 </thead>
                 <tbody>
-                  <template v-for="transaksi in transaksis">
-                      <tr v-for="(body,i) in transaksi.bodyTransaksi" :key="`tr-${i}`">
+                  <template v-for="labarugi in labarugis">
+                      <tr v-for="(body,i) in labarugi.bodyTransaksi" :key="`tr-${i}`">
+                          <td v-if="body.kodeakuns == null" class="padding alignment" :key="`td0-${i}`">
+                              
+                          </td>
                           <td class="padding alignment" :key="`td0-${i}`">
                               {{ body.kodeakuns.kode_akun }}
                           </td>
-                          <td class="padding alignment" :key="`td1-${i}`">
-                              {{ body.kodeakuns.nama_akun }}
-                          </td>
-                          <td class="padding alignment" :key="`td2-${i}`">
-                              {{ !!body.isKredit? '' : body.nominal }}
-                          </td>
+                          <!-- <td class="padding alignment" :key="`td1-${i}`"> -->
+                              <!-- {{ body.kodeakuns.nama_akun }} -->
+                          <!-- </td> -->
+                          <!-- <td class="padding alignment" :key="`td2-${i}`"> -->
+                              <!-- {{ !!body.isKredit? '' : body.nominal }} -->
+                          <!-- </td> -->
                       </tr>
                   </template>
                 </tbody>
@@ -74,8 +77,9 @@ export default {
     bulan: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
     tahun: ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021'],
     getBulan: '',
+    getBulanValue: null,
     getTahun: '',
-    transaksis: [],
+    labarugis: [],
     debits: [],
     TotalDebit: null,
     TotalKredit: null,
@@ -87,15 +91,22 @@ export default {
     },
     'getTahun': function(){
       return this.getTahun;
-    } 
+    },
+    'getBulan'(){
+      this.getBulanNumber();
+      this.getLabaRugi(); 
+    },
+    'getTahun'(){
+      this.getLabaRugi();
+    }
   },
   mounted(){
-    this.getTransaksis();
+    // this.getLabaRugi();
 
   },
   computed: {
     getTotalKredit(){
-    return this.transaksis.reduce((total1, transaksi) => {
+    return this.labarugis.reduce((total1, transaksi) => {
       return total1 + transaksi.bodyTransaksi.reduce((total2, body) => {
         return total2 + (!!body.isKredit? body.nominal: 0)
       }, 0)
@@ -103,7 +114,7 @@ export default {
    },
 
     getTotalDebit(){
-     return this.transaksis.reduce((total1, transaksi) => {
+     return this.labarugis.reduce((total1, transaksi) => {
       return total1 + transaksi.bodyTransaksi.reduce((total2, body) => {
         return total2 + (!!body.isKredit? 0 : body.nominal)
       }, 0)
@@ -112,10 +123,10 @@ export default {
 
   },
   methods:{
-    async getTransaksis(){
-       axios.get('/api/transaksi-user/?Id='+ this.userId)
+    async getLabaRugi(){
+       axios.get('/api/labarugi/' + this.getTahun + '/' + this.getBulanValue + '?Id=' + this.userId)
        .then(res => {
-         this.transaksis = res.data.map(transaksi => ({
+         this.labarugis = res.data.map(transaksi => ({
            ...transaksi,
            bodyTransaksi: [
              ...transaksi.kredits.map(kredit => ({
@@ -130,6 +141,49 @@ export default {
          }))
        })
     },
+    getBulanNumber(){
+      switch(this.getBulan){
+        case "Januari":
+          this.getBulanValue = '01';
+          break;
+        case "Februari":
+          this.getBulanValue = '02';
+          break;
+        case "Maret":
+          this.getBulanValue = '03';
+          break;
+        case "April":
+          this.getBulanValue = '04';
+          break;
+        case "Mei":
+          this.getBulanValue = '05';
+          break;
+        case "Juni":
+          this.getBulanValue = '06';
+          break;
+        case "Juli":
+          this.getBulanValue = '07';
+          break;
+        case "Agustus":
+          this.getBulanValue = '08';
+          break;
+        case "September":
+          this.getBulanValue = '09';
+          break;
+        case "Oktober":
+          this.getBulanValue = '10';
+          break;
+        case "November":
+          this.getBulanValue = '11';
+          break;
+        case "Desember":
+          this.getBulanValue = '12';
+          break;
+        default:
+          this.getBulanValue = null;
+      }
+    },
+    
     
 
   },

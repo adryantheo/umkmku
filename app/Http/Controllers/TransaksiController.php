@@ -38,6 +38,26 @@ class TransaksiController extends Controller
         return response()->json('Data Tidak Ditemukan', 404);
     }
 
+    public function test(Request $request, $year, $month)
+    {
+        if($request->has('Id')){
+            $transaksi=DB::table('transaksis')
+            ->join('users', 'users.id', '=', 'transaksis.user_id')
+            ->join('debits', 'debits.transaksi_id', '=', 'transaksis.id')
+            ->join('kredits', 'kredits.transaksi_id', '=', 'transaksis.id')
+            ->join('kode_akuns','kode_akuns.id','=','debits.kode_akun_id')
+            // ->join('kode_akuns','kodeakuns.id','=','kredits.kode_akun_id')            
+            ->where('kode_akuns.kode_akun','LIKE', '4%')
+            ->orWhere('kode_akuns.kode_akun','LIKE', '5%')
+            ->whereYear('transaksis.tanggal_transaksi', $year)
+            ->whereMonth('transaksis.tanggal_transaksi', $month)
+            ->whereRaw('transaksis.user_id', $request->input('Id'))
+            ->select('transaksis.id', 'debits.nominal','kode_akuns.kode_akun', 'kode_akuns.nama_akun')
+            ->get();
+            return $transaksi;
+        }
+    }
+
     public function labaRugi(Request $request, $year, $month)
     {
         if($request->has('Id')){
@@ -57,7 +77,7 @@ class TransaksiController extends Controller
                             $query->select('id','kode_akun','nama_akun');
                         }
                         ])
-                    ->select('id','jenis_transaksi','keterangan_transaksi','tanggal_transaksi')
+                    ->select('id')
                     ->whereYear('tanggal_transaksi', $year)
                     ->whereMonth('tanggal_transaksi', $month)
                     ->whereRaw('user_id', $request->input('Id'))

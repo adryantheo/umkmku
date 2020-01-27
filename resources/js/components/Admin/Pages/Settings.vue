@@ -20,32 +20,34 @@
             </v-tab>
             <v-tab-item value="tab-0">
                 <v-container fluid fill-height>
-                    <jurnal-umum></jurnal-umum>
+                    <!-- <jurnal-umum></jurnal-umum> -->
                 </v-container>
             </v-tab-item>
             <v-tab-item value="tab-1">
-                <v-layout row wrap>
-                    <neraca-saldo></neraca-saldo>
-                </v-layout>
+                <v-container fluid fill-height>
+                    <keep-alive v-if="activeTab === 'tab-1'">
+                        <company-settings></company-settings>
+                    </keep-alive>
+                </v-container>
             </v-tab-item>
             <v-tab-item value="tab-2">
                 <v-layout row wrap>
-                    <laba-rugi></laba-rugi>
+                    <!-- <laba-rugi></laba-rugi> -->
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-3">
                 <v-layout row wrap>
-                    <perubahan-ekuitas></perubahan-ekuitas>
+                    <!-- <perubahan-ekuitas></perubahan-ekuitas> -->
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-4">
                 <v-layout row wrap>
-                    <posisi-keuangan></posisi-keuangan>
+                    <!-- <posisi-keuangan></posisi-keuangan> -->
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-5">
                 <v-layout row wrap>
-                    <arus-kas></arus-kas>
+                    <!-- <arus-kas></arus-kas> -->
                 </v-layout>
             </v-tab-item>
     </v-tabs>    
@@ -53,21 +55,15 @@
 </template>
 
 <script>
-// import jurnalUmum from './Laporan/JurnalUmum'
-// import neracaSaldo from './Laporan/NeracaSaldo';
-// import labaRugi from './Laporan/LabaRugi';
-// import perubahanEkuitas from './Laporan/PerubahanEkuitas';
-// import posisiKeuangan from './Laporan/PosisiKeuangan';
-// import arusKas from './Laporan/ArusKas';
 export default {
-    // components:{
-    //     jurnalUmum,
-    //     neracaSaldo,
-    //     labaRugi,
-    //     perubahanEkuitas,
-    //     posisiKeuangan,
-    //     arusKas
-    // },
+    components:{
+        companySettings : () => import('./Settings/CompanySettings' /* webpackChunkName: "js/chunk-Settings-CompanySettings" */),
+        // neracaSaldo,
+        // labaRugi,
+        // perubahanEkuitas,
+        // posisiKeuangan,
+        // arusKas
+    },
     data: () => ({
         activeTab: null,
         tabItems: [

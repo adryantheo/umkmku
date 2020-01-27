@@ -22,9 +22,13 @@ class UserController extends Controller
             ];
         }
         
-        return response()->json($response, $status);
-        
+        return response()->json($response, $status);    
     }
+
+    public function getData(User $user){
+        return response()->json($user);
+    }
+
     public function register(Request $request)
     {
         $request->validate([

@@ -2,11 +2,10 @@
 
 use Illuminate\Http\Request;
 
-
-
 //Register Login
 Route::post('/login', 'UserController@login');
 Route::post('/register', 'UserController@register');
+Route::get('/company/{user}', 'UserController@getData');
 Route::patch('/update-company/{user}', 'UserController@updateCompany');
 
 //Kode Akun

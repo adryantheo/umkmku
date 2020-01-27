@@ -31,9 +31,11 @@
                 </v-container>
             </v-tab-item>
             <v-tab-item value="tab-2">
-                <v-layout row wrap>
-                    <!-- <laba-rugi></laba-rugi> -->
-                </v-layout>
+                <v-container fluid fill-height>
+                    <keep-alive v-if="activeTab === 'tab-2'">
+                        <ka-settings></ka-settings>
+                    </keep-alive>
+                </v-container>
             </v-tab-item>
             <v-tab-item value="tab-3">
                 <v-layout row wrap>
@@ -58,7 +60,7 @@
 export default {
     components:{
         companySettings : () => import('./Settings/CompanySettings' /* webpackChunkName: "js/chunk-Settings-CompanySettings" */),
-        // neracaSaldo,
+        kaSettings : () => import('./Settings/KASettings' /* webpackChunkName: "js/chunk-Settings-KodeAkunSettings" */),
         // labaRugi,
         // perubahanEkuitas,
         // posisiKeuangan,

@@ -47,6 +47,19 @@ class UserController extends Controller
         ], 201);
        
     }
+    
+    public function updateCompany(Request $request, User $user){
+        if($user){
+            $status = $user->update($request->only([
+                'name',
+                'company_name',
+                'phone',
+                'address',
+            ]));
+        }
+        return response()->json(['status' => $status, 'message' => $status? 'Berhasil Diupdate' : 'Gagal Menguopdate Data']);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();

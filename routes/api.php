@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 //Register Login
 Route::post('/login', 'UserController@login');
 Route::post('/register', 'UserController@register');
+Route::patch('/update-company/{user}', 'UserController@updateCompany');
 
 //Kode Akun
 Route::get('/kodeakun', 'KodeAkunController@index');

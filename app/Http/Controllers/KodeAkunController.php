@@ -67,7 +67,6 @@ class KodeAkunController extends Controller
     public function destroy(KodeAkun $kodeAkun)
     {
         $status = $kodeAkun->delete();
-
         return response()->json
         ([
             'status' => $status,
@@ -77,7 +76,6 @@ class KodeAkunController extends Controller
     
     //Delete All
     public function deleteAll(){
-        // $status = KodeAkun::where('deleteable', '=', true)->delete();
         $status = DB::table('kode_akuns')->where('deleteable', true)->delete();
         return response()->json([
             'status' => $status, 

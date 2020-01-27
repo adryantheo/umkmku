@@ -42,7 +42,7 @@
                     </v-card-title>
                     <v-card-text>
                       <v-container grid-list-md>
-                        <v-form ref="tambah-akun">
+                        <v-form ref="tambah_akun">
                           <v-layout wrap>
                             <v-flex xs12 sm6 md4>
                               <v-text-field v-model="kode_akun" label="Kode Akun"></v-text-field>
@@ -56,7 +56,7 @@
                     </v-card-text>
                     <v-card-actions>
                       <v-layout justify-end>
-                        <v-btn color="primary">Save</v-btn>
+                        <v-btn color="primary" :loading="isLoading" type="submit" @click="storeKodeAkun">Save</v-btn>
                         <v-btn color="warning" @click="dialog = false">Cancel</v-btn>
                       </v-layout>
                     </v-card-actions>
@@ -76,6 +76,7 @@ export default {
         nama_akun: '',
         kode_akun: '',
         dialog: false,
+        isLoading: false,
         getJenisKode: '',
         headers:[
             {text: 'Kode Akun', sortable: false},
@@ -191,9 +192,24 @@ export default {
              this.kodeAkun.push(newArray[i]);
            }
          }
-
-
+        },
+        async storeKodeAkun(){
+          if(this.$refs.tambah_akun.validate()){
+            this.isLoading = true;
+            try{
+              const res = await axios.post('/api/kodeakun',{
+                kode_akun: this.kode_akun,
+                nama_akun: this.nama_akun,
+              })
+              alert("Berhasil Menambah Kode Akun Baru");
+              this.isLoading = false;
+              this.dialog = false;
+              location.reload();    
+            }catch(err){
+              alert(this.err);
+            }
         }
+      }
 
     },
     mounted (){

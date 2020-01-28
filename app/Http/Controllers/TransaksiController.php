@@ -203,4 +203,15 @@ class TransaksiController extends Controller
             'Message' => $transaksi ? 'Jurnal Terhapus' : 'Gagal Menghapus Jurnal'
         ]);
     }
+
+    public function deleteAll(){
+        $status = DB::table('debits')->truncate();
+        $status = DB::table('kredits')->truncate();
+        $status = DB::table('transaksis')->truncate();
+
+        return response()->json([
+            'status' => $status,
+            'message' => $status? 'Failed Wipe Data' : 'Wiped All'
+        ]);
+    }
 }

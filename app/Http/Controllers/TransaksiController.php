@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Transaksi;
 use App\Debit;
 use App\Kredit;
+use App\User;
+use App\KodeAkun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -87,7 +89,6 @@ class TransaksiController extends Controller
         }
         return response()->json('Data Tidak Ditemukan', 404);
     }
-
 
     //API Transaksi - User Only
     public function transaksiUser(Request $request)
@@ -191,7 +192,6 @@ class TransaksiController extends Controller
 
     }
 
-   
     public function destroy(Transaksi $transaksi)
     {        
         $transaksi->debits()->delete();
@@ -204,11 +204,13 @@ class TransaksiController extends Controller
         ]);
     }
 
-    public function deleteAll(){
-        $status = DB::table('debits')->truncate();
-        $status = DB::table('kredits')->truncate();
-        $status = DB::table('transaksis')->truncate();
-
+    public function deleteAll(User $user){
+        $status = DB::transaction(function() use($user){
+            $transakasi = DB::table('transaksis')->where('user_id',$user)->truncate();
+            $transaksi = DB::table('kredits')->truncate();
+            $transaksi = DB::table('transaksis')->truncate();
+            $kodeakun =  KodeAkun::where('deleteable', true)->delete();          
+        });
         return response()->json([
             'status' => $status,
             'message' => $status? 'Failed Wipe Data' : 'Wiped All'

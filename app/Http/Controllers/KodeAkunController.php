@@ -76,10 +76,10 @@ class KodeAkunController extends Controller
     
     //Delete All
     public function deleteAll(){
-        $status = DB::table('kode_akuns')->where('deleteable', true)->delete();
+        $status = KodeAkun::where('deleteable', true)->delete();
         return response()->json([
-            'status' => $status, 
-            'message' => $status ? 'Wiped All' : 'Failed Wipe All Data'
+            'status' =>(bool) $status, 
+            'message' => $status ? 'Failed Wipe All Data' : 'Wiped All'
         ]);
     }
 }

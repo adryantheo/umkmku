@@ -9,15 +9,16 @@ Route::get('/company/{user}', 'UserController@getData');
 Route::patch('/update-company/{user}', 'UserController@updateCompany');
 
 //Kode Akun
+Route::get('/kodeakun/wipeall/', 'KodeAkunController@deleteAll');
 Route::get('/kodeakun', 'KodeAkunController@index');
 Route::get('/kodeakun/{kodeAkun}', 'KodeAkunController@show');
 Route::post('/kodeakun', 'KodeAkunController@store');
 Route::patch('/kodeakun/{kodeAkun}', 'KodeAkunController@update');
 Route::delete('/kodeakun/{kodeAkun}', 'KodeAkunController@destroy');
 
+
 //Delete All API
-Route::delete('/kodeakun/delete-all', 'KodeAkunController@deleteAll');
-Route::delete('/transaksi/delete-all', 'TransaksiController@deleteAll');
+Route::delete('/transaksi/delete-all/{user}', 'TransaksiController@deleteAll');
 
 //Debits API
 Route::get('/debits', 'DebitController@index');

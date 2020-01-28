@@ -48,9 +48,11 @@
                 </v-layout>
             </v-tab-item>
             <v-tab-item value="tab-5">
-                <v-layout row wrap>
-                    <!-- <arus-kas></arus-kas> -->
-                </v-layout>
+                <v-container fluid fill-height>
+                    <keep-alive v-if="activeTab ==='tab-5'">
+                        <delete-all></delete-all>
+                    </keep-alive>
+                </v-container>
             </v-tab-item>
     </v-tabs>    
 </div>
@@ -61,6 +63,7 @@ export default {
     components:{
         companySettings : () => import('./Settings/CompanySettings' /* webpackChunkName: "js/chunk-Settings-CompanySettings" */),
         kaSettings : () => import('./Settings/KASettings' /* webpackChunkName: "js/chunk-Settings-KodeAkunSettings" */),
+        deleteAll: () => import('./Settings/DeleteAll' /*webpackChunkName: "js/chink-Settings-DeleteAllSettings" */),
         // labaRugi,
         // perubahanEkuitas,
         // posisiKeuangan,

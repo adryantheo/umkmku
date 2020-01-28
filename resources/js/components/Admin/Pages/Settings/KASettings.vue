@@ -210,7 +210,6 @@ export default {
             }
         }
       }
-
     },
     mounted (){
         this.getKodeAkun();

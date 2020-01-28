@@ -20,7 +20,6 @@
                 <v-btn v-if="isDisabled === true" color="primary"
                 @click="turnOnUpdate"
                 >Update</v-btn>
-
                 <v-btn v-if="isDisabled === false" color="primary"
                 :loading="loading"
                 type="submit"   

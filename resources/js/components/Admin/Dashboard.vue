@@ -55,6 +55,12 @@
       <v-toolbar-title>{{myCompany}}</v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">           
       </v-toolbar-items>
+      <v-spacer></v-spacer>
+      <v-layout justify-end>
+        <div>
+          <img class="mr-3" src="../../../../public/logo.jpeg" alt="" height="60">
+        </div>
+      </v-layout>
     </v-toolbar>  
 <v-content>
   <v-container fluid fill-height>

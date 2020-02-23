@@ -14,7 +14,7 @@
                         </v-card-title>
                     </v-layout>
                     <v-card-text>
-                        <p>Menghapus semua data Transaksi/Jurnal, dan Data Kode Akun yang ada buat</p>
+                        <p>Menghapus semua data Transaksi/Jurnal, dan Data Kode Akun yang anda buat</p>
                     </v-card-text>
                     <v-card-actions>
                         <v-checkbox v-model="isCheck">

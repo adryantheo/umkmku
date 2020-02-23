@@ -41,6 +41,12 @@
           </v-list-tile-action>
           <v-list-tile-title>Tentang</v-list-tile-title>
         </v-list-tile>
+        <v-list-tile @click="aboutus">
+          <v-list-tile-action>
+            <v-icon>helpx</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Petunjuk</v-list-tile-title>
+        </v-list-tile>
         
        <v-list-tile @click="logout">
           <v-list-tile-action>

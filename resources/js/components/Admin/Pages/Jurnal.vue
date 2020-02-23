@@ -144,6 +144,7 @@ export default {
       ],
       jenisTransaksi: 
       [
+        'Neraca Awal',
         'Setor modal',
         'Pembelian',
         'Penjualan aset-pendapatan jasa',
@@ -152,7 +153,7 @@ export default {
         'Pengambilan untuk pribadi',
         'Barter',
         'Penyesuaian',
-        'Pembalik'
+        'Pembalik',
       ],
       headers:[
         {text: 'Tanggal', sortable: false, value: 'tanggal_transaksi'},
@@ -392,7 +393,12 @@ export default {
         console.log(jenisTransaksi);
       }
       else{
-        console.log("Invalid Input");
+        for(var i=0; i<getDataAkun.length; i++){
+          this.debitAkun.push(getDataAkun[i]);
+        }
+        for(var i=0; i<getDataAkun.length; i++){
+          this.kreditAkun.push(getDataAkun[i]);
+        }
 
       }
     },

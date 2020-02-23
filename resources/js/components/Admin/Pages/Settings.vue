@@ -18,38 +18,27 @@
                 :href="`#tab-${i}`">
                 {{item.name}}
             </v-tab>
+            <!-- <v-tab-item value="tab-0">
+                <v-container fluid fill-height>
+                </v-container>
+            </v-tab-item> -->
             <v-tab-item value="tab-0">
                 <v-container fluid fill-height>
-                    <!-- <jurnal-umum></jurnal-umum> -->
+                    <keep-alive v-if="activeTab === 'tab-0'">
+                        <company-settings></company-settings>
+                    </keep-alive>
                 </v-container>
             </v-tab-item>
             <v-tab-item value="tab-1">
                 <v-container fluid fill-height>
                     <keep-alive v-if="activeTab === 'tab-1'">
-                        <company-settings></company-settings>
+                        <ka-settings></ka-settings>
                     </keep-alive>
                 </v-container>
             </v-tab-item>
             <v-tab-item value="tab-2">
                 <v-container fluid fill-height>
-                    <keep-alive v-if="activeTab === 'tab-2'">
-                        <ka-settings></ka-settings>
-                    </keep-alive>
-                </v-container>
-            </v-tab-item>
-            <v-tab-item value="tab-3">
-                <v-layout row wrap>
-                    <!-- <perubahan-ekuitas></perubahan-ekuitas> -->
-                </v-layout>
-            </v-tab-item>
-            <v-tab-item value="tab-4">
-                <v-layout row wrap>
-                    <!-- <posisi-keuangan></posisi-keuangan> -->
-                </v-layout>
-            </v-tab-item>
-            <v-tab-item value="tab-5">
-                <v-container fluid fill-height>
-                    <keep-alive v-if="activeTab ==='tab-5'">
+                    <keep-alive v-if="activeTab ==='tab-2'">
                         <delete-all></delete-all>
                     </keep-alive>
                 </v-container>
@@ -72,11 +61,11 @@ export default {
     data: () => ({
         activeTab: null,
         tabItems: [
-            {name: "Pengaturan Neraca Awal"},
+            // {name: "Pengaturan Neraca Awal"},
             {name: "Pengaturan Perusahaan"},
             {name: "Pengaturan Kode Akun"},
-            {name: "Backup Data"},
-            {name: "Restore Data"},
+            // {name: "Backup Data"},
+            // {name: "Restore Data"},
             {name: "Hapus Semua Data"},
         ],
     }),

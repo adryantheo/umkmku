@@ -9,7 +9,7 @@ Route::get('/company/{user}', 'UserController@getData');
 Route::patch('/update-company/{user}', 'UserController@updateCompany');
 
 //Kode Akun
-Route::post('/kodeakun/wipeall/', 'KodeAkunController@deleteAll');
+Route::post('/kodeakun/wipeall/', 'KodeAkunController@deleteAll'); // delete all kode akun based on user_id, require user id params
 Route::get('/kodeakun', 'KodeAkunController@index');
 Route::get('/kodeakun/{kodeAkun}', 'KodeAkunController@show');
 Route::post('/kodeakun', 'KodeAkunController@store');

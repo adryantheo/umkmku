@@ -10,6 +10,7 @@ class KodeAkun extends Model
         'kode_akun',
         'nama_akun',
         'deleteable',
+        'user_id'
     ];
 
     public function debits(){
@@ -18,5 +19,9 @@ class KodeAkun extends Model
 
     public function kredits(){
         return $this->hasMany(Kredit::class);
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 }

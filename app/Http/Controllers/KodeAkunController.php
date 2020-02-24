@@ -21,6 +21,7 @@ class KodeAkunController extends Controller
         ([
             'kode_akun' => $request->kode_akun,
             'nama_akun'  => $request->nama_akun,
+            'user_id' => $request->user_id,
         ]);
 
         return response()->json
@@ -75,11 +76,11 @@ class KodeAkunController extends Controller
     }
     
     //Delete All
-    public function deleteAll(){
-        $status = KodeAkun::where('deleteable', true)->delete();
+    public function deleteAll(Request $request){
+        $status = KodeAkun::where('deleteable', true)->where('user_id',$request->input('user_id'))->delete();
         return response()->json([
             'status' =>(bool) $status, 
-            'message' => $status ? 'Failed Wipe All Data' : 'Wiped All'
+            'message' => $status ? 'Wiped All' : 'Failed Wipe All Data'
         ]);
     }
 }

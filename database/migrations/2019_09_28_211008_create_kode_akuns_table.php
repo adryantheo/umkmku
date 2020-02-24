@@ -17,6 +17,7 @@ class CreateKodeAkunsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('kode_akun')->unique();
             $table->string('nama_akun');
+            $table->unsignedInteger('user_id')->nullable();
             $table->boolean('deleteable')->default(true);
             $table->timestamps();
         });

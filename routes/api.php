@@ -9,7 +9,7 @@ Route::get('/company/{user}', 'UserController@getData');
 Route::patch('/update-company/{user}', 'UserController@updateCompany');
 
 //Kode Akun
-Route::get('/kodeakun/wipeall/', 'KodeAkunController@deleteAll');
+Route::post('/kodeakun/wipeall/', 'KodeAkunController@deleteAll');
 Route::get('/kodeakun', 'KodeAkunController@index');
 Route::get('/kodeakun/{kodeAkun}', 'KodeAkunController@show');
 Route::post('/kodeakun', 'KodeAkunController@store');

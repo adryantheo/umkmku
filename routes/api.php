@@ -33,6 +33,7 @@ Route::patch('/transaksi/{transaksi}', 'TransaksiController@update');
 Route::delete('/transaksi/{transaksi}', 'TransaksiController@destroy');
 
 //Laporan API
+Route::get('/neracasaldo/{year}/{month}/', 'TransaksiController@neracaSaldo');
 Route::get('/transaksi-tgl/{year}/{month}/', 'TransaksiController@selectedTransaksi');
 Route::get('/labarugi/{year}/{month}/', 'TransaksiController@labaRugi');
 Route::get('/test/{year}/{month}/', 'TransaksiController@test');

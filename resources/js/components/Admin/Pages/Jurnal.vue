@@ -174,6 +174,8 @@ export default {
       dataTransaksi:[],
       kodeAkun:[],
       debitAkun: [],
+      getKredit:[],
+      getDebit:[],
       kreditAkun: [],
       editedIndex: -1,
       editedItem: {
@@ -417,14 +419,16 @@ export default {
 
     async editItem (item) {
       this.editedIndex = item.id;     
-      const response = await axios.get(`/api/transaksi/${item.id}`).then(response => this.dataTransaksi = response.data)
+      // const response = await axios.get(`/api/transaksi/${item.id}`).then(response => this.dataTransaksi = response.data)
+      const response = await axios.get(`/api/transaksi/${item.id}`)
+        .then(response => this.dataTransaksi = response.data )
       this.editedItem.date = this.dataTransaksi.tanggal_transaksi;
       this.editedItem.jenis_transaksi = this.dataTransaksi.jenis_transaksi;
       this.editedItem.keterangan_transaksi = this.dataTransaksi.keterangan_transaksi;
-      this.akunDebits = this.dataTransaksi.debits;
-      this.akunKredits = this.dataTransaksi.kredits;
-      this.editedItem.akun_kredit = this.dataTransaksi.kredits[0].akun_kredit;
-      this.editedItem.nominal = this.dataTransaksi.kredits[0].nominal;
+      this.akunDebits = this.dataTransaksi.details;
+      this.akunKredits = this.dataTransaksi.details;
+      // this.editedItem.akun_kredit = this.dataTransaksi.kredits[0].akun_kredit;
+      // this.editedItem.nominal = this.dataTransaksi.kredits[0].nominal;
       this.dialog = true
     },
 

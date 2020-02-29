@@ -22,6 +22,11 @@ class Transaksi extends Model
     public function kredits(){
         return $this->hasMany(Kredit::class);
     }
+
+    public function details(){
+        return $this->hasMany(DetailTransaksi::class);
+    }
+    
     public function users(){
         return $this->belongsTo(User::class);
     }

@@ -7,6 +7,7 @@ use App\Debit;
 use App\Kredit;
 use App\User;
 use App\KodeAkun;
+use App\DetailTransaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,25 +18,48 @@ class TransaksiController extends Controller
     {
         return response()->json(Transaksi::with('debits', 'kredits')->get(),200);
     }
+
+    public function neracaSaldo(Request $request, $year, $month)
+    {
+        if($request->has('Id')){
+            $getKredit = DB::table('transaksis')
+                    ->join('kredits', 'transaksis.id', '=', 'kredits.transaksi_id')
+                    ->join('kode_akuns', 'kredits.kode_akun_id','=', 'kode_akuns.id')
+                    ->select('kredits.nominal', 'kode_akuns.nama_akun', 'kode_akuns.kode_akun')
+                    ->whereYear('tanggal_transaksi', $year)
+                    ->whereMonth('tanggal_transaksi', $month)
+                    ->get();
+            $getDebit = DB::table('transaksis')
+                    ->join('debits', 'transaksis.id', '=', 'debits.transaksi_id')
+                    ->join('kode_akuns', 'debits.kode_akun_id','=', 'kode_akuns.id')
+                    ->select('debits.nominal', 'kode_akuns.nama_akun', 'kode_akuns.kode_akun')
+                    ->whereYear('tanggal_transaksi', $year)
+                    ->whereMonth('tanggal_transaksi', $month)
+                    ->get();
+            return response()->json([  
+                                    'Kredit'=>$getKredit,
+                                    'Debit'=>$getDebit,
+                                    ],200);
+        }
+        return response()->json('Data Tidak Ditemukan', 404);
+    }
     
     public function selectedTransaksi(Request $request, $year, $month)
     {
         if($request->has('Id')){
-            // if($request->has($tanggal)){
-                return response()->json(
-                    Transaksi::with([
-                        'debits:id,nominal,kode_akun_id,transaksi_id',
-                        'debits.kodeakuns:id,kode_akun,nama_akun',
-                        'kredits:id,nominal,kode_akun_id,transaksi_id',
-                        'kredits.kodeakuns:id,kode_akun,nama_akun'
-                        ])
-                    ->select('id','jenis_transaksi','keterangan_transaksi','tanggal_transaksi')
-                    ->whereYear('tanggal_transaksi', $year)
-                    ->whereMonth('tanggal_transaksi', $month)
-                    ->whereRaw('user_id', $request->input('Id'))
-                    ->get()
-                    ,200);
-            // }
+            return response()->json(
+                Transaksi::with([
+                    'debits:id,nominal,kode_akun_id,transaksi_id',
+                    'debits.kodeakuns:id,kode_akun,nama_akun',
+                    'kredits:id,nominal,kode_akun_id,transaksi_id',
+                    'kredits.kodeakuns:id,kode_akun,nama_akun'
+                    ])
+                ->select('id','jenis_transaksi','keterangan_transaksi','tanggal_transaksi')
+                ->whereYear('tanggal_transaksi', $year)
+                ->whereMonth('tanggal_transaksi', $month)
+                ->whereRaw('user_id', $request->input('Id'))
+                ->get()
+                ,200);
         }
         return response()->json('Data Tidak Ditemukan', 404);
     }
@@ -130,19 +154,21 @@ class TransaksiController extends Controller
             ]);
 
             foreach ($request->input('debit') as $debitDetails){
-             Debit::create([
+             DetailTransaksi::create([
                 'kode_akun_id' => $debitDetails['kode_akun_id'],
                 'nominal' => $debitDetails['nominal'],
                 'transaksi_id' => $transaksi->id,
+                'is_debit' => true,
             ]);
             }
             
             foreach ($request->input('kredit') as $kreditDetails){
-            Kredit::create
+            DetailTransaksi::create
                 ([
                     'kode_akun_id' => $kreditDetails['kode_akun_id'],
                     'nominal' => $kreditDetails['nominal'],
                     'transaksi_id' => $transaksi->id,
+                    'is_debit' => false,
                 ]);
             }
 
@@ -158,7 +184,7 @@ class TransaksiController extends Controller
     
     public function show(Transaksi $transaksi)
     {
-        $status = Transaksi::with(['debits','kredits'])
+        $status = Transaksi::with(['details'])
         ->find($transaksi);
         return response()->json($status->first(),200);
     }
